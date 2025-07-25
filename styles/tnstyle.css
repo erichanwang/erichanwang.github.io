@@ -1,0 +1,82 @@
+:root {
+    --background: #1a1b26;
+    --foreground: #c0caf5;
+    --surface: #24283b;
+    --comment: #565f89;
+    --blue: #7aa2f7;
+    --cyan: #2ac3de;
+    --green: #9ece6a;
+    --orange: #ff9e64;
+    --red: #f7768e;
+    --purple: #bb9af7;
+    --yellow: #e0af68;
+  }
+
+/* General Styling */
+body {
+    font-family: Courier, monospace;
+    background-color: var(--background);
+    color: var(--foreground);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Full height of the viewport */ 
+    font-size: 20px; /* font size for all text */   
+}
+
+/* Header */
+header {
+    background: var(--surface);
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    color: var(--purple);
+}
+
+/* Navigation */
+nav {
+    background: var(--background);
+    padding: 10px;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+/* use css variables for nav links */
+nav ul li a {
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    color: var(--cyan);
+}
+
+/* Sections */
+section {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background: var(--surface);
+    border-radius: 10px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: var(--background);
+    margin-top: auto;
+    color: var(--foreground);
+}

@@ -1,0 +1,71 @@
+:root {
+    --link-color: #66ccff; /* light blue */
+    --link-hover-color: #99ddff; /* lighter blue */
+  }
+
+/* General Styling */
+body {
+    font-family: Courier, monospace;
+    background-color: #121212;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Full height of the viewport */
+}
+
+/* Header */
+header {
+    background: #121212;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+/* Navigation */
+nav {
+    background: #1e1e1e;
+    padding: 10px;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+/* use css variables for nav links */
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    color: var(--link-hover-color);
+}
+
+/* Sections */
+section {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #1e1e1e;
+    border-radius: 10px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #121212;
+    margin-top: auto;
+    color: #ffffff
+}

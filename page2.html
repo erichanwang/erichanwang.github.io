@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eric Wang - Page 2</title>
+  <link rel="icon" type="image/png" href="images/icon.png">
+  <link id="theme-style" rel="stylesheet" href="styles/style1.css">
+  <style>
+    #snakeCanvas {
+      border: 1px solid #333;
+      background-color: #000;
+      display: block;
+      margin: 10px auto;
+    }
+    #score {
+      text-align: center;
+      font-size: 1.5rem;
+      color: #333;
+    }
+    #startScreen, #endScreen {
+      display: none;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- load header and navigation  -->
+  <div id="header-container"></div>
+  <script>
+    fetch('header.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('header-container').innerHTML = data
+      })
+      .catch(error => console.error('error loading header:', error))
+  </script>
+
+  <!-- start screen -->
+  <div id="startScreen">
+    <h2>snake game</h2>
+    <label>player color <input type="color" id="playerColor" value="#008000"></label>
+    <br><br>
+    <label>speed 1 to 10 <input type="number" id="gameSpeed" min="1" max="10" value="4"></label>
+    <br><br>
+    <button id="startButton">start game</button>
+  </div>
+
+  <!-- main game section -->
+  <section id="gameScreen" style="display:none">
+    <h2>Snake Game</h2>
+    <p>Use arrow keys to control the snake. Eat red apples to grow. Don't hit walls or yourself!</p>
+    <canvas id="snakeCanvas" width="400" height="400"></canvas>
+    <p id="score">score 0</p>
+  </section>
+
+  <!-- end screen -->
+  <div id="endScreen">
+    <h2>game over</h2>
+    <p id="finalScore"></p>
+    <button id="playAgainButton">play again</button>
+  </div>
+ 
+  <footer>
+    <p>© 2025 Eric Wang. All rights reserved.</p>
+  </footer>
+
+  <!-- make sure these paths are correct and the files exist -->
+  <script src="scripts/page2script.js"></script>
+  <script src="scripts/script.js"></script>
+</body>
+</html>

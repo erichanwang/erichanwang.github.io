@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eric Wang - Portfolio</title>
+    <link rel="icon" type="image/png" href="images/icon.png">
+    <link id="theme-style" rel="stylesheet" href="styles/style1.css"> <!-- Default to light theme -->
+</head>
+<body>
+    <div id="header-container"></div>
+    <script>
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+            })
+            .catch(error => console.error('error loading header:', error));
+    </script>
+
+    <section id="other page">
+        <h2>Other Page</h2>
+        <p>This is a placeholder for another page. You can add content here as needed.</p>
+</html>

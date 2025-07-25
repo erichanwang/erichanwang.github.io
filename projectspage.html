@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eric Wang - Projects</title>
+    <link rel="icon" type="image/png" href="images/icon.png">
+    <link id="theme-style" rel="stylesheet" href="styles/style1.css">
+</head>
+<body>
+    <!-- load header and navigation  -->
+    <div id="header-container"></div>
+    <script>
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+                // show container after header loads
+                // container.style.display = 'block'
+            })
+            .catch(error => console.error('error loading header:', error))
+    </script>
+    
+    <section id="introduction">
+        <h2>Projects</h2>
+        <div></div>
+            <p>Welcome to my projects page!</p>
+            <p>This page showcases some of the projects I've worked on.</p>
+            <p>Feel free to explore these projects!</p>
+        </div>
+    </section>
+    
+    <section id="Python Projects">
+        <h2>Python Projects</h2>
+        <h3>2021</h3>
+            <ul>
+                <li><strong>Snake</strong> - snake in python using the Turtle package</li>
+                <ul>
+                    <li>I made this so long ago on a different computer so I don't have the files/links</li>
+                </ul>
+            </ul>
+        <h3>2024</h3>
+            <ul>
+                <li><strong>Pygame intro</strong> - runner game with jumping and added features</li>
+                <ul>
+                    <li><a href="https://github.com/EricWang559/pygame-intro">GitHub Repo</a></li>
+                </ul>
+            </ul>
+        <h3>2025</h3>
+            <ul>
+                <li><strong>Rubik's Cube Simulation</strong> - A 3d simulation of a Rubik's cube in Python</li>
+                <ul>
+                <li><a href="https://github.com/EricWang559/cube3d">GitHub Repo</a></li>
+                </ul>
+                <li><strong>Ball Bounce</strong> - Physics Simulations of Gravity, Magnetism, and Electric fields</li>
+                <ul>
+                    <li><a href="https://github.com/EricWang559/ballbounce">GitHub Repo</a></li>
+                </ul>
+                <li><strong>Block Games</strong> - A collection of common 2d block games</li>
+                <ul>
+                    <li><a href="https://github.com/EricWang559/blockgame">GitHub Repo</a></li>
+                </ul>
+                <li><strong>Ordering Game</strong> - A game where you must order items correctly</li>
+                <ul>
+                    <li><a href="https://github.com/EricWang559/ordering-game">GitHub Repo</a></li>
+                </ul>
+            </ul>
+    <section id="Java Projects">
+        <h2>Java Projects</h2>
+        <h3>2022</h3>
+            <ul>
+                <li><strong>Hangman</strong> - hangman project for Computer Science 1</li>
+                <ul>
+                    <li><a href="https://github.com/EricWang559/Hangman">GitHub Repo</a></li>
+                </ul>
+            </ul>
+        <h3>2023</h3>
+            <ul>
+                <li><strong>Snake Game</strong> - snake game</li>
+                <ul>
+                    <li><a href="https://github.com/EricWang559/SnakeGame">GitHub Repo</a></li>
+                </ul>
+                <li><strong>Pong Game</strong> - pong but with object generation</li>
+                <ul>
+                    <li><a href="https://drive.google.com/drive/folders/1S4xHkHHeU34yr4x43S94p2DwO8x_gIH_?usp=sharing">Google Drive Link</a></li>
+                </ul>
+                <li><strong>Blackjack</strong> - a simulation of the gambling game Blackjack</li>
+                <ul>
+                    <li><a href="https://github.com/EricWang559/BlackJack">GitHub Repo</a></li>
+                </ul>
+                <li><strong>2048</strong> - sliding blocks game of 2048</li>
+                <ul>
+                    <li><a href="https://github.com/EricWang559/2048">GitHub Repo</a></li>
+                </ul>
+            </ul>
+        <h3>2024</h3>
+        <li><strong>Calculator</strong> - Java GUI Calculator</li>
+                <ul>
+                    <li><a href="https://github.com/EricWang03/CalculatorProject">GitHub Repo</a></li>
+                </ul>
+                <li><strong>Inheritance Project</strong> - Inheritance Final Project for Computer Science 2</li>
+                <ul>
+                    <li><a href="https://github.com/EricWang559/java-inheritance-project">GitHub Repo</a></li>
+                </ul>
+        
+    </section>
+    <section id="C++ Projects">
+        <h2>C++ Projects</h2>
+        <h3>2025</h3>
+            <li><strong>Sorting Algorithms</strong> - A collection of sorting algorithms in C++</li>
+            <ul>
+                <li><a href="https://github.com/EricWang559/SortingAlgorithms">GitHub Repo</a></li>
+            </ul>
+            <li><strong>Hangman</strong> - I remade my Java Hangman project</li>
+            <ul>
+                <li><a href="https://github.com/EricWang559/HangmanCpp">GitHub Repo</a></li>
+            </ul>
+    </section>
+    <section id="Other Projects">
+        <h2>Other Projects</h2>
+        <h3>2024</h3>
+            <li><strong>Godot Project</strong> - An introduction project of Godot.</li>
+            <ul>
+                <li><a href="https://github.com/TheCalmPerson/Godot1-Gm">GitHub Repo</a></li>
+    </section>
+
+    </section>
+   
+    
+    <footer>
+        <p>© 2025 Eric Wang. All rights reserved.</p>
+    </footer>
+    
+    <script src="scripts/projectspage.js"></script>
+    <script src="scripts/script.js"></script>
+</body>
+</html>

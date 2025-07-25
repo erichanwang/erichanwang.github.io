@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eric Wang - Page 1</title>
+    <link rel="icon" type="image/png" href="images/icon.png">
+    <link id="theme-style" rel="stylesheet" href="styles/style1.css">
+</head>
+<body>
+    <!-- load header and navigation  -->
+    <div id="header-container"></div>
+    <script>
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+                // show container after header loads
+                // container.style.display = 'block'
+            })
+            .catch(error => console.error('error loading header:', error))
+    </script>
+    
+    <section id="game">
+        <h2>Reaction Time Game</h2>
+        <p>Wait for the button to turn green and click as fast as you can!</p>
+        <button id="startButton">Start</button>
+        <button id="reactionButton" disabled>Click Me!</button>
+        <p id="result"></p>
+    </section>
+   
+    
+    <footer>
+        <p>© 2025 Eric Wang. All rights reserved.</p>
+    </footer>
+    
+    <script src="scripts/page1script.js"></script>
+    <script src="scripts/script.js"></script>
+</body>
+</html>

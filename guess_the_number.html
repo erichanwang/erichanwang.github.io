@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Number Game</title>
+    <link rel="icon" type="image/png" href="images/IMG_1417.png">
+    <link rel="stylesheet" href="styles/style1.css">
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #game-container {
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            max-width: 400px;
+        }
+        input[type="number"] {
+            padding: 8px;
+            margin-right: 10px;
+            width: 100px;
+        }
+        button {
+            padding: 8px 15px;
+            cursor: pointer;
+        }
+        #message {
+            margin-top: 20px;
+            font-weight: bold;
+            min-height: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header content is directly included for faster loading -->
+    <header>
+        <h1>Eric Wang</h1>
+        <p>Version 1.4.1</p>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html" class="nav-button">Home</a></li>
+            <li><a href="projectspage.html" class="nav-button">Projects</a></li>
+        </ul>
+    </nav>
+
+    <div id="game-container">
+        <h2>Guess the Number!</h2>
+        <p>I'm thinking of a number between 1 and 100.</p>
+        <input type="number" id="guess-input" min="1" max="100">
+        <button onclick="checkGuess()">Submit Guess</button>
+        <p id="message"></p>
+        <p>Guesses: <span id="guesses-count">0</span></p>
+    </div>
+
+    <script>
+        // Game Logic
+        const messageEl = document.getElementById('message');
+        const guessInputEl = document.getElementById('guess-input');
+        const guessesCountEl = document.getElementById('guesses-count');
+
+        let randomNumber = Math.floor(Math.random() * 100) + 1;
+        let guesses = 0;
+
+        function checkGuess() {
+            const userGuess = parseInt(guessInputEl.value);
+            guesses++;
+            guessesCountEl.textContent = guesses;
+
+            if (isNaN(userGuess) || userGuess < 1 || userGuess > 100) {
+                messageEl.textContent = 'Please enter a valid number between 1 and 100.';
+                return;
+            }
+
+            if (userGuess === randomNumber) {
+                messageEl.textContent = `Congratulations! You guessed the number ${randomNumber} in ${guesses} tries!`;
+                messageEl.style.color = 'green';
+                guessInputEl.disabled = true;
+            } else if (userGuess < randomNumber) {
+                messageEl.textContent = 'Too low! Try again.';
+                messageEl.style.color = 'red';
+            } else {
+                messageEl.textContent = 'Too high! Try again.';
+                messageEl.style.color = 'red';
+            }
+            guessInputEl.value = ''; // Clear the input
+            guessInputEl.focus();
+        }
+    </script>
+
+</body>
+</html>

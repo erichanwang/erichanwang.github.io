@@ -1,0 +1,71 @@
+:root {
+    --link-color: #66ccff; /* light blue */
+    --link-hover-color: #99ddff; /* lighter blue */
+  }
+
+/* General Styling */
+body {
+    font-family: Courier, monospace;
+    background-color: #001523; /* Deep dark background */
+    color: #f4f2fc; /* Light text color for contrast */
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Full height of the viewport */    
+}
+
+/* Header */
+header {
+    background: #001523; /* Dark purple background */
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    color: #f4f2fc; /* Pinkish color for the header */
+}
+
+/* Navigation */
+nav {
+    background: #002945; /* Darker blue-gray */
+    padding: 10px;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #f4f2fc; /* Light text color */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    color: #5096d3; /* Pinkish color on hover */
+}
+
+/* Sections */
+section {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #002E4E; /* Slightly lighter dark background for the sections */
+    border-radius: 10px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #001523; /* Dark purple footer */
+    margin-top: auto;
+    color: #f4f2fc; /* Light text for footer */
+}

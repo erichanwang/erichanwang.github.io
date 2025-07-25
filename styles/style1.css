@@ -1,0 +1,245 @@
+:root {
+    --link-color: #7aa2f7; /* light blue accent */
+    --link-hover-color: #2ac3de; /* neon cyan */
+}
+
+/* General Styling */
+body {
+    font-family: Courier, monospace;
+    background-color: #1a1b26; /* dark background */
+    color: #c0caf5; /* light text */
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-size: 20px;  /* font size for all text, 24 too big */
+}
+
+/* SCROLLBAR */
+/* classic bar, light-blue theme */
+::-webkit-scrollbar         { width: 10px; }
+::-webkit-scrollbar-track   { background: #1a1b26; }  /* page bg */
+::-webkit-scrollbar-thumb   {
+  background: #cbdaf8;       /* very light blue */
+  border-radius: 10px;          /* keep classic rectangular look */
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #c2d7ff;       /* slightly lighter on hover */
+}
+::-webkit-scrollbar-button  { display: none; }
+
+/* Header */
+header {
+    background-image: url('../images/shanghai_img.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0; /* More padding to lower the header text */
+    text-align: center;
+    position: relative;
+    color: white;
+    margin-bottom: -0px;
+    padding-bottom: 0; /* Remove extra padding if present */
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+header > * {
+    position: relative;
+    z-index: 2;
+}
+
+header h1 {
+    margin: 0;
+    color: #f0f0f0; /* light text */
+}
+
+/* Navigation */
+nav {
+    background: rgba(16, 18, 26, 0.37); /* More transparent background */
+    padding: 0; /* Reduced padding to shorten the nav bar */
+    text-align: center;
+    width: 100%;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+/* nav links using variables */
+nav ul li a {
+    color: #c0caf5;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    color: #5972e3;
+}
+
+/* Sections */
+section {
+    max-width: 1000px;  /* space between the end of the screen*/
+    margin: 40px auto;
+    padding: 20px;
+    background: #161821;
+    border-radius: 10px;
+}
+
+section:first-of-type {
+    margin-top: 10;
+    
+    margin-top: 15px auto;/* Remove top margin for the first section */
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #1a1b26;
+    margin-top: auto;
+    color: #c0caf5;
+}
+
+.center-div {
+    width: 50%; /* Or a fixed pixel value */
+    margin: auto;
+}
+
+#item-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 10px; /* space between items */
+    justify-content: center; /* center items horizontally */
+    flex-wrap: wrap; /* allow items to wrap to the next line */
+}
+
+.item {
+    display: flex; /* enables vertical + horizontal centering */
+    align-items: center; /* vertical center */
+    justify-content: center; /* horizontal center */
+    border: 1px solid black;
+    margin: 5px;
+    width: 100px;
+    height: 60px;
+    background-color: #f0f0f0;
+    color: #161821;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 0px; /* optional: makes corners look smoother */
+}
+
+.item.selected {
+    background-color: #c0caf5; /* highlight selected item */
+}
+
+#timer {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #c0caf5; /* light text */
+    margin: 10px 0
+}
+
+#game-container {
+    text-align: center;
+}
+
+#game-container p,
+#game-container #message,
+#game-container {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+#leaderboard {
+    list-style: none;
+    padding: 0 20px;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 800px;
+    font-size: 18px;
+}
+
+.leaderboard-entry {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    font-family: sans-serif;
+}
+
+.rank-name {
+    flex: 1;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.time {
+    flex-shrink: 0;
+    width: 80px;
+    text-align: right;
+    font-family: monospace;
+}
+
+.hint-highlight {
+    background-color: yellow;
+    transition: background-color 0.5s ease;
+}
+
+.correct {
+    background-color: #b0f2b6; /* light green */
+    border: 2px solid #2ecc71; /* darker green border */
+    color: #2e7d32; /* optional: green text */
+}
+
+#button-row {
+    display: flex;
+    gap: 10px; /* small space between buttons */
+    justify-content: center; /* center horizontally */
+    margin-top: 10px; /* optional vertical spacing */
+    padding: 0; /* reset any extra padding */
+}
+
+#button-row button {
+    margin: 0; /* reset any extra margin */
+    padding: 6px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background-color: #eee;
+    transition: background-color 0.3s ease;
+}
+
+#button-row button:hover {
+    background-color: #ddd;
+}
+
+button.active-easy {
+    background-color: #4caf50;
+    color: white;
+    border-color: #3a8b3a;
+}

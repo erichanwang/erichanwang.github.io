@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eric Wang - Plinko Game</title>
+  <link rel="icon" type="image/png" href="images/icon.png" />
+  <link id="theme-style" rel="stylesheet" href="styles/style1.css" />
+</head>
+<body>
+
+  <div class="controls">
+    <div id="balls">-</div>
+
+    <div class="drop-container">
+      <div class="drop">
+        <button id="drop-button" type="button">Drop</button>
+      </div>
+      <input id="checkbox" type="checkbox" />
+      <label for="checkbox">
+        <div class="box">
+          <svg class="checked" xmlns="http://www.w3.org/2000/svg" width="8px" height="8px" viewBox="0 0 24 24">
+            <path fill="#ffffff" d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z" />
+          </svg>
+        </div>
+      </label>
+    </div>
+
+    <div id="multiplier">1</div>
+  </div>
+
+  <div class="canvas-container">
+    <canvas id="canvas" width="620" height="534"></canvas>
+  </div>
+
+  <div class="notes">
+    <!-- 17 notes -->
+    <div class="note" id="note-0">-</div>
+    <div class="note" id="note-1">-</div>
+    <div class="note" id="note-2">-</div>
+    <div class="note" id="note-3">-</div>
+    <div class="note" id="note-4">-</div>
+    <div class="note" id="note-5">-</div>
+    <div class="note" id="note-6">-</div>
+    <div class="note" id="note-7">-</div>
+    <div class="note" id="note-8">-</div>
+    <div class="note" id="note-9">-</div>
+    <div class="note" id="note-10">-</div>
+    <div class="note" id="note-11">-</div>
+    <div class="note" id="note-12">-</div>
+    <div class="note" id="note-13">-</div>
+    <div class="note" id="note-14">-</div>
+    <div class="note" id="note-15">-</div>
+    <div class="note" id="note-16">-</div>
+  </div>
+
+  <!-- scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tone@14.8.39/build/Tone.js"></script>
+
+  <script src="scripts/plinko_script.js"></script>
+</body>
+</html>

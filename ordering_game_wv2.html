@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eric Wang - Ordering Game</title>
+    <link rel="icon" type="image/png" href="images/icon.png">
+    <link id="theme-style" rel="stylesheet" href="styles/style1.css"><!-- Default to light theme --> 
+</head>
+<body>
+    <div id="header-container"></div>
+    <script>
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+            })
+            .catch(error => console.error('error loading header:', error));
+    </script>
+
+    <section id="game-container">
+        <h1>Ordering Game 2</h1>
+        <p>Click exactly three items to rotate them left by one!</p>
+        <div id="timer">Time: 0.000s</div>
+        <ul id="item-list"></ul>
+        <p id="message"></p>
+        
+        <div id="button-row">
+            <button id="reset-button">Reset</button>
+            <button id="hint-button">Hint</button>
+            <button id="easy-mode-button">Easy Mode</button>
+        </div>
+
+        <h2>Leaderboard</h2>
+        <ul id="leaderboard"></ul>
+    </section>
+
+
+    <footer>
+        <p>© 2025 Eric Wang. All rights reserved.</p>
+    </footer>
+    
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
+
+    <script src="scripts/ordering_game_wv2.js"></script>
+    <script src="scripts/script.js"></script>
+</body>
+</html>
