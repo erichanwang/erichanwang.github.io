@@ -3,30 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Games</title>
-    <link rel="icon" type="image/png" href="images/IMG_1417.png">
+    <title>Eric Wang - Portfolio</title>
+    <link rel="icon" type="image/png" href="images/icon.png">
     <link id="theme-style" rel="stylesheet" href="styles/style1.css"> <!-- Default to light theme -->
 </head>
 <body>
-    <!-- header.html -->
-    <header>
-        <h1>Eric Wang</h1>
-        <p>Version 1.4.1</p>
-    </header>
-
-    <nav>
-        <ul>
-            <li><a href="index.html" class="nav-button">Home</a></li>
-            <!--<li><a href="page1.html" class="nav-button">Page 1</a></li>
-        <li><a href="page2.html" class="nav-button">Page 2</a></li>-->
-            <li><a href="projectspage.html" class="nav-button">Projects</a></li>
-        </ul>
-    </nav>
+    <div id="header-container"></div>
+    <script>
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+            })
+            .catch(error => console.error('error loading header:', error));
+    </script>
     <main>
         <section>
             <div class="button-container">
                 <button id="orderingGameBtn">Ordering Game</button>
-                <button id="orderingGame2Btn">Ordering Game 2</button>
+                <button id="tetrisBtn">Tetris</button>
                 <button onclick="location.href='guess_the_number.html'">Guess the Number</button>
             </div>
         </section>

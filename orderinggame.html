@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eric Wang - Ordering Game</title>
+    <link rel="icon" type="image/png" href="images/icon.png">
+    <link id="theme-style" rel="stylesheet" href="styles/style1.css">
+    <style>
+        .game-mode { display: none; }
+        .game-mode.active { display: block; }
+    </style>
+</head>
+<body>
+    <div id="header-container"></div>
+    <script>
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+            })
+            .catch(error => console.error('error loading header:', error));
+    </script>
+
+    <section id="game-container">
+        <div id="game-mode-selector">
+            <button id="game1-button">Game 1</button>
+            <button id="game2-button">Game 2</button>
+            <button id="game3-button">Game 3</button>
+        </div>
+        <div id="game-content">
+            <div id="game1-container" class="game-mode">
+                <h1>Ordering Game 1</h1>
+                <p>Click two items to swap them. Get them in order!</p>
+                <p class="instructions"><b>Controls:</b><br>Use number keys to select items. Press 'R' to reset.</p>
+                <div id="game1-timer" class="timer">Time: 0.000s</div>
+                <ul id="game1-item-list" class="item-list"></ul>
+                <p id="game1-message" class="message"></p>
+                <div class="button-row">
+                    <button id="game1-reset-button">Reset</button>
+                    <button id="game1-hint-button">Hint</button>
+                    <button id="game1-easy-mode-button">Easy Mode</button>
+                </div>
+                <h2>Leaderboard</h2>
+                <div class="leaderboard-controls">
+                    <button id="game1-sort-time">Sort by Time</button>
+                    <button id="game1-sort-moves">Sort by Moves</button>
+                </div>
+                <ul id="game1-leaderboard" class="leaderboard"></ul>
+            </div>
+            <div id="game2-container" class="game-mode">
+                <h1>Ordering Game 2</h1>
+                <p>Click exactly three items to rotate them left by one!</p>
+                <p class="instructions"><b>Controls:</b><br>Use number keys to select items. Press 'R' to reset.</p>
+                <div id="game2-timer" class="timer">Time: 0.000s</div>
+                <ul id="game2-item-list" class="item-list"></ul>
+                <p id="game2-message" class="message"></p>
+                <div class="button-row">
+                    <button id="game2-reset-button">Reset</button>
+                    <button id="game2-hint-button">Hint</button>
+                    <button id="game2-easy-mode-button">Easy Mode</button>
+                </div>
+                <h2>Leaderboard</h2>
+                <div class="leaderboard-controls">
+                    <button id="game2-sort-time">Sort by Time</button>
+                    <button id="game2-sort-moves">Sort by Moves</button>
+                </div>
+                <ul id="game2-leaderboard" class="leaderboard"></ul>
+            </div>
+            <div id="game3-container" class="game-mode">
+                <h1>Ordering Game 3</h1>
+                <p>Click exactly four items to rotate them left by one!</p>
+                <p class="instructions"><b>Controls:</b><br>Use number keys to select items. Press 'R' to reset.</p>
+                <div id="game3-timer" class="timer">Time: 0.000s</div>
+                <ul id="game3-item-list" class="item-list"></ul>
+                <p id="game3-message" class="message"></p>
+                <div class="button-row">
+                    <button id="game3-reset-button">Reset</button>
+                    <button id="game3-hint-button">Hint</button>
+                    <button id="game3-easy-mode-button">Easy Mode</button>
+                </div>
+                <h2>Leaderboard</h2>
+                <div class="leaderboard-controls">
+                    <button id="game3-sort-time">Sort by Time</button>
+                    <button id="game3-sort-moves">Sort by Moves</button>
+                </div>
+                <ul id="game3-leaderboard" class="leaderboard"></ul>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Eric Wang. All rights reserved.</p>
+    </footer>
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+    <script src="scripts/orderinggame.js"></script>
+    <script src="scripts/script.js"></script>
+</body>
+</html>

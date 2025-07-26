@@ -3,51 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guess the Number Game</title>
-    <link rel="icon" type="image/png" href="images/IMG_1417.png">
-    <link rel="stylesheet" href="styles/style1.css">
-    <style>
-        body {
-            font-family: sans-serif;
-            text-align: center;
-            margin-top: 50px;
-        }
-        #game-container {
-            margin: 20px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            max-width: 400px;
-        }
-        input[type="number"] {
-            padding: 8px;
-            margin-right: 10px;
-            width: 100px;
-        }
-        button {
-            padding: 8px 15px;
-            cursor: pointer;
-        }
-        #message {
-            margin-top: 20px;
-            font-weight: bold;
-            min-height: 20px;
-        }
-    </style>
+    <title>Eric Wang - Guess the Number</title>
+    <link rel="icon" type="image/png" href="images/icon.png">
+    <link id="theme-style" rel="stylesheet" href="styles/style1.css"> <!-- Default to light theme -->
 </head>
 <body>
-
-    <!-- Header content is directly included for faster loading -->
-    <header>
-        <h1>Eric Wang</h1>
-        <p>Version 1.4.1</p>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="index.html" class="nav-button">Home</a></li>
-            <li><a href="projectspage.html" class="nav-button">Projects</a></li>
-        </ul>
-    </nav>
+    <div id="header-container"></div>
+    <script>
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+            })
+            .catch(error => console.error('error loading header:', error));
+    </script>
 
     <div id="game-container">
         <h2>Guess the Number!</h2>
@@ -92,6 +61,10 @@
             guessInputEl.focus();
         }
     </script>
+    <script src="scripts/script.js"></script>
 
+    <footer>
+        <p>© 2025 Eric Wang. All rights reserved.</p>
+    </footer>
 </body>
 </html>
