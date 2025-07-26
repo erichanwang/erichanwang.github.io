@@ -419,22 +419,43 @@ document.addEventListener('DOMContentLoaded', () => {
         hintGenerator: function(correctOrder) {
             const itemList = document.getElementById('game3-item-list');
             const currentOrder = Array.from(itemList.children).map(item => parseInt(item.textContent));
-            // Try all groups of 4
-            for (let i = 0; i <= currentOrder.length - 4; i++) {
-                const group = currentOrder.slice(i, i + 4);
-                // Try rotating left
-                const rotated = group.slice(1).concat(group[0]);
-                const testOrder = currentOrder.slice();
-                for (let j = 0; j < 4; j++) testOrder[i + j] = rotated[j];
-                // See if this improves the number of correct positions
-                const before = currentOrder.reduce((acc, val, idx) => acc + (val === correctOrder[idx] ? 1 : 0), 0);
-                const after = testOrder.reduce((acc, val, idx) => acc + (val === correctOrder[idx] ? 1 : 0), 0);
-                if (after > before) {
-                    alert(`Hint: Try rotating the group: ${group.join(', ')}.`);
-                    return;
+
+            const indices = [0, 1, 2, 3, 4, 5];
+
+            function combinations(arr, k) {
+                if (k === 0) return [[]];
+                if (arr.length < k) return [];
+                const [first, ...rest] = arr;
+                const withFirst = combinations(rest, k - 1).map(c => [first, ...c]);
+                const withoutFirst = combinations(rest, k);
+                return withFirst.concat(withoutFirst);
+            }
+
+            const allCombos = combinations(indices, 4);
+
+            let bestCombo = null;
+            let bestAfter = -1;
+
+            for (const combo of allCombos) {
+                const values = combo.map(i => currentOrder[i]);
+                const rotated = [values[1], values[2], values[3], values[0]];
+                const testOrder = [...currentOrder];
+                for (let i = 0; i < 4; i++) testOrder[combo[i]] = rotated[i];
+
+                const correctCount = testOrder.reduce((acc, val, idx) => acc + (val === correctOrder[idx] ? 1 : 0), 0);
+
+                if (correctCount > bestAfter) {
+                    bestAfter = correctCount;
+                    bestCombo = combo;
                 }
             }
-            alert("No helpful rotation found. Try another move!");
+
+            if (bestCombo) {
+                const rotated = bestCombo.map(i => currentOrder[i]);
+                alert(`best move: rotate positions ${bestCombo.join(', ')} → [${rotated.join(', ')}]`);
+            } else {
+                alert("no valid moves found. \n the correct order is: " + correctOrder.join(', '));
+            }
         },
         rotateSize: 4
     });
