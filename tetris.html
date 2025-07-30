@@ -8,8 +8,22 @@
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .settings-dialog-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+    </style>
 </head>
-<body class="bg-gray-900">
+<body class="bg-gray-900" style="overflow: hidden;">
     <div id="root"></div>
     <script type="text/babel" data-presets="react,typescript">
         const { useState, useEffect, useCallback, useRef } = React;
@@ -112,7 +126,7 @@
                 onOpenChange(false);
             };
             if (!open) return null;
-            return <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"><div className="bg-gray-800 border border-gray-700 rounded-xl p-8 max-w-lg w-full"><h2 className="text-2xl font-bold mb-6">Settings</h2><div className="space-y-6"><div><h3 className="text-lg font-semibold mb-2">Gameplay</h3><div className="grid grid-cols-1 gap-4"><label className="flex flex-col"><span className="text-sm text-gray-400">DAS (ms): {localSettings.das}</span><input type="range" min="0" max="300" value={localSettings.das} onChange={(e) => handleSettingChange('das', e.target.value)} className="w-full" /></label><label className="flex flex-col"><span className="text-sm text-gray-400">ARR (ms): {localSettings.arr}</span><input type="range" min="0" max="100" value={localSettings.arr} onChange={(e) => handleSettingChange('arr', e.target.value)} className="w-full" /></label><label className="flex flex-col"><span className="text-sm text-gray-400">Soft Drop Speed: {localSettings.softDropSpeed > 40 ? "Instant" : localSettings.softDropSpeed}</span><input type="range" min="20" max="41" value={localSettings.softDropSpeed} onChange={(e) => handleSettingChange('softDropSpeed', e.target.value)} className="w-full" /></label></div></div><div><h3 className="text-lg font-semibold mb-2">Key Bindings</h3><div className="grid grid-cols-2 gap-x-8 gap-y-4">{Object.entries(localKeyBindings).map(([action, key]) => <div key={action} className="flex items-center justify-between"><span className="capitalize">{action.replace(/([A-Z])/g, ' $1')}</span><button onClick={() => handleKeyBind(action)} className="bg-gray-700 hover:bg-gray-600 rounded px-3 py-1 w-32 text-center">{isBinding === action ? '...' : key}</button></div>)}</div></div></div><div className="flex justify-end gap-4 mt-8"><button onClick={() => onOpenChange(false)} className="px-4 py-2 bg-gray-600 rounded hover:bg-gray-700">Cancel</button><button onClick={handleSave} className="px-4 py-2 bg-purple-600 rounded hover:bg-purple-700">Save</button></div></div></div>;
+            return <div className="settings-dialog-backdrop"><div className="bg-gray-800 border border-gray-700 rounded-xl p-8 max-w-lg w-full"><h2 className="text-2xl font-bold mb-6">Settings</h2><div className="space-y-6"><div><h3 className="text-lg font-semibold mb-2">Gameplay</h3><div className="grid grid-cols-1 gap-4"><label className="flex flex-col"><span className="text-sm text-gray-400">DAS (ms): {localSettings.das}</span><input type="range" min="0" max="300" value={localSettings.das} onChange={(e) => handleSettingChange('das', e.target.value)} className="w-full" /></label><label className="flex flex-col"><span className="text-sm text-gray-400">ARR (ms): {localSettings.arr}</span><input type="range" min="0" max="100" value={localSettings.arr} onChange={(e) => handleSettingChange('arr', e.target.value)} className="w-full" /></label><label className="flex flex-col"><span className="text-sm text-gray-400">Soft Drop Speed: {localSettings.softDropSpeed > 40 ? "Instant" : localSettings.softDropSpeed}</span><input type="range" min="20" max="41" value={localSettings.softDropSpeed} onChange={(e) => handleSettingChange('softDropSpeed', e.target.value)} className="w-full" /></label></div></div><div><h3 className="text-lg font-semibold mb-2">Key Bindings</h3><div className="grid grid-cols-2 gap-x-8 gap-y-4">{Object.entries(localKeyBindings).map(([action, key]) => <div key={action} className="flex items-center justify-between"><span className="capitalize">{action.replace(/([A-Z])/g, ' $1')}</span><button onClick={() => handleKeyBind(action)} className="bg-gray-700 hover:bg-gray-600 rounded px-3 py-1 w-32 text-center">{isBinding === action ? '...' : key}</button></div>)}</div></div></div><div className="flex justify-end gap-4 mt-8"><button onClick={() => onOpenChange(false)} className="px-4 py-2 bg-gray-600 rounded hover:bg-gray-700">Cancel</button><button onClick={handleSave} className="px-4 py-2 bg-purple-600 rounded hover:bg-purple-700">Save</button></div></div></div>;
         }
 
         // --- useTetris Hook ---
@@ -127,12 +141,12 @@
             const [nextQueue, setNextQueue] = useState([]);
             const [holdPiece, setHoldPiece] = useState(null);
             const [canHold, setCanHold] = useState(true);
-            const [settings, setSettings] = useState({ das: 160, arr: 50, softDropSpeed: 30 });
+            const [settings, setSettings] = useState({ das: 80, arr: 20, softDropSpeed: 30 });
             const [keyBindings, setKeyBindings] = useState({ moveLeft: 'ArrowLeft', moveRight: 'ArrowRight', softDrop: 'ArrowDown', hardDrop: 'Space', rotateClockwise: 'KeyX', rotateCounterClockwise: 'KeyZ', rotate180: 'KeyA', hold: 'KeyC', pause: 'Escape', restart: 'KeyR' });
 
             const gameLoopRef = useRef();
             const bagRef = useRef([]);
-            const moveState = useRef({ dasTimer: null, arrTimer: null });
+            const moveState = useRef({ dasTimer: null, arrTimer: null, moveDir: 0 });
             const lockDelayRef = useRef(null);
 
             const shuffleBag = useCallback(() => {
@@ -198,7 +212,7 @@
                                 resetPlayer();
                                 setCanHold(true);
                                 lockDelayRef.current = null;
-                            }, 1000);
+                            }, 500);
                         }
                         return p;
                     }
@@ -277,17 +291,17 @@
             }, []);
 
             const hardDrop = useCallback(() => {
-                setPlayer(p => {
-                    if (!p || !isRunning) return p;
-                    let newPlayer = { ...p };
-                    while (!collide(newPlayer, board)) { newPlayer.pos.y++; }
-                    newPlayer.pos.y--;
-                    merge(newPlayer);
-                    resetPlayer();
-                    setCanHold(true);
-                    return null;
-                });
-            }, [isRunning, merge, resetPlayer]);
+                if (!player || !isRunning) return;
+                let newPlayer = JSON.parse(JSON.stringify(player));
+                while (!collide(newPlayer, board)) {
+                    newPlayer.pos.y++;
+                }
+                newPlayer.pos.y--;
+                merge(newPlayer);
+                resetPlayer();
+                setCanHold(true);
+                setPlayer(null);
+            }, [player, isRunning, merge, resetPlayer]);
 
             const sonicDrop = useCallback(() => {
                 setPlayer(p => {
@@ -318,18 +332,37 @@
 
             const handleKeyDown = useCallback((e) => {
                 if (e.ctrlKey || e.metaKey || (e.shiftKey && e.code === 'KeyR')) return;
-                e.preventDefault();
+                if (e.code === 'Space') e.preventDefault();
                 if (!isRunning) { if (e.code === keyBindings.restart) startGame(); return; }
-                if (e.repeat) return;
+                
                 const { moveLeft, moveRight, softDrop, hardDrop: hardDropKey, rotateClockwise, rotateCounterClockwise, rotate180, hold: holdKey, pause } = keyBindings;
-                const stopMovement = () => { clearTimeout(moveState.current.dasTimer); clearInterval(moveState.current.arrTimer); moveState.current.dasTimer = null; moveState.current.arrTimer = null; };
-                const startMovement = (dir) => { stopMovement(); playerMove(dir); moveState.current.dasTimer = setTimeout(() => { moveState.current.arrTimer = setInterval(() => playerMove(dir), settings.arr); }, settings.das); };
+                
+                if (e.repeat) return;
+
+                const startMovement = (dir) => {
+                    if (moveState.current.moveDir === dir) return;
+                    stopMovement();
+                    moveState.current.moveDir = dir;
+                    playerMove(dir);
+                    moveState.current.dasTimer = setTimeout(() => {
+                        moveState.current.arrTimer = setInterval(() => playerMove(dir), settings.arr);
+                    }, settings.das);
+                };
+
+                const stopMovement = () => {
+                    clearTimeout(moveState.current.dasTimer);
+                    clearInterval(moveState.current.arrTimer);
+                    moveState.current.dasTimer = null;
+                    moveState.current.arrTimer = null;
+                    moveState.current.moveDir = 0;
+                };
+
                 switch (e.code) {
                     case moveLeft: startMovement(-1); break;
                     case moveRight: startMovement(1); break;
                     case softDrop:
                         if (settings.softDropSpeed > 40) { sonicDrop(); } 
-                        else { stopMovement(); playerDrop(true); moveState.current.arrTimer = setInterval(() => playerDrop(true), 1000 / settings.softDropSpeed); }
+                        else { playerDrop(true); moveState.current.arrTimer = setInterval(() => playerDrop(true), 1000 / settings.softDropSpeed); }
                         break;
                     case hardDropKey: hardDrop(); break;
                     case rotateClockwise: playerRotate(1); break;
@@ -342,10 +375,15 @@
 
             const handleKeyUp = useCallback((e) => {
                 const { moveLeft, moveRight, softDrop } = keyBindings;
-                if (e.code === moveLeft || e.code === moveRight || e.code === softDrop) {
+                if ((e.code === moveLeft && moveState.current.moveDir === -1) || (e.code === moveRight && moveState.current.moveDir === 1)) {
                     clearTimeout(moveState.current.dasTimer);
                     clearInterval(moveState.current.arrTimer);
                     moveState.current.dasTimer = null;
+                    moveState.current.arrTimer = null;
+                    moveState.current.moveDir = 0;
+                }
+                if (e.code === softDrop) {
+                    clearInterval(moveState.current.arrTimer);
                     moveState.current.arrTimer = null;
                 }
             }, [keyBindings]);
@@ -367,7 +405,7 @@
           const { gameState, startGame, pauseGame, restartGame, settings, setSettings, keyBindings, setKeyBindings } = useTetris();
           const [showSettings, setShowSettings] = useState(false);
           useEffect(() => { startGame(); }, []);
-          return <div className="min-h-screen text-white flex items-center justify-center p-4 font-mono"><div className="w-full max-w-6xl"><div className="text-center mb-8"><h1 className="text-5xl font-bold text-purple-400">TETRIS</h1><p className="text-sm text-gray-400 mt-2">Modern Tetris with SRS</p></div><div className="flex flex-col lg:flex-row gap-8 items-start justify-center"><div className="bg-gray-800 border border-gray-700 rounded-xl p-6 min-w-[200px] space-y-6"><div><h3 className="text-xs font-semibold text-purple-400 uppercase tracking-wider mb-3">Hold</h3><PiecePreview piece={gameState.holdPiece} /></div><GameStats score={gameState.score} lines={gameState.lines} level={gameState.level} /></div><div className="flex flex-col items-center space-y-6"><GameControls isRunning={gameState.isRunning} isPaused={!gameState.isRunning && gameState.player !== null} isGameOver={gameState.isGameOver} onStart={startGame} onPause={pauseGame} onRestart={restartGame} onSettings={() => setShowSettings(true)} /><div className="relative"><GameBoard board={gameState.board} player={gameState.player} />{gameState.isGameOver && <div className="absolute inset-0 bg-black/50 flex items-center justify-center text-3xl font-bold">GAME OVER</div>}</div></div><div className="bg-gray-800 border border-gray-700 rounded-xl p-6 min-w-[200px] space-y-4"><h3 className="text-xs font-semibold text-purple-400 uppercase tracking-wider mb-3">Next</h3>{gameState.nextQueue.map((piece, index) => <PiecePreview key={index} piece={piece} />)}</div></div><SettingsDialog open={showSettings} onOpenChange={setShowSettings} settings={settings} onSettingsChange={setSettings} keyBindings={keyBindings} onKeyBindingsChange={setKeyBindings} /></div></div>;
+          return <div className="min-h-screen text-white flex items-center justify-center p-4 font-mono"><div className="w-full max-w-6xl"><div className="text-center mb-8"><h1 className="text-5xl font-bold text-purple-400">TETRIS</h1><p className="text-sm text-gray-400 mt-2">Modern Tetris with SRS</p></div><div className="flex flex-row gap-8 items-start justify-center"><div className="bg-gray-800 border border-gray-700 rounded-xl p-6 min-w-[200px] space-y-6"><div><h3 className="text-xs font-semibold text-purple-400 uppercase tracking-wider mb-3">Hold</h3><PiecePreview piece={gameState.holdPiece} /></div></div><div className="flex flex-col items-center space-y-6"><GameControls isRunning={gameState.isRunning} isPaused={!gameState.isRunning && gameState.player !== null} isGameOver={gameState.isGameOver} onStart={startGame} onPause={pauseGame} onRestart={restartGame} onSettings={() => setShowSettings(true)} /><div className="relative"><GameBoard board={gameState.board} player={gameState.player} />{gameState.isGameOver && <div className="absolute inset-0 bg-black/50 flex items-center justify-center text-3xl font-bold">GAME OVER</div>}</div></div><div className="bg-gray-800 border border-gray-700 rounded-xl p-6 min-w-[200px] space-y-4"><h3 className="text-xs font-semibold text-purple-400 uppercase tracking-wider mb-3">Next</h3>{gameState.nextQueue.map((piece, index) => <PiecePreview key={index} piece={piece} />)}<GameStats score={gameState.score} lines={gameState.lines} level={gameState.level} /></div></div><SettingsDialog open={showSettings} onOpenChange={setShowSettings} settings={settings} onSettingsChange={setSettings} keyBindings={keyBindings} onKeyBindingsChange={setKeyBindings} /></div></div>;
         }
 
         const domContainer = document.querySelector('#root');
@@ -376,55 +414,3 @@
     </script>
 </body>
 </html>
-
-</final_file_content>
-
-IMPORTANT: For any future changes to this file, use the final_file_content shown above as your reference. This content reflects the current state of the file, including any auto-formatting (e.g., if you used single quotes but the formatter converted them to double quotes). Always base your SEARCH/REPLACE operations on this final version to ensure accuracy.
-
-<environment_details>
-# VSCode Visible Files
-tetris.html
-
-# VSCode Open Tabs
-README.md
-guess_the_number.html
-games.html
-scripts/games_script.js
-orderinggame.html
-scripts/orderinggame.js
-styles/tetris.css
-scripts/tetris.js
-scripts/tetrisscript.tsx
-scripts/tetrisgame.tsx
-tetris.html
-tetrisstuff/useTetris.ts
-tetrisstuff/TetrisGame.tsx
-tetrisstuff/GameBoard.tsx
-tetrisstuff/PiecePreview.tsx
-tetrisstuff/GameStats.tsx
-tetrisstuff/GameControls.tsx
-tetrisstuff/SettingsDialog.tsx
-scripts/tetrisscript.js
-../../../../../AppData/Roaming/Code/User/settings.json
-styles/style1.css
-scripts/ordering_game_wv3.js
-index.html
-header.html
-scripts/script.js
-ordering_game_wv.html
-ordering_game_wv2.html
-page0.html
-page1.html
-page2.html
-projectspage.html
-plinko.html
-
-# Current Time
-7/26/2025, 6:29:22 PM (America/Chicago, UTC-5:00)
-
-# Context Window Usage
-264,803 / 1,048.576K tokens used (25%)
-
-# Current Mode
-ACT MODE
-</environment_details>

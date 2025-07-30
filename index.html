@@ -1,73 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Eric Wang - Portfolio</title>
-    <link rel="icon" type="image/png" href="images/icon.png">
-    <link id="theme-style" rel="stylesheet" href="styles/style1.css"> <!-- Default to light theme -->
+    <link rel="icon" type="image/png" href="images/icon.png" />
+    <link id="theme-style" rel="stylesheet" href="styles/style1.css" />
 </head>
 <body>
-    <!-- load header and navigation  -->
+    <!-- header and navigation -->
     <div id="header-container"></div>
     <script>
         fetch('header.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('header-container').innerHTML = data;
-                // show container after header loads
-                // document.getElementById('header-container').style.display = 'block';
             })
             .catch(error => console.error('error loading header:', error))
     </script>
-    
-
 
     <section id="about-me">
         <h2>About Me</h2>
-        <p>Hi, I'm Eric! I'm a 16-year-old Senior from Texas.</p>
-        <p>I'm passionate about coding, violin, and math.</p>
-        <p>I'm fluent in English and Mandarin Chinese.</p>
+        <p>Hi, I'm Eric!</p>
+        <p>I'm currently a high school senior with a passion for computer science and programming.</p>
+        <p>I'm aiming to major in computer science.</p>
+        <p>Fluent in English and Mandarin Chinese.</p>
+        <p>College Station High School '26</p>
     </section>
 
-    <section id="awards">
-        <h2>Awards & Experience</h2>
-        
-        <h3>Research & Summer Programs</h3>
-        <h4>2022</h4>
+    <section id="skills">
+        <h2>Skills</h2>
+        <h3>Programming Languages</h3>
         <ul>
-            <li><strong>Texas A&M STEM Research Camp</strong> - Conducted STEM Research.</li>
-        </ul>
-        <h4>2023</h4>
-        <ul>
-            <li><strong>Yale SIG Camp</strong> - Neuroscience and Regenerative Medicine.</li>
-        </ul>
-        <h4>2025</h4>
-        <ul>
-            <li><strong>UT Austin Computer Science Machine Learning Program</strong> - Research in AI and Machine Learning.</li>
+            <li>Python - 5 years</li>
+            <li>Java - 3 years</li>
+            <li>C, C++, C# - 1 year</li>
+            <li>HTML, CSS, JavaScript - 2 years</li>
+            <li>PHP - 2 years</li>
+            <li>TypeScript - 1 year</li>
+            <li>Bash / Shell Scripting - 2 years</li>
+            <li>GDScript - 1 year</li>
         </ul>
 
-        <h3>Competitions & Recognitions</h3>
-        <h4>2023</h4>
+        <h3>Frameworks & Tools</h3>
         <ul>
-            <li>Region Full Orchestra</li>
-
-        </ul>
-        <h4>2024</h4>
-        <ul>
-            <li>AMC12 - Distinction</li>
-            <li>Region Full Orchestra</li>
-        </ul>
-
-        <h4>2025</h4>
-        <ul>
-            <li>Region Full Orchestra</li>
-            <li>AIME National Qualifier</li>
-            <li>BPA National Alternate (Python)</li>
-            <li>TEAMS National Qualifier</li>
-            <li>GARSEF Finalist - 2nd (Material Science)</li>
-            <li>TXSEF Finalist - 3rd (Material Science)</li>
-            
+            <li>React</li>
+            <li>Node.js</li>
+            <li>Flask (Python)</li>
+            <li>Firebase</li>
+            <li>Git / GitHub</li>
+            <li>VSCode, Vim / Neovim</li>
+            <li>Linux (Arch)</li>
+            <li>Make, GCC, GDB</li>
         </ul>
     </section>
 
@@ -75,107 +59,22 @@
         <h2>Certifications</h2>
         <ul>
             <li>Java Programming Certificate</li>
-            <li>Java Industry Based Certification</li>
             <li>Python Programming Certificate</li>
             <li>C++ Programming Certificate</li>
             <li>HTML & CSS Certificate</li>
         </ul>
     </section>
 
-    <section id="skills">
-        <h2>Skills</h2>
-        <h3>Coding Languages</h3>
-        <ul>
-            <li>Python</li>
-            <li>Java</li>
-            <li>C, C++, C#</li>
-            <li>HTML</li>
-            <li>CSS</li>
-            <li>JavaScript</li>
-            <li>GDScript</li>
-            <li>PHP</li>
-        </ul>
-    </section>
-
-    <section id="education">
-        <h3>Education</h3>
-        <h4>2023</h4>
-        <ul>
-            <li>AP Human Geography</li>
-        </ul>
-        <h4>2024</h4>
-        <ul>
-            <li>AP Computer Science A</li>
-            <li>AP Calculus BC</li>
-            <li>AP Psychology</li>
-            <li>AP World History</li>
-
-            <li>Calculus 3</li>
-        </ul>
-
-        <h4>2025</h4>
-        <ul>
-            <li>AP Chinese Language and Culture</li>
-            <li>AP Physics 1</li>
-            <li>AP Chemistry</li>
-            <li>AP English Language</li>
-            <li>AP US History</li>
-        </ul>
-        
-        <h4>2026</h4>
-        <ul>
-            <li>AP Physics C: Mechanics</li>
-            <li>AP Physics C: Electricity and Magnetism</li>
-            <li>AP Biology</li>
-            <li>AP English Literature</li>
-            <li>AP Macroeconomics</li>
-            <li>AP US Government and Politics</li>
-
-            <li>Differential Equations</li>
-            <li>Linear Algebra</li>
-        </ul>
-    </section>
-
-    <section id="roles">
-        <h2>Positions & Roles</h2>
-        <h3>Competitions</h3>
-        <ul>
-            <li>UIL Number Sense, Calculator, Math, Science, Accounting, Computer Science</li>
-        </ul>
-
-        <h3>Leadership</h3>
-        <ul>
-            <li>Math Club Officer</li>
-            <li>Computer Science Club Officer</li>
-            <li>Scholars of Science Officer, Treasurer, Secretary</li>
-        </ul>
-    </section>
-
     <section id="contact">
-        <h2>Contact Me</h2>
-        <p>Email: <a href="mailto:ericwang559@gmail.com">ericwang559@gmail.com</a></p>
-        <p>GitHub: <a href="https://github.com/EricWang559" target="_blank">github.com/EricWang559</a></p>
+        <h2>contact me</h2>
+        <p>email: <a href="mailto:ericwang559@gmail.com">ericwang559@gmail.com</a></p>
+        <p>github: <a href="https://github.com/EricWang559" target="_blank">github.com/EricWang559</a></p>
     </section>
 
     <footer>
         <p>© 2025 Eric Wang. All rights reserved.</p>
     </footer>
-    <script>
-        function openTab(evt, tabName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablink");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
-        document.getElementsByClassName("tablink")[0].click();
-    </script>
+
     <script src="scripts/script.js"></script>
 </body>
 </html>

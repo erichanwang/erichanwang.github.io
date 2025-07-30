@@ -313,3 +313,50 @@ button:hover, .game-mode button:hover {
     background: #1e40af;
     color: #fff;
 }
+
+
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+.skill-box {
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  width: 150px;
+  height: 180px;
+  padding: 12px;
+  color: #161821;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: default;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+}
+
+.skill-box:hover {
+  background-color: #7aa2f7; /* your accent color */
+  color: white;
+  box-shadow: 0 8px 20px rgba(122, 162, 247, 0.7);
+}
+
+.skill-name {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.skill-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 8px;
+}
+
+.skill-desc {
+  font-size: 0.85rem;
+  line-height: 1.2;
+}

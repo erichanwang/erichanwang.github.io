@@ -33,9 +33,9 @@ export function TetrisGame() {
           </p>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-8 items-start justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Left Panel - Hold & Stats */}
-          <div className="bg-gray-800 border border-gray-700 rounded-xl p-6 min-w-[200px] space-y-6">
+          <div className="lg:col-span-1 bg-gray-800 border border-gray-700 rounded-xl p-6 space-y-6">
             <div>
               <h3 className="text-xs font-semibold text-purple-400 uppercase tracking-wider mb-3">
                 Hold
@@ -46,7 +46,7 @@ export function TetrisGame() {
           </div>
 
           {/* Center - Game Board */}
-          <div className="flex flex-col items-center space-y-6">
+          <div className="lg:col-span-2 flex flex-col items-center space-y-6">
             <GameControls
               isRunning={gameState.isRunning}
               isPaused={!gameState.isRunning && gameState.player !== null}
@@ -68,7 +68,7 @@ export function TetrisGame() {
           </div>
 
           {/* Right Panel - Next Queue */}
-          <div className="bg-gray-800 border border-gray-700 rounded-xl p-6 min-w-[200px] space-y-4">
+          <div className="lg:col-span-1 bg-gray-800 border border-gray-700 rounded-xl p-6 space-y-4">
             <h3 className="text-xs font-semibold text-purple-400 uppercase tracking-wider mb-3">
               Next
             </h3>

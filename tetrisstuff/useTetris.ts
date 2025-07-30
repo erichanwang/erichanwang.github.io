@@ -57,10 +57,10 @@ export const useTetris = () => {
         moveRight: 'ArrowRight',
         softDrop: 'ArrowDown',
         hardDrop: 'Space',
-        rotateClockwise: 'ArrowUp',
+        rotateClockwise: ['ArrowUp', 'KeyX'],
         rotateCounterClockwise: 'KeyZ',
         rotate180: 'KeyA',
-        hold: 'ShiftLeft',
+        hold: 'KeyC',
         pause: 'Escape',
         restart: 'KeyR',
     });
@@ -166,11 +166,10 @@ export const useTetris = () => {
         if (!player || !isRunning) return;
         let newPlayer = { ...player };
         let dropCount = 0;
-        while (!collide(newPlayer, board)) {
-            newPlayer.pos.y++;
+        while (!collide({ ...newPlayer, pos: { x: newPlayer.pos.x, y: newPlayer.pos.y + dropCount + 1 } }, board)) {
             dropCount++;
         }
-        newPlayer.pos.y--;
+        newPlayer.pos.y += dropCount;
         setScore(s => s + dropCount * 2);
         merge(newPlayer);
         resetPlayer();
@@ -243,7 +242,11 @@ export const useTetris = () => {
             for (let x = 0; x < player.matrix[y].length; x++) {
                 if (
                     player.matrix[y][x] !== 0 &&
-                    (board[y + player.pos.y] && board[y + player.pos.y][x + player.pos.x]) !== 0
+                    (
+                        !board[y + player.pos.y] ||
+                        board[y + player.pos.y][x + player.pos.x] === undefined ||
+                        board[y + player.pos.y][x + player.pos.x] !== 0
+                    )
                 ) {
                     return true;
                 }
@@ -289,76 +292,76 @@ export const useTetris = () => {
         setBoard(newBoard);
     };
 
-    const gameLoop = (time) => {
-        if (!isRunning) return;
+    const gameLoop = useCallback((time) => {
+        if (isRunning) {
+            const deltaTime = time - lastTimeRef.current;
+            lastTimeRef.current = time;
+            dropCounterRef.current += deltaTime;
 
-        const deltaTime = time - lastTimeRef.current;
-        lastTimeRef.current = time;
-        dropCounterRef.current += deltaTime;
-
-        const dropInterval = 1000 / level;
-        if (dropCounterRef.current > dropInterval) {
-            playerDrop();
+            const dropInterval = 1000 / level;
+            if (dropCounterRef.current > dropInterval) {
+                playerDrop();
+            }
+            gameLoopRef.current = requestAnimationFrame(gameLoop);
         }
-
-        gameLoopRef.current = requestAnimationFrame(gameLoop);
-    };
-
-    // Keyboard handling for smooth movement (DAS/ARR)
-    const moveState = useRef({ left: false, right: false, down: false, timer: null, repeatTimer: null });
-
-    const handleKeyUp = useCallback((e) => {
-        const { moveLeft, moveRight, softDrop } = keyBindings;
-        if (e.code === moveLeft) moveState.current.left = false;
-        if (e.code === moveRight) moveState.current.right = false;
-        if (e.code === softDrop) moveState.current.down = false;
-
-        if (!moveState.current.left && !moveState.current.right && !moveState.current.down) {
-            clearTimeout(moveState.current.timer);
-            clearInterval(moveState.current.repeatTimer);
-            moveState.current.timer = null;
-            moveState.current.repeatTimer = null;
-        }
-    }, [keyBindings]);
+    }, [isRunning, level, playerDrop]);
 
     const handleKeyDown = useCallback((e) => {
-        e.preventDefault();
         if (!isRunning) {
             if (e.code === keyBindings.restart) startGame();
             return;
         }
 
-        const { moveLeft, moveRight, softDrop, hardDrop, rotateClockwise, rotateCounterClockwise, rotate180, hold: holdKey, pause } = keyBindings;
-
-        if (e.code === moveLeft || e.code === moveRight || e.code === softDrop) {
-            if (moveState.current.timer) return; // Already moving
-
-            const move = () => {
-                if (moveState.current.left) playerMove(-1);
-                if (moveState.current.right) playerMove(1);
-                if (moveState.current.down) playerDrop(true);
-            };
-            
-            if (e.code === moveLeft) moveState.current.left = true;
-            if (e.code === moveRight) moveState.current.right = true;
-            if (e.code === softDrop) moveState.current.down = true;
-
-            move();
-
-            moveState.current.timer = setTimeout(() => {
-                moveState.current.repeatTimer = setInterval(move, settings.arr);
-            }, settings.das);
+        if (e.code === keyBindings.pause) {
+            pauseGame();
+            return;
         }
+
+        if (e.repeat) return;
 
         switch (e.code) {
-            case hardDrop: hardDrop(); break;
-            case rotateClockwise: playerRotate(1); break;
-            case rotateCounterClockwise: playerRotate(-1); break;
-            case rotate180: playerRotate(1); playerRotate(1); break;
-            case holdKey: hold(); break;
-            case pause: pauseGame(); break;
+            case keyBindings.moveLeft:
+                playerMove(-1);
+                break;
+            case keyBindings.moveRight:
+                playerMove(1);
+                break;
+            case keyBindings.softDrop:
+                playerDrop(true);
+                break;
+            case keyBindings.hardDrop:
+                hardDrop();
+                break;
+            case keyBindings.rotateClockwise[0]:
+            case keyBindings.rotateClockwise[1]:
+                playerRotate(1);
+                break;
+            case keyBindings.rotateCounterClockwise:
+                playerRotate(-1);
+                break;
+            case keyBindings.rotate180:
+                playerRotate(1);
+                playerRotate(1);
+                break;
+            case keyBindings.hold:
+                hold();
+                break;
         }
-    }, [isRunning, keyBindings, settings, playerMove, playerDrop, hardDrop, playerRotate, hold, pauseGame, startGame]);
+    }, [isRunning, keyBindings, playerMove, playerDrop, hardDrop, playerRotate, hold, pauseGame, startGame]);
+
+    const handleKeyUp = useCallback((e) => {
+        // Future implementation for handling key up events if needed
+    }, []);
+
+    useEffect(() => {
+        if (isRunning) {
+            lastTimeRef.current = performance.now();
+            gameLoopRef.current = requestAnimationFrame(gameLoop);
+        } else {
+            cancelAnimationFrame(gameLoopRef.current);
+        }
+        return () => cancelAnimationFrame(gameLoopRef.current);
+    }, [isRunning, gameLoop]);
 
     useEffect(() => {
         window.addEventListener('keydown', handleKeyDown);
