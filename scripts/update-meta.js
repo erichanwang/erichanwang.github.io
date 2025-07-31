@@ -10,7 +10,7 @@ pkg.version = newVersion;
 fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
 
 // Read meta.json and update lastUpdated and lastModified
-const metaPath = path.resolve(__dirname, '../scripts/meta.json'); // Resolve path to root directory
+const metaPath = path.resolve(__dirname, 'meta.json'); // Resolve path to meta.json in scripts folder
 const meta = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
 const now = new Date().toISOString();
 
