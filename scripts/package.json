@@ -1,0 +1,20 @@
+{
+  "name": "erichanwang.github.io",
+  "version": "1.0.0",
+  "description": "this is my personal portfolio website where i share my programming projects, web experiments, and interactive games. it includes:",
+  "main": "index.js",
+  "scripts": {
+  "release": "npm version patch --no-git-tag-version && node scripts/update-meta.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erichanwang/erichanwang.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/erichanwang/erichanwang.github.io/issues"
+  },
+  "homepage": "https://github.com/erichanwang/erichanwang.github.io#readme"
+}

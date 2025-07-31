@@ -1,212 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Eric Wang - Portfolio</title>
-    <link rel="icon" type="image/png" href="images/icon.png" />
-    <link id="theme-style" rel="stylesheet" href="styles/style1.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eric Wang - Home</title>
+  <link rel="icon" type="image/png" href="images/icon.png" />
+  <link id="theme-style" rel="stylesheet" href="styles/style1.css" />
 </head>
 <body>
-    <!-- header.html -->
+  <!-- header.html injected here -->
+      <!-- header.html -->
+<!-- header.html -->
 <header>
-    <h1>Eric Wang</h1>
-    <p>Version 1.5.1</p>
-    <nav>
-        <ul>
-            <li><a href="index.html" class="nav-button">Home</a></li>
-            <!--<li><a href="page1.html" class="nav-button">Page 1</a></li>
-            <li><a href="page2.html" class="nav-button">Page 2</a></li>-->
-            <li><a href="projectspage.html" class="nav-button">Projects</a></li>
-        </ul>
-    </nav>
+  <h1>Eric Wang</h1>
+  <p id="version-display">Version 2.0.0</p>
+  <p id="last-updated">Last updated 2025-07-31</p>
+  <nav>
+    <ul>
+      <li><a href="index.html" class="nav-button">Home</a></li>
+      <li><a href="awards.html" class="nav-button">Awards</a></li>
+      <li><a href="skills.html" class="nav-button">Skills</a></li>
+      <li><a href="certifications.html" class="nav-button">Certifications</a></li>
+      <li><a href="education.html" class="nav-button">Education</a></li>
+      <li><a href="projects.html" class="nav-button">Projects</a></li>
+    </ul>
+  </nav>
 </header>
 
-    <section id="about-me">
-        <h2>About Me</h2>
-        <p>Hi, I'm Eric!</p>
-        <p>I'm currently a high school senior with a passion for computer science and programming.</p>
-        <p>I'm aiming to major in computer science.</p>
-        <p>Fluent in English and Mandarin Chinese.</p>
-        <p>College Station High School '26</p>
-    </section>
+  <section id="about-me">
+    <h2>About Me</h2>
+    <p>Hi, I'm Eric!</p>
+    <p>I'm currently a high-school senior with a passion for computer science and programming.</p>
+    <p>I'm aiming to major in computer science.</p>
+    <p>Fluent in English and Mandarin Chinese.</p>
+    <p>GMT-5 (CDT)</p>
+    <p>CSGS '26</p>
+  </section>
 
-    <section id="skills">
-        <h2>Skills</h2>
-        
-        <h3>Programming Languages</h3>
-        <div class="skills-container">
-          <div class="skill-box">
-            <div class="skill-name">Python</div>
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/python.svg" alt="Python Icon" class="skill-icon" />
-            <div class="skill-desc">Versatile, high-level language known for readability and broad applications.</div>
-          </div>
-          <div class="skill-box">
-            <div class="skill-name">Java</div>
-            <img src="images/java-icon.png" alt="Java Icon" class="skill-icon" />
-            <div class="skill-desc">Platform-independent language popular for enterprise and Android development.</div>
-          </div>
-          <div class="skill-box">
-            <div class="skill-name">C, C++, C#</div>
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/c.svg" alt="C Icon" class="skill-icon" />
-            <div class="skill-desc">Efficient, low-level languages widely used in systems, apps, and games.</div>
-          </div>
-          <div class="skill-box">
-            <div class="skill-name">Bash / Shell Scripting</div>
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/gnubash.svg" alt="Bash Icon" class="skill-icon" />
-            <div class="skill-desc">Command-line scripting for automation and system management.</div>
-          </div>
-          <div class="skill-box">
-            <div class="skill-name">GDScript</div>
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/godotengine.svg" alt="GDScript Icon" class="skill-icon" />
-            <div class="skill-desc">Lightweight scripting language for game development with Godot Engine.</div>
-          </div>
-        </div>
-
-        <h3>Front End</h3>
-          <div class="skills-container">
-            <div class="skill-box">
-              <div class="skill-name">HTML</div>
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/html5.svg" alt="HTML Icon" class="skill-icon" />
-            <div class="skill-desc">Standard markup language for creating web pages.</div>
-          </div>
-          <div class="skill-box">
-            <div class="skill-name">CSS</div>
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/css3.svg" alt="CSS Icon" class="skill-icon" />
-            <div class="skill-desc">Stylesheet language for designing the look of web pages.</div>
-          </div>
-          <div class="skill-box">
-            <div class="skill-name">JavaScript</div>
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/javascript.svg" alt="JavaScript Icon" class="skill-icon" />
-            <div class="skill-desc">Scripting language to create interactive web elements.</div>
-          </div>
-          <div class="skill-box">
-            <div class="skill-name">TypeScript</div>
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/typescript.svg" alt="TypeScript Icon" class="skill-icon" />
-            <div class="skill-desc">Superset of JavaScript adding static types for better tooling.</div>
-          </div>
-          <div class="skill-box">
-            <div class="skill-name">React</div>
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/react.svg" alt="React Icon" class="skill-icon" />
-            <div class="skill-desc">JavaScript library for building user interfaces.</div>
-          </div>
-        </div>
-
-        <h3>Back End</h3>
-        <div class="skills-container">
-          <div class="skill-box">
-            <div class="skill-name">Node.js</div>
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/nodedotjs.svg" alt="Node.js Icon" class="skill-icon" />
-            <div class="skill-desc">JavaScript runtime for server-side development.</div>
-          </div>
-          <div class="skill-box">
-            <div class="skill-name">Flask (Python)</div>
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/flask.svg" alt="Flask Icon" class="skill-icon" />
-            <div class="skill-desc">Lightweight Python web framework for backend APIs.</div>
-          </div>
-          <div class="skill-box">
-            <div class="skill-name">PHP</div>
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/php.svg" alt="PHP Icon" class="skill-icon" />
-            <div class="skill-desc">Server-side scripting language for dynamic web pages.</div>
-          </div>
-          <div class="skill-box">
-            <div class="skill-name">Ruby</div>
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/ruby.svg" alt="Ruby Icon" class="skill-icon" />
-            <div class="skill-desc">Dynamic, open-source programming language with a focus on simplicity.</div>
-          </div>
-        </div>
-
-        <h3>Databases</h3>
-        <div class="skills-container">
-          <div class="skill-box">
-            <div class="skill-name">MySQL</div>
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/mysql.svg" alt="MySQL Icon" class="skill-icon" />
-            <div class="skill-desc">Relational database management system for structured data.</div>
-          </div>
-          <div class="skill-box">
-            <div class="skill-name">PostgreSQL</div>
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/postgresql.svg" alt="PostgreSQL Icon" class="skill-icon" />
-            <div class="skill-desc">Advanced open-source relational database.</div>
-          </div>
-          <div class="skill-box">
-            <div class="skill-name">Firebase</div>
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/firebase.svg" alt="Firebase Icon" class="skill-icon" />
-            <div class="skill-desc">Backend platform for building web and mobile apps.</div>
-          </div>
-        </div>
-
-        <h3>APIs & Tools</h3>
-        <div class="skills-container">
-          <div class="skill-box">
-            <div class="skill-name">Git / GitHub</div>
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/github.svg" alt="GitHub Icon" class="skill-icon" />
-            <div class="skill-desc">Version control and collaboration platform.</div>
-          </div>
-          <div class="skill-box">
-            <div class="skill-name">VSCode</div>
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/visualstudiocode.svg" alt="VSCode Icon" class="skill-icon" />
-            <div class="skill-desc">Popular source code editor with powerful extensions.</div>
-          </div>
-          <div class="skill-box">
-            <div class="skill-name">Vim / Neovim</div>
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/vim.svg" alt="Vim Icon" class="skill-icon" />
-            <div class="skill-desc">Highly configurable text editors for efficient coding.</div>
-          </div>
-          <div class="skill-box">
-            <div class="skill-name">Arch Linux</div>
-            <img src="images/arch-linux.png" alt="Arch Linux Icon" class="skill-icon" />
-            <div class="skill-desc">Open-source operating system with Arch Linux expertise.</div>
-          </div>
-          <div class="skill-box">
-            <div class="skill-name">Make, GCC, GDB</div>
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/gnu.svg" alt="GNU Icon" class="skill-icon" />
-            <div class="skill-desc">Build automation, compiler, and debugger tools for C/C++.</div>
-          </div>
-        </div>
-    </section>
-
-    <section id="certifications">
-        <h2>Certifications</h2>
-        <div class="skills-container">
-            <a href="https://www.hackerrank.com/certificates/961fc6182eb6" target="_blank" class="skill-box certification-box">
-                <img src="images/external-link.svg" class="external-link-icon" alt="External Link">
-                <div class="skill-name">Java Programming</div>
-                <img src="images/hackerrank-logo.webp" alt="HackerRank Logo" class="skill-icon" />
-                <div class="skill-desc">July 2025</div>
-            </a>
-            <a href="https://www.credly.com/badges/54bfaf1a-da2b-4364-837d-95c1c5557917/public_url" target="_blank" class="skill-box certification-box">
-                <img src="images/external-link.svg" class="external-link-icon" alt="External Link">
-                <div class="skill-name">Java Industry Based</div>
-                <img src="images/it-specialist-java.png" alt="IT Specialist Java Icon" class="skill-icon java-cert-icon" />
-                <div class="certification-date">April 2024</div>
-            </a>
-            <a href="https://www.hackerrank.com/certificates/162d6f0e6bf7" target="_blank" class="skill-box certification-box">
-                <img src="images/external-link.svg" class="external-link-icon" alt="External Link">
-                <div class="skill-name">Python Programming</div>
-                <img src="images/hackerrank-logo.webp" alt="HackerRank Logo" class="skill-icon" />
-                <div class="skill-desc">January 2025</div>
-            </a>
-            <div class="skill-box certification-box">
-                <div class="skill-name">C++ Programming</div>
-                <div class="skill-desc"></div>
-            </div>
-            <div class="skill-box certification-box">
-                <div class="skill-name">HTML & CSS</div>
-                <div class="skill-desc"></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact">
-        <h2>Contact Me</h2>
-        <p>email: <a href="mailto:ericwang559@gmail.com">ericwang559@gmail.com</a></p>
-        <p>github: <a href="https://github.com/EricWang559" target="_blank">github.com/EricWang559</a></p>
-    </section>
-
-    <footer>
-        <p>© 2025 Eric Wang. All rights reserved.</p>
-    </footer>
-
-    <script src="scripts/script.js"></script>
+  <footer>
+    <p>© 2025 Eric Wang. All rights reserved.</p>
+  </footer>
+  <script src="scripts/script.js"></script>
 </body>
 </html>

@@ -9,6 +9,9 @@ document.addEventListener("DOMContentLoaded", function() {
         window.location.href = "guess_the_number.html";
     });
     document.getElementById("snakeGameBtn").addEventListener("click", function() {
-        window.location.href = "page2.html";
+        window.location.href = "snake.html";
     });
+    document.getElementById("rstBtn").addEventListener("click, function()"){
+        window.location.href = "reaction-speed-test.html";
+    }
 });
