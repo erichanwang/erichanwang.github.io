@@ -14,4 +14,4 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("rstBtn").addEventListener("click", function() {
         window.location.href = "reaction-speed-test.html";
     });
-}
+});
