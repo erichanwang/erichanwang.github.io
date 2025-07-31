@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("snakeGameBtn").addEventListener("click", function() {
         window.location.href = "snake.html";
     });
-    document.getElementById("rstBtn").addEventListener("click, function()"){
+    document.getElementById("rstBtn").addEventListener("click", function() {
         window.location.href = "reaction-speed-test.html";
     }
 });
