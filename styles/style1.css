@@ -389,6 +389,10 @@ button:hover, .game-mode button:hover {
   color: #a9b1d6;
 }
 
-h2, h3 {
+h2 {
     text-align: center;
+}
+
+h3{
+    text-align: left;
 }
