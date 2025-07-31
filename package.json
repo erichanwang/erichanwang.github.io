@@ -1,17 +1,17 @@
 {
   "name": "erichanwang.github.io",
-  "version": "1.0.0",
-  "description": "this is my personal portfolio website where i share my programming projects, web experiments, and interactive games. it includes:",
-  "main": "index.js",
+  "version": "2.0.9",
+  "description": "This is my personal portfolio website where I share my programming projects, web experiments, and interactive games.",
+  "main": "scripts/script.js",
   "scripts": {
-  "release": "npm version patch --no-git-tag-version && node scripts/update-meta.js"
+    "release": "npm version patch --no-git-tag-version && node scripts/update-meta.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/erichanwang/erichanwang.github.io.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Eric Wang",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/erichanwang/erichanwang.github.io/issues"

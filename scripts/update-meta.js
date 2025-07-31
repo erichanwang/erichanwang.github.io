@@ -1,16 +1,16 @@
-// update-meta.js
+// scripts/update-meta.js
 const fs = require('fs');
 const path = require('path');
 
 // Read package.json and bump the version
-const pkgPath = path.join(__dirname, 'package.json');
+const pkgPath = path.resolve(__dirname, '../package.json'); // Resolve path to root directory
 const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
 const newVersion = pkg.version.split('.').map((part, i) => i === 2 ? (+part + 1) : part).join('.');
 pkg.version = newVersion;
 fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
 
 // Read meta.json and update lastUpdated and lastModified
-const metaPath = path.join(__dirname, 'meta.json');
+const metaPath = path.resolve(__dirname, '../scripts/meta.json'); // Resolve path to root directory
 const meta = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
 const now = new Date().toISOString();
 

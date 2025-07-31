@@ -1,27 +1,32 @@
 /* ===== script.js (single file) ===== */
 document.addEventListener('DOMContentLoaded', () => {
   /* ---------- 1)  META (version + last-updated) ---------- */
-  fetch('meta.json')
-    .then(r => r.json())
-    .then(data => {
-      // Version in <p> inside <header>
-      const vEl = document.querySelector('header p');
-      if (vEl) vEl.textContent = `Version ${data.version}`;
+  // scripts/update-meta.js
+  const fs = require('fs');
+  const path = require('path');
 
-      // Most-recent file date
-      const latest = new Date(
-        Math.max(...data.files.map(f => new Date(f.lastModified)))
-      );
-      const luEl = document.getElementById('last-updated');
-      if (luEl) {
-        luEl.textContent = `Last updated ${latest.toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric'
-        })}`;
-      }
-    })
-    .catch(console.error);
+  // Read package.json and bump the version
+  const pkgPath = path.resolve(__dirname, '..', 'package.json'); // Resolve path to root directory
+  const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
+  const newVersion = pkg.version.split('.').map((part, i) => i === 2 ? (+part + 1) : part).join('.');
+  pkg.version = newVersion;
+  fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
+
+  // Read meta.json and update lastUpdated and lastModified
+  const metaPath = path.resolve(__dirname, 'meta.json'); // Resolve path to root directory
+  const meta = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
+  const now = new Date().toISOString();
+
+  meta.version = newVersion;
+  meta.lastUpdated = now;
+
+  meta.files.forEach(file => {
+    file.lastModified = now;
+  });
+
+  fs.writeFileSync(metaPath, JSON.stringify(meta, null, 2));
+
+  console.log(`✅ meta.json updated → v${newVersion} | ${now}`);
 
   /* ---------- 2)  THEME SWITCHER (unchanged) ---------- */
   const toggle = document.createElement('button');
