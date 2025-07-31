@@ -366,8 +366,15 @@ button:hover, .game-mode button:hover {
 }
 
 .skill-icon {
-  width: 48px;
-  height: 48px;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 8px;
+  object-fit: contain;
+}
+
+.skill-icon2 {
+  width: 96px;
+  height: 96px;
   margin-bottom: 8px;
 }
 
