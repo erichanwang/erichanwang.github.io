@@ -376,6 +376,19 @@ button:hover, .game-mode button:hover {
   line-height: 1.2;
 }
 
+.java-cert-icon {
+    width: 96px;
+    height: 96px;
+}
+
+.certification-date {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 0.8rem;
+  color: #a9b1d6;
+}
+
 h2, h3 {
     text-align: center;
 }

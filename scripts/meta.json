@@ -1,0 +1,23 @@
+{
+  "version": "2.0.0",
+  "lastUpdated": "2025-07-31T10:00:00Z",
+
+  "files": [
+    {
+      "path": "index.html",
+      "lastModified": "2024-06-14T12:00:00Z"
+    },
+    {
+      "path": "games.html",
+      "lastModified": "2024-06-14T12:00:00Z"
+    },
+    {
+      "path": "guess_the_number.html",
+      "lastModified": "2024-06-14T12:00:00Z"
+    },
+    {
+      "path": "orderinggame.html",
+      "lastModified": "2024-06-14T12:00:00Z"
+    }
+  ]
+}

@@ -1,40 +1,49 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const toggle = document.createElement("button");
-    toggle.textContent = "Change Theme";
-    toggle.style.position = "fixed";
-    toggle.style.top = "10px";
-    toggle.style.right = "10px";
-    toggle.style.padding = "10px";
-    toggle.style.background = "#002945"; // BUTTON COLOR
-    toggle.style.color = "#ffffff"; 
-    toggle.style.border = "none";
-    toggle.style.borderRadius = "5px";
-    toggle.style.cursor = "pointer";
-    toggle.style.boxShadow = "2px 2px 10px rgba(0, 0, 0, 0.2)";
-    toggle.style.zIndex = "1000"; // Ensure the button is on top
-    toggle.style.fontFamily = "'Courier New', Courier, monospace";
-    toggle.style.fontSize = "12px";
-    //document.body.appendChild(toggle);
+/* ===== script.js (single file) ===== */
+document.addEventListener('DOMContentLoaded', () => {
+  /* ---------- 1)  META (version + last-updated) ---------- */
+  fetch('meta.json')
+    .then(r => r.json())
+    .then(data => {
+      // Version in <p> inside <header>
+      const vEl = document.querySelector('header p');
+      if (vEl) vEl.textContent = `Version ${data.version}`;
 
-    // Define the available theme files
-    const themes = ["styles/style1.css", "styles/tnstyle.css"];
-    // add other themes here to make it an option
+      // Most-recent file date
+      const latest = new Date(
+        Math.max(...data.files.map(f => new Date(f.lastModified)))
+      );
+      const luEl = document.getElementById('last-updated');
+      if (luEl) {
+        luEl.textContent = `Last updated ${latest.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        })}`;
+      }
+    })
+    .catch(console.error);
 
-    // Retrieve current theme index from localStorage (if set) or default to 0.
-    let currentThemeIndex = localStorage.getItem("themeIndex") ? parseInt(localStorage.getItem("themeIndex"), 10) : 0;
-    
-    // set the theme on page load
-    document.getElementById("theme-style").setAttribute("href", themes[currentThemeIndex]);
+  /* ---------- 2)  THEME SWITCHER (unchanged) ---------- */
+  const toggle = document.createElement('button');
+  toggle.textContent = 'Change Theme';
+  Object.assign(toggle.style, {
+    position: 'fixed', top: '10px', right: '10px', padding: '10px',
+    background: '#002945', color: '#fff', border: 'none',
+    borderRadius: '5px', cursor: 'pointer',
+    boxShadow: '2px 2px 10px rgba(0,0,0,.2)', zIndex: 1000,
+    fontFamily: '"Courier New", monospace', fontSize: '12px'
+  });
 
-    toggle.addEventListener("click", () => {
-        // Increment the theme index and wrap around if necessary
-        currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-        console.log(`Current theme index: ${currentThemeIndex}`); // Debugging line
+  //off for now
+  //document.body.appendChild(toggle);
 
-        // Update the link element's href to the new theme file
-        document.getElementById("theme-style").setAttribute("href", themes[currentThemeIndex]);
+  const themes = ['styles/style1.css', 'styles/tnstyle.css'];
+  let idx = +localStorage.getItem('themeIndex') || 0;
+  document.getElementById('theme-style').href = themes[idx];
 
-        // Store the current theme index in localStorage
-        localStorage.setItem("themeIndex", currentThemeIndex);
-    });
+  toggle.addEventListener('click', () => {
+    idx = (idx + 1) % themes.length;
+    document.getElementById('theme-style').href = themes[idx];
+    localStorage.setItem('themeIndex', idx);
+  });
 });
