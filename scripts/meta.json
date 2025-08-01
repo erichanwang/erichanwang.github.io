@@ -1,30 +1,30 @@
 {
-  "version": "2.0.17",
-  "lastUpdated": "2025-08-01T06:52:48.856Z",
+  "version": "2.0.18",
+  "lastUpdated": "2025-08-01T18:52:26.982Z",
   "files": [
     {
       "path": "index.html",
-      "lastModified": "2025-08-01T06:52:48.856Z"
+      "lastModified": "2025-08-01T18:52:26.982Z"
     },
     {
       "path": "games.html",
-      "lastModified": "2025-08-01T06:52:48.856Z"
+      "lastModified": "2025-08-01T18:52:26.982Z"
     },
     {
       "path": "guess_the_number.html",
-      "lastModified": "2025-08-01T06:52:48.856Z"
+      "lastModified": "2025-08-01T18:52:26.982Z"
     },
     {
       "path": "orderinggame.html",
-      "lastModified": "2025-08-01T06:52:48.856Z"
+      "lastModified": "2025-08-01T18:52:26.982Z"
     },
     {
       "path": "education.html",
-      "lastModified": "2025-08-01T06:52:48.856Z"
+      "lastModified": "2025-08-01T18:52:26.982Z"
     },
     {
       "path": "awards.html",
-      "lastModified": "2025-08-01T06:52:48.856Z"
+      "lastModified": "2025-08-01T18:52:26.982Z"
     }
   ]
 }
