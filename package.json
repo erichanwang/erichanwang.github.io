@@ -1,6 +1,6 @@
 {
   "name": "erichanwang.github.io",
-  "version": "2.0.16",
+  "version": "2.0.17",
   "description": "This is my personal portfolio website where I share my programming projects, web experiments, and interactive games.",
   "main": "scripts/script.js",
   "scripts": {
