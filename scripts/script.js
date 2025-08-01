@@ -1,12 +1,15 @@
 /* ===== script.js (single file) ===== */
 document.addEventListener('DOMContentLoaded', () => {
   /* ---------- 1)  META (version + last-updated) ---------- */
-  fetch('meta.json')
+  fetch('scripts/meta.json')
     .then(r => r.json())
     .then(data => {
       // Version in <p> inside <header>
       const vEl = document.querySelector('header p#version-display');
-      if (vEl) vEl.textContent = `Version ${data.version}`;
+      if (vEl) {
+        vEl.textContent = `Version ${data.version}`;
+        vEl.classList.add('loaded');
+      }
 
       // Most-recent file date
       const latest = new Date(
@@ -19,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
           month: 'long',
           day: 'numeric'
         })}`;
+        luEl.classList.add('loaded');
       }
     })
     .catch(console.error);

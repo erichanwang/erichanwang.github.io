@@ -349,8 +349,8 @@ button:hover, .game-mode button:hover {
     position: absolute;
     top: 10px;
     right: 10px;
-    width: 20px;
-    height: 20px;
+    width: 40px;
+    height: 40px;
 }
 
 .skill-box:hover {
@@ -402,4 +402,23 @@ h2 {
 
 h3{
     text-align: left;
+}
+
+.skill-category {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#skills h3 {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+#version-display, #last-updated {
+    visibility: hidden;
+}
+
+#version-display.loaded, #last-updated.loaded {
+    visibility: visible;
 }
