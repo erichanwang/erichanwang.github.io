@@ -24,7 +24,7 @@
   <nav>
     <ul>
       <li><a href="index.html" class="nav-button">Home</a></li>
-      <li><a href="awards.html" class="nav-button">Awards</a></li>
+      <li><a href="awards.html" class="nav-button active">Awards</a></li>
       <li><a href="skills.html" class="nav-button">Skills</a></li>
       <li><a href="certifications.html" class="nav-button">Certifications</a></li>
       <li><a href="education.html" class="nav-button">Education</a></li>
@@ -59,9 +59,9 @@
     </div>
     <h4>2023</h4>
     <div class="award-list">
-      <a href="javascript:void(0);" data-href="https://www.csisd.org/news/whats-new/middle-and-high-school-musicians-perform-at-tmea-all-region-concert#:~:text=Eric%20Wang,College%20Station%20HS" target="_blank" class="award-item locked-link">
+      <span data-href="https://www.csisd.org/news/whats-new/middle-and-high-school-musicians-perform-at-tmea-all-region-concert#:~:text=Eric%20Wang,College%20Station%20HS" class="award-item locked-link">
         TMEA All-Region Full Orchestra (Region 8)
-      </a>
+      </span>
     </div>
     <h4>2024</h4>
     <div class="award-list">
@@ -71,18 +71,18 @@
     <h4>2025</h4>
     <div class="award-list">
       <div class="award-item">AIME National Qualifier</div>
-      <a href="javascript:void(0);" data-href="https://bpa.org/texas/state-leadership-conference-2025/" target="_blank" class="award-item locked-link">
+      <span data-href="https://bpa.org/texas/state-leadership-conference-2025/" class="award-item locked-link">
         BPA National Alternate (Python)
-      </a>
-      <a href="javascript:void(0);" data-href="https://tsaweb.org/teams/state-competitions#awardsrankings" target="_blank" class="award-item locked-link">
+      </span>
+      <span data-href="https://tsaweb.org/teams/state-competitions#awardsrankings" class="award-item locked-link">
         TEAMS National Qualifier
-      </a>
-      <a href="javascript:void(0);" data-href="https://sciencefest.org/rackforms/output/forms/sfawdsecplcsch/placessecbyschool.php?awd_school=College+Station+HS&Search=Search#:~:text=College%20Station%20HS-,Eric%20Wang,-2nd" target="_blank" class="award-item locked-link">
+      </span>
+      <span data-href="https://sciencefest.org/rackforms/output/forms/sfawdsecplcsch/placessecbyschool.php?awd_school=College+Station+HS&Search=Search#:~:text=College%20Station%20HS-,Eric%20Wang,-2nd" class="award-item locked-link">
         GARSEF Finalist - 2nd (Material Science)
-      </a>
-      <a href="javascript:void(0);" data-href="https://sciencefest.org/rackforms/output/forms/sfawdst/page0.php#:~:text=3rd%20Materials%20Science-,Eric%20Wang,-College%20Station%20HS" target="_blank" class="award-item locked-link">
+      </span>
+      <span data-href="https://sciencefest.org/rackforms/output/forms/sfawdst/page0.php#:~:text=3rd%20Materials%20Science-,Eric%20Wang,-College%20Station%20HS" class="award-item locked-link">
         TXSEF Finalist - 3rd (Materials Science)
-      </a>
+      </span>
     </div>
   </div>
 </section>
@@ -98,16 +98,29 @@
 </footer>
 <script src="scripts/script.js"></script>
 <script>
+  const lockedLinks = document.querySelectorAll('.locked-link');
+
+  function handleLinkClick(event) {
+    if (event.currentTarget.classList.contains('locked-link')) {
+      event.preventDefault();
+    } else {
+      const url = event.currentTarget.getAttribute('data-href');
+      if (url) {
+        window.open(url, '_blank');
+      }
+    }
+  }
+
+  lockedLinks.forEach(link => {
+    link.addEventListener('click', handleLinkClick);
+  });
+
   document.getElementById('unlock-links-button').addEventListener('click', function() {
     const password = prompt('Please enter the password to unlock the links:');
     if (password === '052909') {
-      const lockedLinks = document.querySelectorAll('.locked-link');
       lockedLinks.forEach(link => {
-        const realHref = link.getAttribute('data-href');
-        if (realHref) {
-          link.href = realHref;
-          link.classList.remove('locked-link');
-        }
+        link.classList.remove('locked-link');
+        link.style.cursor = 'pointer';
       });
     } else {
       alert('Incorrect password!');

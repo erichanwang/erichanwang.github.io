@@ -94,6 +94,12 @@ nav ul li a:hover {
     color: #5972e3;
 }
 
+nav ul li a.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
 /* Sections */
 section {
     max-width: 1000px;  /* space between the end of the screen*/
@@ -447,4 +453,20 @@ h3{
   background-color: #3B4064;
   color: white;
   box-shadow: 0 8px 20px rgba(122, 162, 247, 0.7);
+}
+
+#unlock-links-button {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  margin: 6px 0;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#unlock-links-button:hover {
+  background: #1e40af29;
 }

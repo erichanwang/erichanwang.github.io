@@ -124,6 +124,9 @@
         if (certElement) {
           certElement.classList.add('highlight');
           certElement.scrollIntoView({ behavior: 'smooth' });
+          certElement.addEventListener('mouseover', function() {
+            certElement.classList.remove('highlight');
+          }, { once: true });
         }
       }
     });
