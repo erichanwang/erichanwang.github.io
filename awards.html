@@ -6,6 +6,15 @@
   <title>Eric Wang - Awards & Experience</title>
   <link rel="icon" type="image/png" href="images/icon.png" />
   <link id="theme-style" rel="stylesheet" href="styles/style1.css" />
+  <style>
+    .locked-link {
+      cursor: default;
+    }
+    .award-item a {
+      color: inherit;
+      text-decoration: none;
+    }
+  </style>
 </head>
 <body>
 <header>
@@ -24,48 +33,86 @@
   </nav>
 </header>
 
-  <section id="awards">
-    <h2>Awards & Experience</h2>
-
+<section id="awards">
+  <h2>Awards & Experience</h2>
+  <div class="award-category">
     <h3>Research & Summer Programs</h3>
     <h4>2022</h4>
-    <ul><li><strong>Texas A&M STEM Research Camp</strong> - Conducted STEM Research.</li></ul>
-
+    <div class="award-list">
+      <div class="award-item"><strong>Texas A&M STEM Research Camp</strong> - Conducted STEM Research.</div>
+    </div>
     <h4>2023</h4>
-    <ul><li><strong>Yale SIG Camp</strong> - Neuroscience & Regenerative Medicine.</li></ul>
-
+    <div class="award-list">
+      <div class="award-item"><strong>Yale SIG Camp</strong> - Neuroscience & Regenerative Medicine.</div>
+    </div>
     <h4>2025</h4>
-    <ul><li><strong>UT Austin CS Machine-Learning Program</strong> - AI/ML Research.</li></ul>
+    <div class="award-list">
+      <div class="award-item"><a href="certifications.html#ml-cert"><strong>UT Austin CS Machine-Learning Program</strong></a> - AI/ML Research.</div>
+    </div>
+  </div>
 
+  <div class="award-category">
     <h3>Competitions & Recognitions</h3>
+    <h4>2022</h4>
+    <div class="award-list">
+      <div class="award-item">TMEA All-Region Full Orchestra (Region 8)</div>
+    </div>
     <h4>2023</h4>
-    <ul><li>Region Full Orchestra</li></ul>
-
+    <div class="award-list">
+      <a href="javascript:void(0);" data-href="https://www.csisd.org/news/whats-new/middle-and-high-school-musicians-perform-at-tmea-all-region-concert#:~:text=Eric%20Wang,College%20Station%20HS" target="_blank" class="award-item locked-link">
+        TMEA All-Region Full Orchestra (Region 8)
+      </a>
+    </div>
     <h4>2024</h4>
-    <ul>
-      <li>AMC12 - Distinction</li>
-      <li>Region Full Orchestra</li>
-    </ul>
-
+    <div class="award-list">
+      <div class="award-item">AMC12 - Distinction</div>
+      <div class="award-item">TMEA All-Region Orchestra (Region 8)</div>
+    </div>
     <h4>2025</h4>
-    <ul>
-      <li>Region Full Orchestra</li>
-      <li>AIME National Qualifier</li>
-      <li>BPA National Alternate (Python)</li>
-      <li>TEAMS National Qualifier</li>
-      <li>GARSEF Finalist - 2<sup>nd</sup> (Material Science)</li>
-      <li>TXSEF Finalist - 3<sup>rd</sup> (Material Science)</li>
-    </ul>
-  </section>
+    <div class="award-list">
+      <div class="award-item">AIME National Qualifier</div>
+      <a href="javascript:void(0);" data-href="https://bpa.org/texas/state-leadership-conference-2025/" target="_blank" class="award-item locked-link">
+        BPA National Alternate (Python)
+      </a>
+      <a href="javascript:void(0);" data-href="https://tsaweb.org/teams/state-competitions#awardsrankings" target="_blank" class="award-item locked-link">
+        TEAMS National Qualifier
+      </a>
+      <a href="javascript:void(0);" data-href="https://sciencefest.org/rackforms/output/forms/sfawdsecplcsch/placessecbyschool.php?awd_school=College+Station+HS&Search=Search#:~:text=College%20Station%20HS-,Eric%20Wang,-2nd" target="_blank" class="award-item locked-link">
+        GARSEF Finalist - 2nd (Material Science)
+      </a>
+      <a href="javascript:void(0);" data-href="https://sciencefest.org/rackforms/output/forms/sfawdst/page0.php#:~:text=3rd%20Materials%20Science-,Eric%20Wang,-College%20Station%20HS" target="_blank" class="award-item locked-link">
+        TXSEF Finalist - 3rd (Materials Science)
+      </a>
+    </div>
+  </div>
+</section>
 
-  <footer>
-    <section id="contact-me">
-        <h2>Contact Me</h2>
-        <p>Email: <a href="mailto:ericwang559@gmail.com">ericwang559@gmail.com</a></p>
-        <p>GitHub: <a href="https://github.com/erichanwang" target="_blank">erichanwang</a></p>
-    </section>
-    <p>© 2025 Eric Wang. All rights reserved.</p>
-  </footer>
-  <script src="scripts/script.js"></script>
+<footer>
+  <section id="contact-me">
+      <h2>Contact Me</h2>
+      <p>Email: <a href="mailto:ericwang559@gmail.com">ericwang559@gmail.com</a></p>
+      <p>GitHub: <a href="https://github.com/erichanwang" target="_blank">https://github.com/erichanwang</a></p>
+  </section>
+  <button id="unlock-links-button">Unlock Links</button>
+  <p>© 2025 Eric Wang. All rights reserved.</p>
+</footer>
+<script src="scripts/script.js"></script>
+<script>
+  document.getElementById('unlock-links-button').addEventListener('click', function() {
+    const password = prompt('Please enter the password to unlock the links:');
+    if (password === '052909') {
+      const lockedLinks = document.querySelectorAll('.locked-link');
+      lockedLinks.forEach(link => {
+        const realHref = link.getAttribute('data-href');
+        if (realHref) {
+          link.href = realHref;
+          link.classList.remove('locked-link');
+        }
+      });
+    } else {
+      alert('Incorrect password!');
+    }
+  });
+</script>
 </body>
 </html>

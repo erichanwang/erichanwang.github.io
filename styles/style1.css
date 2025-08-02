@@ -422,3 +422,29 @@ h3{
 #version-display.loaded, #last-updated.loaded {
     visibility: visible;
 }
+
+.award-category {
+  margin-bottom: 30px;
+}
+
+.award-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.award-item {
+  background-color: #2A2D3D;
+  padding: 15px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  color: #c0caf5;
+  text-decoration: none;
+  display: block;
+}
+
+.award-item:hover {
+  background-color: #3B4064;
+  color: white;
+  box-shadow: 0 8px 20px rgba(122, 162, 247, 0.7);
+}
