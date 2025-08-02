@@ -96,23 +96,18 @@ nav ul li a:hover {
 
 nav ul li a.active {
     background-color: rgba(255, 255, 255, 0.2);
-    padding: 5px 10px;
+    padding: 10px 15px;
     border-radius: 5px;
 }
 
 /* Sections */
 section {
-    max-width: 1000px;  /* space between the end of the screen*/
-    margin: 40px auto;
+    max-width: 1100px;  /* space between the end of the screen*/
+    margin: 20px auto;
     padding: 20px;
+    padding-top: 5px;
     background: #161821;
-    border-radius: 10px;
-}
-
-section:first-of-type {
-    margin-top: 10;
-    
-    margin-top: 15px auto;/* Remove top margin for the first section */
+    border-radius: 20px;
 }
 
 /* Footer */
@@ -217,7 +212,7 @@ footer {
 }
 
 .hint-highlight {
-    background-color: yellow;
+    background-color: #c0caf5;
     transition: background-color 0.5s ease;
 }
 
@@ -456,15 +451,14 @@ h3{
 }
 
 #unlock-links-button {
-  background: #2563eb;
-  color: #fff;
+  background: #161821;
+  color: #161821;
   border: none;
   border-radius: 6px;
-  padding: 8px 18px;
-  margin: 6px 0;
+  padding: 0px 0px;
+  margin: 0px 0;
   font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.2s;
+  cursor: arrow; 
 }
 
 #unlock-links-button:hover {
