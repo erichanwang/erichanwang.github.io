@@ -91,7 +91,7 @@
       <h2>Contact Me</h2>
       <p>Email: <a href="mailto:ericwang559@gmail.com">ericwang559@gmail.com</a></p>
       <p>GitHub: <a href="https://github.com/erichanwang" target="_blank">https://github.com/erichanwang</a></p>
-      <button id="unlock-links-button">Unlock Links</button>
+      <button id="unlock-links-button">ㅤ</button>
 </section>
 
 <footer>
@@ -118,14 +118,14 @@
   });
 
   document.getElementById('unlock-links-button').addEventListener('click', function() {
-    const password = prompt('Please enter the password to unlock the links:');
+    const password = prompt('');
     if (password === '052909') {
       lockedLinks.forEach(link => {
         link.classList.remove('locked-link');
         link.style.cursor = 'pointer';
       });
     } else {
-      alert('Incorrect password!');
+      //alert('Incorrect password!');
     }
   });
 </script>

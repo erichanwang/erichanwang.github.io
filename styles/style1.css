@@ -458,7 +458,7 @@ h3{
   padding: 0px 0px;
   margin: 0px 0;
   font-size: 1rem;
-  cursor: arrow; 
+  cursor: default; 
 }
 
 #unlock-links-button:hover {
