@@ -434,7 +434,7 @@ h3{
   gap: 10px;
 }
 
-.award-item {
+.award-item, .project-item, .bar-item {
   background-color: #2A2D3D;
   padding: 15px;
   border-radius: 8px;
@@ -444,7 +444,7 @@ h3{
   display: block;
 }
 
-.award-item:hover {
+.award-item:hover, .project-item:hover, .bar-item:hover {
   background-color: #3B4064;
   color: white;
   box-shadow: 0 8px 20px rgba(122, 162, 247, 0.7);
@@ -463,4 +463,34 @@ h3{
 
 #unlock-links-button:hover {
   background: #1e40af29;
+}
+
+.project-item a {
+  color: inherit;
+  text-decoration: none;
+}
+.project-item {
+  position: relative;
+}
+.external-link-icon {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+}
+
+.highlight {
+    background-color: #3B4064;
+    color: white;
+    box-shadow: 0 8px 20px rgba(122, 162, 247, 0.7);
+}
+
+.locked-link {
+    cursor: default;
+}
+.award-item a {
+    color: inherit;
+    text-decoration: none;
 }

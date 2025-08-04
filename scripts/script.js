@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //off for now
   //document.body.appendChild(toggle);
 
-  const themes = ['styles/style1.css', 'styles/tnstyle.css'];
+  const themes = ['styles/style.css', 'styles/tnstyle.css'];
   let idx = +localStorage.getItem('themeIndex') || 0;
   document.getElementById('theme-style').href = themes[idx];
 
