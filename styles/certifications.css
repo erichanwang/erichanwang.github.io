@@ -1,0 +1,93 @@
+#certifications-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    overflow: hidden;
+}
+
+#carousel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.scroll-zone {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background-color: rgba(128, 128, 128, 0);
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s;
+    border-radius: 15px;
+}
+
+#certifications-container:hover .scroll-zone {
+    opacity: 1;
+}
+
+.scroll-zone.left {
+    left: 0;
+}
+
+.scroll-zone.right {
+    right: 0;
+}
+
+.certification-item {
+    position: absolute;
+    width: 300px; /* Increased width */
+    height: 210px; /* Increased height */
+    background-color: #2A2D3D;
+    border: 1px solid #3B4064;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    font-size: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.5s, opacity 0.5s, box-shadow 0.5s;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.certification-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.certification-item img.skill-icon2 {
+    max-width: 50px;
+    max-height: 50px;
+    margin-bottom: 10px;
+}
+
+.certification-item, .certification-item:link, .certification-item:visited, .certification-item:hover, .certification-item:active {
+    color: #c0caf5;
+    text-decoration: none;
+}
+
+.certification-item:hover {
+    background-color: #3B4064;
+    border-color: #7aa2f7;
+}
+
+.certification-item .skill-name {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.certification-item .certification-date {
+    font-size: 12px;
+    color: #c0caf5;
+}
