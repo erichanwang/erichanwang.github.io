@@ -459,8 +459,9 @@ h3{
 }
 
 #unlock-links-button {
-  background: #161821;
-  color: #161821;
+  align-items: right;
+  background: #1a1b26;
+  color: #1a1b26;
   border: none;
   border-radius: 6px;
   padding: 0px 0px;
@@ -471,9 +472,6 @@ h3{
   outline: none;
 }
 
-#unlock-links-button:hover {
-  background: #1e40af29;
-}
 
 .project-item a {
   color: inherit;
@@ -508,5 +506,96 @@ h3{
 .youtube-link {
     color: #7aa2f7;
     text-decoration: underline;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    body {
+        font-size: 18px;
+    }
+    
+    header {
+        padding: 15px 0;
+    }
+    
+    nav ul li {
+        margin: 0 10px;
+    }
+    
+    section {
+        margin: 15px 10px;
+        padding: 15px;
+    }
+    
+    .skills-container {
+        gap: 12px;
+    }
+    
+    .skill-box {
+        width: 130px;
+        height: 160px;
+        padding: 10px;
+    }
+    
+    .skill-name {
+        font-size: 1rem;
+    }
+    
+    .skill-desc {
+        font-size: 0.8rem;
+    }
+    
+    .game-modes-wrapper, .game-modes, .game-modes-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .game-mode {
+        min-width: auto;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 16px;
+    }
+    
+    header h1 {
+        font-size: 1.8rem;
+    }
+    
+    nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    nav ul li {
+        margin: 5px;
+    }
+    
+    .skill-box {
+        width: 120px;
+        height: 150px;
+    }
+    
+    .skill-icon {
+        width: 48px;
+        height: 48px;
+    }
+    
+    button, .game-mode button {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+    }
+    
+    #button-row {
+        flex-wrap: wrap;
+    }
+    
+    .award-item, .project-item, .bar-item {
+        padding: 12px;
+    }
 }
 
