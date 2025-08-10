@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Music Player</title>
+    <link rel="icon" type="image/png" href="images/icon.png">
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/music.css">
 </head>
@@ -27,13 +28,23 @@
     <main>
       <h2>Music Player</h2>
         <div id="music-player">
-            <audio id="audio-player" controls></audio>
+            <audio id="audio-player" preload="auto"></audio>
+            <div id="custom-controls" style="text-align: center;">
+                <button id="play-pause-btn">▶</button>
+                <input type="range" id="progress-bar" value="0">
+                <span id="current-time">0:00</span> / <span id="duration">0:00</span>
+                <input type="text" id="timestamp-input" placeholder="m:ss">
+                <button id="timestamp-btn">Go</button>
+            </div>
             <div id="playlist"></div>
             <div id="controls">
                 <label for="loop">Loop:</label>
                 <input type="checkbox" id="loop">
-                <label for="speed">Speed:</label>
-                <input type="text" id="speed" value="1">
+                <label for="speed-range">Speed:</label>
+                <input type="range" id="speed-range" min="0.25" max="2" step="0.05" value="1">
+                <input type="text" id="speed-text" value="1">
+                <label for="volume-range">Volume:</label>
+                <input type="range" id="volume-range" min="0" max="2" step="0.01" value="1">
             </div>
         </div>
     </main>

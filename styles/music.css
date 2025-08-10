@@ -23,10 +23,98 @@
     background-color: #89b2ef75;
 }
 
+#custom-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+#play-pause-btn {
+    background-color: #3B4064;
+    color: white;
+    border: none;
+    width: 50px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#play-pause-btn:hover {
+    background-color: #5972e3;
+}
+
+#timestamp-btn {
+    background-color: #3B4064;
+    color: white;
+    border: none;
+    height: 30px;
+    cursor: pointer;
+    font-family: Courier, monospace;
+}
+
+#timestamp-btn:hover {
+    background-color: #2c3046;
+}
+
+#progress-bar {
+    width: 500px;
+    margin: 0 10px;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 10px;
+    background: #ddd;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+#progress-bar:hover {
+    opacity: 1;
+}
+
+#progress-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: #cbdaf8;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+#progress-bar::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    background: #cbdaf8;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
 #controls {
     margin-top: 20px;
 }
 
 #controls label {
     margin-right: 10px;
+}
+#speed-text, #timestamp-input {
+    width: 40px;
+    font-family: Courier, monospace;
+    background-color: #1a1b26;
+    color: #c0caf5;
+    border: 1px solid #c0caf5;
+}
+#timestamp-input {
+    width: 60px;
+    margin-left: 15px;
+}
+
+#volume-range {
+    width: 100px;
+    margin: 0 10px;
 }
