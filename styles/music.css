@@ -1,0 +1,32 @@
+#music-player {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#playlist {
+    margin-top: 20px;
+}
+
+.playlist-item {
+    cursor: pointer;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.playlist-item:hover {
+    background-color: #3B4064;
+}
+
+.playlist-item.active {
+    background-color: #89b2ef75;
+}
+
+#controls {
+    margin-top: 20px;
+}
+
+#controls label {
+    margin-right: 10px;
+}
