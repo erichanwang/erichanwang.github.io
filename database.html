@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <header>
+        <h1>Database Interaction</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="nav-button">Home</a></li>
+                <li><a href="database.html" class="nav-button">Database</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h2>Write to Database</h2>
+        <form id="data-form">
+            <input type="text" id="data-input" placeholder="Enter data" required>
+            <button type="submit">Save Data</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>Data in Database</h2>
+        <ul id="data-list"></ul>
+    </section>
+
+    <script type="module" src="scripts/database-page.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyB67q01HUssXeYo0A2MdpsVU9AOG_KLB3E",
+    authDomain: "new-database-bc98a.firebaseapp.com",
+    projectId: "new-database-bc98a",
+    storageBucket: "new-database-bc98a.firebasestorage.app",
+    messagingSenderId: "436686586315",
+    appId: "1:436686586315:web:53350b51bcbcd52794764e",
+    measurementId: "G-W8BR4WNQR6"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+const authStatusContainer = document.createElement('div');
+authStatusContainer.id = 'auth-status-container';
+document.body.prepend(authStatusContainer);
+
+onAuthStateChanged(auth, (user) => {
+    authStatusContainer.innerHTML = '';
+    if (user) {
+        const userEmail = document.createElement('span');
+        userEmail.textContent = `Logged in as: ${user.email}`;
+        authStatusContainer.appendChild(userEmail);
+
+        const logoutButton = document.createElement('button');
+        logoutButton.textContent = 'Logout';
+        logoutButton.addEventListener('click', () => {
+            signOut(auth).then(() => {
+                window.location.href = 'login.html';
+            });
+        });
+        authStatusContainer.appendChild(logoutButton);
+    } else {
+        const loginButton = document.createElement('button');
+        loginButton.textContent = 'Login';
+        loginButton.addEventListener('click', () => {
+            window.location.href = 'login.html';
+        });
+        authStatusContainer.appendChild(loginButton);
+    }
+});
+
+const style = document.createElement('style');
+style.textContent = `
+    #auth-status-container {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        background-color: #161821;
+        padding: 10px;
+        border-radius: 5px;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    #auth-status-container button {
+        background: #2563eb;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 8px 18px;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+    #auth-status-container button:hover {
+        background: #1e40af;
+    }
+`;
+document.head.appendChild(style);

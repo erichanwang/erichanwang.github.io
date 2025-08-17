@@ -1,6 +1,6 @@
 {
   "name": "erichanwang.github.io",
-  "version": "2.1.7",
+  "version": "2.1.8",
   "description": "This is my personal portfolio website where I share my programming projects, web experiments, and interactive games.",
   "main": "scripts/script.js",
   "scripts": {
@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/erichanwang/erichanwang.github.io/issues"
   },
-  "homepage": "https://github.com/erichanwang/erichanwang.github.io#readme"
+  "homepage": "https://github.com/erichanwang/erichanwang.github.io#readme",
+  "dependencies": {
+    "firebase": "^12.1.0"
+  }
 }
