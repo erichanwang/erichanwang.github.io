@@ -22,7 +22,7 @@ onAuthStateChanged(auth, (user) => {
     authStatusContainer.innerHTML = '';
     if (user) {
         const userEmail = document.createElement('span');
-        userEmail.textContent = `Logged in as: ${user.email}`;
+        userEmail.textContent = user.email;
         authStatusContainer.appendChild(userEmail);
 
         const logoutButton = document.createElement('button');
@@ -65,9 +65,15 @@ style.textContent = `
         padding: 8px 18px;
         cursor: pointer;
         transition: background 0.2s;
+        font-size: 14px;
     }
     #auth-status-container button:hover {
         background: #1e40af;
+    }
+    #auth-status-container span {
+        font-size: 12px;
+        opacity: 0.7;
+        color: #fff;
     }
 `;
 document.head.appendChild(style);

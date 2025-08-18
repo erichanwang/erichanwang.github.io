@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -28,6 +29,10 @@ signupForm.addEventListener('submit', (e) => {
         .then((userCredential) => {
             // Signed in 
             const user = userCredential.user;
+            const database = getDatabase(app);
+            set(ref(database, 'users/' + user.uid), {
+                email: user.email
+            });
             console.log('User signed up:', user);
             window.location.href = "index.html";
         })
