@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eric Wang - Home</title>
+  <link rel="icon" type="image/png" href="images/icon.png" />
+  <link id="theme-style" rel="stylesheet" href="styles/style.css" />
+  <link rel="stylesheet" href="styles/settings.css" />
+</head>
+<body>
+<header>
+  <h1>Eric Wang</h1>
+  <nav>
+    <ul>
+      <li><a href="index.html" class="nav-button">Home</a></li>
+      <li><a href="awards.html" class="nav-button">Awards</a></li>
+      <li><a href="skills.html" class="nav-button">Skills</a></li>
+      <li><a href="certifications.html" class="nav-button">Certifications</a></li>
+      <li><a href="education.html" class="nav-button">Education</a></li>
+      <li><a href="projects.html" class="nav-button">Projects</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section>
+    <!--Big time with schedule i think-->
+    <h2>Current Local Time</h2>
+    <p id="local-time" class="time-display"></p>
+    <h2>Schedule</h2>
+    <p id="schedule-info">Loading schedule...</p>
+
+
+</section>
+
+
+<footer>
+    <p>© 2025 Eric Wang. All rights reserved.</p>
+</footer>
+  <script src="scripts/nav.js"></script>
+  <script src="scripts/script.js"></script>
+  <script src="scripts/settings.js"></script>
+  <script src="scripts/time.js"></script>
+  <script type="module" src="scripts/activity-tracker.js"></script>
+  <script>
+    function updateTime() {
+      const timeElement = document.getElementById('local-time');
+      if (timeElement) {
+        const now = new Date();
+        timeElement.textContent = now.toLocaleTimeString();
+      }
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
+  </script>
+  <script type="module" src="scripts/auth-status.js"></script>
+
+</body>
+</html>
