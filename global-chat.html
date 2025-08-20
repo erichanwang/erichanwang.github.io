@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Eric Wang - Chat</title>
+  <title>Eric Wang - Global Chat</title>
   <link rel="icon" type="image/png" href="images/icon.png" />
   <link id="theme-style" rel="stylesheet" href="styles/style.css" />
   <link rel="stylesheet" href="styles/settings.css" />
@@ -26,13 +26,8 @@
 </header>
 
 <section id="chat-section">
-    <div id="user-list-container">
-        <h2>Chat</h2>
-        <input type="text" id="user-search-input" placeholder="Search for users by email...">
-        <div id="users-list"></div>
-    </div>
-    <div id="chat-container" style="display: none;">
-        <h3 id="chat-with"></h3>
+    <h2>Global Chat</h2>
+    <div id="chat-container">
         <div id="messages"></div>
         <div id="input-container">
             <input type="text" id="message-input" placeholder="Type a message...">
@@ -48,6 +43,6 @@
   <script src="scripts/script.js"></script>
   <script src="scripts/settings.js"></script>
   <script type="module" src="scripts/auth-status.js"></script>
-  <script type="module" src="scripts/chat.js"></script>
+  <script type="module" src="scripts/global-chat.js"></script>
 </body>
 </html>

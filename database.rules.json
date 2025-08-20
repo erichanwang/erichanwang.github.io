@@ -1,6 +1,19 @@
 {
   "rules": {
-    ".read": "auth != null",
-    ".write": "auth != null"
+    "users": {
+      ".read": "auth != null",
+      "$uid": {
+        ".write": "$uid === auth.uid"
+      }
+    },
+    "dms": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "global-chat": {
+      ".read": "auth != null",
+      ".write": "auth != null",
+      ".indexOn": "timestamp"
+    }
   }
 }

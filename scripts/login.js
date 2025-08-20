@@ -29,7 +29,9 @@ loginForm.addEventListener('submit', (e) => {
             // Signed in 
             const user = userCredential.user;
             console.log('User signed in:', user);
-            window.location.href = "index.html";
+            const redirectTo = sessionStorage.getItem('redirectTo');
+            sessionStorage.removeItem('redirectTo');
+            window.location.href = redirectTo || 'index.html';
         })
         .catch((error) => {
             const errorCode = error.code;

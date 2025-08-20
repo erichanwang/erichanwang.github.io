@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eric Wang - Home</title>
+  <link rel="icon" type="image/png" href="images/icon.png" />
+  <link id="theme-style" rel="stylesheet" href="styles/style.css" />
+  <link rel="stylesheet" href="styles/settings.css" />
+</head>
+<body>
+<header>
+  <h1>Eric Wang</h1>
+  <p id="version-display">Version 2.0.0</p>
+  <p id="last-updated">Last updated 2025-08-19</p>
+  <nav>
+    <ul>
+  <li><a href="notes.html" class="nav-button">Notes</a></li>
+  <li><a href="chat.html" class="nav-button">Chat</a></li>
+  <li><a href="global-chat.html" class="nav-button">Global Chat</a></li>
+  <li><a href="time.html" class="nav-button">Time</a></li>
+  <li><a href="profile.html" class="nav-button">Profile</a></li>
+    </ul>
+  </nav>
+</header>
+    <main>
+        <section id="profile-section">
+            <h3 id="current-display-name"></h3>
+            <h2>Update Your Profile</h2>
+            <input type="text" id="displayNameInput" placeholder="Enter your display name">
+            <button id="updateProfileButton">Update Profile</button>
+        </section>
+    </main>
+    <script src="scripts/nav.js"></script>
+    <script src="scripts/settings.js"></script>
+    <script type="module" src="scripts/profile.js"></script>
+    <script src="scripts/script.js"></script>
+    <script type="module" src="scripts/auth-status.js"></script>
+</body>
+</html>

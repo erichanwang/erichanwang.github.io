@@ -599,3 +599,29 @@ h3{
     }
 }
 
+/* Schedule Table */
+#schedule-container {
+    margin-top: 20px;
+}
+
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.schedule-table th, .schedule-table td {
+    border: 1px solid #444;
+    padding: 8px;
+    text-align: left;
+}
+
+.schedule-table th {
+    background-color: #2A2D3D;
+}
+
+.current-period {
+    background-color: #3B4064;
+    color: white;
+    font-weight: bold;
+}

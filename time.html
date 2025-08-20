@@ -7,6 +7,12 @@
   <link rel="icon" type="image/png" href="images/icon.png" />
   <link id="theme-style" rel="stylesheet" href="styles/style.css" />
   <link rel="stylesheet" href="styles/settings.css" />
+  <style>
+    .big-time {
+      font-size: 3em;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
 <header>
@@ -17,7 +23,9 @@
     <ul>
   <li><a href="notes.html" class="nav-button">Notes</a></li>
   <li><a href="chat.html" class="nav-button">Chat</a></li>
+  <li><a href="global-chat.html" class="nav-button">Global Chat</a></li>
   <li><a href="time.html" class="nav-button">Time</a></li>
+  <li><a href="profile.html" class="nav-button">Profile</a></li>
     </ul>
   </nav>
 </header>
@@ -25,7 +33,11 @@
 <section>
     <!--Big time with schedule i think-->
     <h2>Current Local Time</h2>
-    <p id="local-time" class="time-display"></p>
+    <!-- Centered local time-->
+    <p id="local-time" class="time-display big-time" style="text-align: center;"></p>
+
+    <h2>Time Remaining in Current Period</h2>
+    <p id="time-remaining" class="time-display big-time" style="text-align: center;"></p>
     <h2>Schedule</h2>
     <div>
       <label for="lunch-schedule">Select Lunch:</label>

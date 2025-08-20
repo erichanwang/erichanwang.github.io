@@ -1,5 +1,5 @@
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { auth, rtdb } from './firebase-config.js';
+import { auth, rtdb, db } from './firebase-config.js';
 import { ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 const notesSection = document.getElementById('notes-section');

@@ -8,9 +8,9 @@ document.body.prepend(authStatusContainer);
 onAuthStateChanged(auth, (user) => {
     authStatusContainer.innerHTML = '';
     if (user) {
-        const userEmail = document.createElement('span');
-        userEmail.textContent = user.email;
-        authStatusContainer.appendChild(userEmail);
+        const userDisplayName = document.createElement('span');
+        userDisplayName.textContent = user.displayName || user.email;
+        authStatusContainer.appendChild(userDisplayName);
 
         const logoutButton = document.createElement('button');
         logoutButton.textContent = 'Logout';
@@ -24,6 +24,7 @@ onAuthStateChanged(auth, (user) => {
         const loginButton = document.createElement('button');
         loginButton.textContent = 'Login';
         loginButton.addEventListener('click', () => {
+            sessionStorage.setItem('redirectTo', window.location.href);
             window.location.href = 'login.html';
         });
         authStatusContainer.appendChild(loginButton);
