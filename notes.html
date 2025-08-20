@@ -16,19 +16,17 @@
   <p id="last-updated">Last updated 2025-08-19</p>
   <nav>
     <ul>
-      <li><a href="index.html" class="nav-button">Home</a></li>
-      <li><a href="awards.html" class="nav-button">Awards</a></li>
-      <li><a href="skills.html" class="nav-button">Skills</a></li>
-      <li><a href="certifications.html" class="nav-button">Certifications</a></li>
-      <li><a href="education.html" class="nav-button">Education</a></li>
-      <li><a href="projects.html" class="nav-button">Projects</a></li>
+  <li><a href="notes.html" class="nav-button">Notes</a></li>
+  <li><a href="chat.html" class="nav-button">Chat</a></li>
+  <li><a href="time.html" class="nav-button">Time</a></li>
     </ul>
   </nav>
 </header>
 
 <section id="notes-section">
     <h2>Private Notes</h2>
-    <p>You must be logged in to see your notes.</p>
+  <p id="local-time" class="time-display" style="font-weight:bold;font-size:1.1em;"></p>
+  <p style="margin-bottom:10px;" id="login-msg">You must be logged in to see your notes.</p>
     <div id="notes-container" style="display: none;">
         <div id="editor-container">
           <div id="toolbar">
@@ -50,5 +48,16 @@
   <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
   <script type="module" src="scripts/auth-status.js"></script>
   <script type="module" src="scripts/notes.js"></script>
+  <script>
+    function updateTime() {
+      const timeElement = document.getElementById('local-time');
+      if (timeElement) {
+        const now = new Date();
+        timeElement.textContent = now.toLocaleTimeString();
+      }
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
+  </script>
 </body>
 </html>

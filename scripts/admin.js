@@ -21,7 +21,7 @@ const adminContainer = document.getElementById('admin-container');
 const userListDiv = document.getElementById('user-list');
 
 // IMPORTANT: Replace this with your actual Firebase User ID
-const ADMIN_UID = "YOUR_ADMIN_UID_HERE";
+const ADMIN_UID = "faJ889dfw9h6yyJT0OSVcMqdUQ73";
 
 onAuthStateChanged(auth, user => {
     if (user && user.uid === ADMIN_UID) {

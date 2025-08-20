@@ -1,20 +1,6 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyB67q01HUssXeYo0A2MdpsVU9AOG_KLB3E",
-    authDomain: "new-database-bc98a.firebaseapp.com",
-    projectId: "new-database-bc98a",
-    storageBucket: "new-database-bc98a.firebasestorage.app",
-    messagingSenderId: "436686586315",
-    appId: "1:436686586315:web:53350b51bcbcd52794764e",
-    measurementId: "G-W8BR4WNQR6"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { auth, db } from './firebase-config.js';
+import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const notesSection = document.getElementById('notes-section');
 const notesContainer = document.getElementById('notes-container');
@@ -31,8 +17,9 @@ const toolbarOptions = [
 ];
 
 onAuthStateChanged(auth, user => {
+    const loginMsg = Array.from(notesSection.querySelectorAll('p')).find(p => p.textContent.includes('You must be logged in'));
     if (user) {
-        notesSection.querySelector('p').style.display = 'none';
+        if (loginMsg) loginMsg.style.display = 'none';
         notesContainer.style.display = 'block';
         if (!quill) {
             quill = new Quill('#notes-editor', {
@@ -41,26 +28,45 @@ onAuthStateChanged(auth, user => {
                 },
                 theme: 'snow'
             });
+            // Autosave on text change
+            quill.on('text-change', function() {
+                saveNotes(false);
+            });
         }
         loadNotes(user.uid);
     } else {
-        notesSection.querySelector('p').style.display = 'block';
+        if (loginMsg) loginMsg.style.display = 'block';
         notesContainer.style.display = 'none';
     }
 });
 
-function loadNotes(userId) {
-    const notes = localStorage.getItem(`notes_${userId}`);
-    if (notes) {
-        quill.setContents(JSON.parse(notes));
+async function loadNotes(userId) {
+    // Only load from Firestore (users/{userId}/notes/note)
+    try {
+        const docRef = doc(db, "users", userId, "notes", "note");
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            quill.setContents(docSnap.data().content);
+        } else {
+            quill.setContents([]); // Empty if no notes
+        }
+    } catch (e) {
+        console.error("Error loading notes from Firestore:", e);
+        alert("Failed to load notes from database. Please check your connection and permissions.");
     }
 }
 
-function saveNotes() {
+async function saveNotes(showAlert = true) {
     const user = auth.currentUser;
     if (user) {
-        localStorage.setItem(`notes_${user.uid}`, JSON.stringify(quill.getContents()));
-        alert('Notes saved!');
+        const content = quill.getContents();
+        try {
+            await setDoc(doc(db, "users", user.uid, "notes", "note"), { content });
+            if (showAlert) alert('Notes saved!');
+        } catch (e) {
+            console.error("Error saving notes to Firestore:", e);
+            alert("Failed to save notes to database. Please check your connection and permissions.");
+        }
     }
 }
 
