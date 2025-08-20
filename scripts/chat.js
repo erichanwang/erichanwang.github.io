@@ -23,6 +23,7 @@ let messagesRef = null;
 onAuthStateChanged(auth, user => {
     currentUser = user;
     if (!user) {
+        sessionStorage.setItem('redirectTo', window.location.href);
         window.location.href = 'login.html';
     }
 });
