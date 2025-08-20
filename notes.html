@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Eric Wang - Home</title>
+  <title>Eric Wang - Private Notes</title>
   <link rel="icon" type="image/png" href="images/icon.png" />
   <link id="theme-style" rel="stylesheet" href="styles/style.css" />
   <link rel="stylesheet" href="styles/settings.css" />
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 </head>
 <body>
 <header>
@@ -25,27 +26,20 @@
   </nav>
 </header>
 
-<section>
-    <!--Big time with schedule i think-->
-    <h2>Current Local Time</h2>
-    <p id="local-time" class="time-display"></p>
-    <h2>Schedule</h2>
-    <div>
-      <label for="lunch-schedule">Select Lunch:</label>
-      <select id="lunch-schedule">
-        <option value="A">A Lunch</option>
-        <option value="B">B Lunch</option>
-        <option value="C">C Lunch</option>
-        <option value="D">D Lunch</option>
-      </select>
+<section id="notes-section">
+    <h2>Private Notes</h2>
+    <p>You must be logged in to see your notes.</p>
+    <div id="notes-container" style="display: none;">
+        <div id="editor-container">
+          <div id="toolbar">
+            <button class="ql-bold">Bold</button>
+            <button class="ql-italic">Italic</button>
+          </div>
+          <div id="notes-editor"></div>
+        </div>
+        <button id="save-notes">Save Notes</button>
     </div>
-    <div id="schedule-container">
-        <p id="schedule-info">Loading schedule...</p>
-    </div>
-
-
 </section>
-
 
 <footer>
     <p>© 2025 Eric Wang. All rights reserved.</p>
@@ -53,19 +47,8 @@
   <script src="scripts/nav.js"></script>
   <script src="scripts/script.js"></script>
   <script src="scripts/settings.js"></script>
-  <script src="scripts/time.js"></script>
-  <script>
-    function updateTime() {
-      const timeElement = document.getElementById('local-time');
-      if (timeElement) {
-        const now = new Date();
-        timeElement.textContent = now.toLocaleTimeString();
-      }
-    }
-    setInterval(updateTime, 1000);
-    updateTime();
-  </script>
+  <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
   <script type="module" src="scripts/auth-status.js"></script>
-
+  <script type="module" src="scripts/notes.js"></script>
 </body>
 </html>

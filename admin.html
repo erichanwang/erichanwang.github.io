@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Eric Wang - Home</title>
+  <title>Eric Wang - Admin</title>
   <link rel="icon" type="image/png" href="images/icon.png" />
   <link id="theme-style" rel="stylesheet" href="styles/style.css" />
   <link rel="stylesheet" href="styles/settings.css" />
@@ -25,27 +25,14 @@
   </nav>
 </header>
 
-<section>
-    <!--Big time with schedule i think-->
-    <h2>Current Local Time</h2>
-    <p id="local-time" class="time-display"></p>
-    <h2>Schedule</h2>
-    <div>
-      <label for="lunch-schedule">Select Lunch:</label>
-      <select id="lunch-schedule">
-        <option value="A">A Lunch</option>
-        <option value="B">B Lunch</option>
-        <option value="C">C Lunch</option>
-        <option value="D">D Lunch</option>
-      </select>
+<section id="admin-section">
+    <h2>Admin Dashboard</h2>
+    <p>You must be an admin to view this page.</p>
+    <div id="admin-container" style="display: none;">
+        <h3>User Management</h3>
+        <div id="user-list"></div>
     </div>
-    <div id="schedule-container">
-        <p id="schedule-info">Loading schedule...</p>
-    </div>
-
-
 </section>
-
 
 <footer>
     <p>© 2025 Eric Wang. All rights reserved.</p>
@@ -53,19 +40,7 @@
   <script src="scripts/nav.js"></script>
   <script src="scripts/script.js"></script>
   <script src="scripts/settings.js"></script>
-  <script src="scripts/time.js"></script>
-  <script>
-    function updateTime() {
-      const timeElement = document.getElementById('local-time');
-      if (timeElement) {
-        const now = new Date();
-        timeElement.textContent = now.toLocaleTimeString();
-      }
-    }
-    setInterval(updateTime, 1000);
-    updateTime();
-  </script>
   <script type="module" src="scripts/auth-status.js"></script>
-
+  <script type="module" src="scripts/admin.js"></script>
 </body>
 </html>
