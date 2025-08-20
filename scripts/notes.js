@@ -1,10 +1,11 @@
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { auth, db } from './firebase-config.js';
-import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { auth, rtdb } from './firebase-config.js';
+import { ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 const notesSection = document.getElementById('notes-section');
 const notesContainer = document.getElementById('notes-container');
 const saveButton = document.getElementById('save-notes');
+
 
 let quill;
 
@@ -41,17 +42,16 @@ onAuthStateChanged(auth, user => {
 });
 
 async function loadNotes(userId) {
-    // Only load from Firestore (users/{userId}/notes/note)
     try {
-        const docRef = doc(db, "users", userId, "notes", "note");
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-            quill.setContents(docSnap.data().content);
+        const notesRef = ref(rtdb, `users/${userId}/notes`);
+        const snapshot = await get(notesRef);
+        if (snapshot.exists()) {
+            quill.setContents(snapshot.val());
         } else {
             quill.setContents([]); // Empty if no notes
         }
     } catch (e) {
-        console.error("Error loading notes from Firestore:", e);
+        console.error("Error loading notes from Realtime Database:", e);
         alert("Failed to load notes from database. Please check your connection and permissions.");
     }
 }
@@ -61,10 +61,10 @@ async function saveNotes(showAlert = true) {
     if (user) {
         const content = quill.getContents();
         try {
-            await setDoc(doc(db, "users", user.uid, "notes", "note"), { content });
+            await set(ref(rtdb, `users/${user.uid}/notes`), content);
             if (showAlert) alert('Notes saved!');
         } catch (e) {
-            console.error("Error saving notes to Firestore:", e);
+            console.error("Error saving notes to Realtime Database:", e);
             alert("Failed to save notes to database. Please check your connection and permissions.");
         }
     }
