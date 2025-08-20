@@ -3,11 +3,15 @@ import { auth } from './firebase-config.js';
 
 const authStatusContainer = document.createElement('div');
 authStatusContainer.id = 'auth-status-container';
-document.body.prepend(authStatusContainer);
+const allowedPages = ['notes.html', 'chat.html', 'global-chat.html', 'profile.html'];
+const currentPage = window.location.pathname.split('/').pop();
 
-onAuthStateChanged(auth, (user) => {
-    authStatusContainer.innerHTML = '';
-    if (user) {
+if (allowedPages.includes(currentPage)) {
+    document.body.prepend(authStatusContainer);
+
+    onAuthStateChanged(auth, (user) => {
+        authStatusContainer.innerHTML = '';
+        if (user) {
         const userDisplayName = document.createElement('span');
         userDisplayName.textContent = user.displayName || user.email;
         authStatusContainer.appendChild(userDisplayName);
@@ -24,12 +28,13 @@ onAuthStateChanged(auth, (user) => {
         const loginButton = document.createElement('button');
         loginButton.textContent = 'Login';
         loginButton.addEventListener('click', () => {
-            sessionStorage.setItem('redirectTo', window.location.href);
+            sessionStorage.setItem('redirectTo', 'global-chat.html');
             window.location.href = 'login.html';
         });
         authStatusContainer.appendChild(loginButton);
     }
-});
+    });
+}
 
 const style = document.createElement('style');
 style.textContent = `

@@ -25,8 +25,39 @@ onAuthStateChanged(auth, user => {
     if (!user) {
         sessionStorage.setItem('redirectTo', window.location.href);
         window.location.href = 'login.html';
+    } else {
+        const userRef = ref(db, `users/${user.uid}`);
+        onValue(userRef, (snapshot) => {
+            if (!snapshot.exists()) {
+                set(userRef, {
+                    uid: user.uid,
+                    email: user.email,
+                    displayName: user.displayName
+                });
+            }
+        });
+        loadAllUsers();
     }
 });
+
+async function loadAllUsers() {
+    const usersRef = ref(db, 'users');
+    const snapshot = await get(usersRef);
+    usersList.innerHTML = '';
+    if (snapshot.exists()) {
+        snapshot.forEach((childSnapshot) => {
+            const user = childSnapshot.val();
+            if (user.uid !== currentUser.uid) {
+                const userElement = document.createElement('div');
+                userElement.textContent = user.displayName || user.email;
+                userElement.addEventListener('click', () => selectUser(user));
+                usersList.appendChild(userElement);
+            }
+        });
+    } else {
+        usersList.innerHTML = 'No users found.';
+    }
+}
 
 userSearchInput.addEventListener('input', searchUsers);
 
@@ -35,7 +66,7 @@ async function searchUsers() {
     const usersRef = ref(db, 'users');
 
     if (searchText === '') {
-        usersList.innerHTML = '';
+        loadAllUsers();
         return;
     }
 
@@ -106,21 +137,5 @@ sendButton.addEventListener('click', sendMessage);
 messageInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         sendMessage();
-    }
-});
-
-// Store user data in the database
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        const userRef = ref(db, `users/${user.uid}`);
-        onValue(userRef, (snapshot) => {
-            if (!snapshot.exists()) {
-                set(userRef, {
-                    uid: user.uid,
-                    email: user.email,
-                    displayName: user.displayName
-                });
-            }
-        });
     }
 });
