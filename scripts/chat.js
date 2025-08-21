@@ -77,7 +77,8 @@ async function searchUsers() {
         snapshot.forEach((childSnapshot) => {
             const user = childSnapshot.val();
             const userEmail = user.email ? user.email.toLowerCase() : '';
-            if (user.uid !== currentUser.uid && userEmail.includes(searchText)) {
+            const displayName = user.displayName ? user.displayName.toLowerCase() : '';
+            if (user.uid !== currentUser.uid && (userEmail.includes(searchText) || displayName.includes(searchText))) {
                 const userElement = document.createElement('div');
                 userElement.textContent = user.displayName || user.email;
                 userElement.addEventListener('click', () => selectUser(user));
