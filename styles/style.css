@@ -325,6 +325,10 @@ button:hover, .game-mode button:hover {
   flex-wrap: wrap;
   gap: 16px;
   justify-content: center;
+  margin-bottom: 24px;
+  margin-top: 0;
+  width: 100%;
+  max-width: 850px;
 }
 
 .skill-box {
@@ -410,9 +414,21 @@ h3{
 }
 
 .skill-category {
-    width: 100%;
-    margin-bottom: 20px;
+  width: 100%;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
+
+.skill-category > h3 {
+  text-align: center;
+  width: 100%;
+}
+
 
 #skills h3 {
     text-align: center;
@@ -528,6 +544,7 @@ h3{
     }
     
     .skills-container {
+        grid-template-columns: repeat(2, 130px);
         gap: 12px;
     }
     
@@ -575,6 +592,11 @@ h3{
         margin: 5px;
     }
     
+    .skills-container {
+        grid-template-columns: repeat(1, 120px);
+        gap: 12px;
+    }
+
     .skill-box {
         width: 120px;
         height: 150px;
