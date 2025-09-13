@@ -7,10 +7,8 @@
       }
     },
     "dms": {
-      "$conversationId": {
-        ".read": "auth != null && $conversationId.contains(auth.uid)",
-        ".write": "auth != null && $conversationId.contains(auth.uid)"
-      }
+      ".read": "auth != null",
+      ".write": "auth != null"
     },
     "global-chat": {
       ".read": "auth != null",
