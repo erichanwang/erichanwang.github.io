@@ -55,3 +55,5 @@
 
 - [ ] Clean up old files
   - Remove or archive old HTML, CSS, JS files after migration
+
+- [ ] Get images for each project in projects.html, update the projects-containers
