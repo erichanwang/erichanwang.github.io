@@ -17,8 +17,8 @@
             border-radius: 5px;
         }
         .project-media {
-            width: 250px;
-            height: 150px;
+            width: 400px;
+            height: 250px;
             margin-right: 10px;
             border-radius: 5px;
             display: inline-block;
@@ -43,6 +43,13 @@
             display: block;
             width: 80%;
             max-width: 700px;
+            transition: transform 0.2s ease-out;
+            cursor: zoom-in;
+            transform-origin: center center;
+        }
+        .modal-content.zoomed {
+            transform: scale(2.5);
+            cursor: move;
         }
         .close {
             position: absolute;
@@ -90,9 +97,10 @@
             <div class="award-list">
                 <a href="https://github.com/erichanwang/snake" target="_blank" class="project-link">
                     <div class="project-item project-item-large">
-                        <strong>Snake</strong> - snake in python using the Turtle package.
+                        <div class="project-title">Snake</div>
+                        <div class="project-description">snake in python using the Turtle package.</div>
                         <div class="project-media-container">
-                            <img src="images/project images/snake_img1.png" alt="Snake Project Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/snake_img1.png" alt="Snake Project Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -101,11 +109,12 @@
             <div class="award-list">
                 <a href="https://github.com/erichanwang/pygame-intro" target="_blank" class="project-link">
                     <div class="project-item project-item-large">
-                        <strong>Pygame intro</strong> - runner game with jumping and added features. I followed a tutorial for this project, which can be found <a href="https://www.youtube.com/watch?v=AY9MnQ4x3zk" target="_blank" class="youtube-link">https://www.youtube.com/watch?v=AY9MnQ4x3zk</a>.
+                        <div class="project-title">Pygame intro</div>
+                        <div class="project-description">runner game with jumping and added features. I followed a tutorial for this project, which can be found <a href="https://www.youtube.com/watch?v=AY9MnQ4x3zk" target="_blank" class="youtube-link">https://www.youtube.com/watch?v=AY9MnQ4x3zk</a>.</div>
                         <div class="project-media-container">
-                            <img src="images/project images/pygame_intro_img1.png" alt="Pygame Intro Image 1" class="project-media" onclick="openModal(this.src)">
-                            <img src="images/project images/pygame_intro_img2.png" alt="Pygame Intro Image 2" class="project-media" onclick="openModal(this.src)">
-                            <img src="images/project images/pygame_intro_img3.png" alt="Pygame Intro Image 3" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/pygame_intro_img1.png" alt="Pygame Intro Image 1" class="project-media" onclick="openModal(event, this.src)">
+                            <img src="images/project images/pygame_intro_img2.png" alt="Pygame Intro Image 2" class="project-media" onclick="openModal(event, this.src)">
+                            <img src="images/project images/pygame_intro_img3.png" alt="Pygame Intro Image 3" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -116,7 +125,7 @@
                     <div class="project-item project-item-large">
                         <strong>Rubik's Cube Simulation</strong> - 3d simulation of a Rubik's cube in Python.
                         <div class="project-media-container">
-                            <img src="images/project images/rubiks_cube_simulation_img1.png" alt="Rubik's Cube Simulation Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/rubiks_cube_simulation_img1.png" alt="Rubik's Cube Simulation Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -124,7 +133,7 @@
                     <div class="project-item project-item-large">
                         <strong>Ball Bounce</strong> - Physics Simulations of Gravity, Magnetism, and Electric fields.
                         <div class="project-media-container">
-                            <img src="images/project images/ball_bounce_img1.png" alt="Ball Bounce Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/ball_bounce_img1.png" alt="Ball Bounce Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -132,7 +141,7 @@
                     <div class="project-item project-item-large">
                         <strong>Block Games</strong> - A collection of common 2d block games.
                         <div class="project-media-container">
-                            <img src="images/project images/block_games_img1.png" alt="Block Games Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/block_games_img1.png" alt="Block Games Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -140,7 +149,7 @@
                     <div class="project-item project-item-large">
                         <strong>Reinforcement Learning</strong> - A collection of reinforcement learning algorithms, implemented in Pacman.
                         <div class="project-media-container">
-                            <img src="images/project images/reinforcement_learning_img1.png" alt="Reinforcement Learning Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/reinforcement_learning_img1.png" alt="Reinforcement Learning Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -148,7 +157,7 @@
                     <div class="project-item project-item-large">
                         <strong>Ordering Game</strong> - Item ordering game with GUI
                         <div class="project-media-container">
-                            <img src="images/project images/ordering_game_img1.png" alt="Ordering Game Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/ordering_game_img1.png" alt="Ordering Game Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -156,7 +165,7 @@
                     <div class="project-item project-item-large">
                         <strong>Suika Game</strong> - Pygame-based game with custom physics, collision, scoring, and stacking logic.
                         <div class="project-media-container">
-                            <img src="images/project images/suika_game_img1.png" alt="Suika Game Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/suika_game_img1.png" alt="Suika Game Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -164,7 +173,7 @@
                     <div class="project-item project-item-large">
                         <strong>Stock Simulation</strong> - Simulation of stock market trading.
                         <div class="project-media-container">
-                            <img src="images/project images/stock_simulation_img1.png" alt="Stock Simulation Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/stock_simulation_img1.png" alt="Stock Simulation Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -172,7 +181,7 @@
                     <div class="project-item project-item-large">
                         <strong>Brachistochrone Curve</strong> - Simulation of the Brachistochrone problem.
                         <div class="project-media-container">
-                            <img src="images/project images/brachistochrone_curve_img1.png" alt="Brachistochrone Curve Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/brachistochrone_curve_img1.png" alt="Brachistochrone Curve Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -180,7 +189,7 @@
                     <div class="project-item project-item-large">
                         <strong>Monty Hall</strong> - simulation of the Monty Hall problem.
                         <div class="project-media-container">
-                            <img src="images/project images/monty_hall_img1.png" alt="Monty Hall Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/monty_hall_img1.png" alt="Monty Hall Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -188,7 +197,7 @@
                     <div class="project-item project-item-large">
                         <strong>Autotyper</strong> - A typing automation tool.
                         <div class="project-media-container">
-                            <img src="images/project images/autotyper_img1.png" alt="Autotyper Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/autotyper_img1.png" alt="Autotyper Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -196,7 +205,7 @@
                     <div class="project-item project-item-large">
                         <strong>Virtual Keyboard</strong> - A virtual keyboard with customizable layouts.
                         <div class="project-media-container">
-                            <img src="images/project images/virtual_keyboard_img1.png" alt="Virtual Keyboard Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/virtual_keyboard_img1.png" alt="Virtual Keyboard Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -204,7 +213,7 @@
                     <div class="project-item project-item-large">
                         <strong>Neural Network</strong> - A neural network implementation to train ML for different games.
                         <div class="project-media-container">
-                            <img src="images/project images/neural_network_img1.png" alt="Neural Network Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/neural_network_img1.png" alt="Neural Network Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -212,7 +221,7 @@
                     <div class="project-item project-item-large">
                         <strong>PDF Reader/Editor</strong> - A simple PDF reader and editor.
                         <div class="project-media-container">
-                            <img src="images/project images/pdf_reader_editor_img1.png" alt="PDF Reader/Editor Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/pdf_reader_editor_img1.png" alt="PDF Reader/Editor Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -220,7 +229,7 @@
                     <div class="project-item project-item-large">
                         <strong>Coffee Filter Simulator</strong> - AP Physics C lab made in Python. Simulating a coffee filter drop, with drag, gravity, and terminal velocity.
                         <div class="project-media-container">
-                            <img src="images/project images/coffee_filter_simulator_img1.png" alt="Coffee Filter Simulator Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/coffee_filter_simulator_img1.png" alt="Coffee Filter Simulator Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -234,7 +243,7 @@
                     <div class="project-item project-item-large">
                         <strong>Hangman</strong> - hangman project for Computer Science 1.
                         <div class="project-media-container">
-                            <img src="images/project images/hangman_img1.png" alt="Hangman Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/hangman_img1.png" alt="Hangman Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -245,7 +254,7 @@
                     <div class="project-item project-item-large">
                         <strong>Snake Game</strong> - snake game.
                         <div class="project-media-container">
-                            <img src="images/project images/snake_game_img1.png" alt="Snake Game Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/snake_game_img1.png" alt="Snake Game Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -253,7 +262,7 @@
                     <div class="project-item project-item-large">
                         <strong>Pong Game</strong> - pong but with object generation.
                         <div class="project-media-container">
-                            <img src="images/project images/pong_game_img1.png" alt="Pong Game Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/pong_game_img1.png" alt="Pong Game Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -261,7 +270,7 @@
                     <div class="project-item project-item-large">
                         <strong>Blackjack</strong> - a simulation of the gambling game Blackjack.
                         <div class="project-media-container">
-                            <img src="images/project images/blackjack_img1.png" alt="Blackjack Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/blackjack_img1.png" alt="Blackjack Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -269,7 +278,7 @@
                     <div class="project-item project-item-large">
                         <strong>2048</strong> - sliding blocks game of 2048.
                         <div class="project-media-container">
-                            <img src="images/project images/2048_img1.png" alt="2048 Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/2048_img1.png" alt="2048 Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -280,7 +289,7 @@
                     <div class="project-item project-item-large">
                         <strong>Calculator</strong> - Java GUI Calculator.
                         <div class="project-media-container">
-                            <img src="images/project images/calculator_img1.png" alt="Calculator Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/calculator_img1.png" alt="Calculator Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -288,7 +297,7 @@
                     <div class="project-item project-item-large">
                         <strong>Inheritance Project</strong> - Inheritance Final Project for Computer Science 2.
                         <div class="project-media-container">
-                            <img src="images/project images/inheritance_project_img1.png" alt="Inheritance Project Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/inheritance_project_img1.png" alt="Inheritance Project Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -302,7 +311,7 @@
                     <div class="project-item project-item-large">
                         <strong>Sorting Algorithms</strong> - A collection of sorting algorithms in C++.
                         <div class="project-media-container">
-                            <img src="images/project images/sorting_algorithms_img1.png" alt="Sorting Algorithms Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/sorting_algorithms_img1.png" alt="Sorting Algorithms Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -310,7 +319,7 @@
                     <div class="project-item project-item-large">
                         <strong>Path Finding Algorithms</strong> - A collection of path finding algorithms in C++.
                         <div class="project-media-container">
-                            <img src="images/project images/path_finding_algorithms_img1.png" alt="Path Finding Algorithms Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/path_finding_algorithms_img1.png" alt="Path Finding Algorithms Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -318,7 +327,7 @@
                     <div class="project-item project-item-large">
                         <strong>Hangman</strong> - I remade my Java Hangman project.
                         <div class="project-media-container">
-                            <img src="images/project images/hangman_cpp_img1.png" alt="Hangman C++ Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/hangman_cpp_img1.png" alt="Hangman C++ Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -326,7 +335,7 @@
                     <div class="project-item project-item-large">
                         <strong>Probability</strong> - Series of probability simulations including a coin flip, dice roll, and spinner.
                         <div class="project-media-container">
-                            <img src="images/project images/probability_img1.png" alt="Probability Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/probability_img1.png" alt="Probability Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -334,7 +343,7 @@
                     <div class="project-item project-item-large">
                         <strong>Conway's Game of Life</strong> -  Conway's Game of Life in C++
                         <div class="project-media-container">
-                            <img src="images/project images/conway_game_of_life_img1.png" alt="Conway's Game of Life Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/conway_game_of_life_img1.png" alt="Conway's Game of Life Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -342,7 +351,7 @@
                     <div class="project-item project-item-large">
                         <strong>Compiler</strong> - A simple compiler that compiles a custom language to C++.
                         <div class="project-media-container">
-                            <img src="images/project images/compiler_img1.png" alt="Compiler Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/compiler_img1.png" alt="Compiler Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -356,7 +365,7 @@
                     <div class="project-item project-item-large">
                         <strong>Godot Project</strong> - An introduction project of Godot.
                         <div class="project-media-container">
-                            <img src="images/project images/godot_project_img1.png" alt="Godot Project Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/godot_project_img1.png" alt="Godot Project Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -364,7 +373,7 @@
                     <div class="project-item project-item-large">
                         <strong>Tic Tac Toe (React Website)</strong> - Tic Tac Toe game made with React. The website is hosted <a href="https://react-stuff.pages.dev" target="_blank">here</a>.
                         <div class="project-media-container">
-                            <img src="images/project images/tic_tac_toe_react_img1.png" alt="Tic Tac Toe React Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/tic_tac_toe_react_img1.png" alt="Tic Tac Toe React Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -372,7 +381,7 @@
                     <div class="project-item project-item-large">
                         <strong>Pixel Art Maker (React Website)</strong> - A pixel art maker made with React. The website is hosted <a href="https://ericwang-pixelart.pages.dev" target="_blank">here</a>.
                         <div class="project-media-container">
-                            <img src="images/project images/pixel_art_maker_react_img1.png" alt="Pixel Art Maker React Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/pixel_art_maker_react_img1.png" alt="Pixel Art Maker React Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -380,7 +389,7 @@
                     <div class="project-item project-item-large">
                         <strong>multi-lang</strong> - a collection of "Hello, World!" programs in different programming languages.
                         <div class="project-media-container">
-                            <img src="images/project images/multi_lang_img1.png" alt="Multi-lang Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/multi_lang_img1.png" alt="Multi-lang Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -388,7 +397,7 @@
                     <div class="project-item project-item-large">
                         <strong>SQL Testing</strong> - A collection of SQL queries and database management hosted on a website: <a href="https://sql-testing.pages.dev" target="_blank">sql-testing.pages.dev</a>.
                         <div class="project-media-container">
-                            <img src="images/project images/sql_testing_img1.png" alt="SQL Testing Image 1" class="project-media" onclick="openModal(this.src)">
+                            <img src="images/project images/sql_testing_img1.png" alt="SQL Testing Image 1" class="project-media" onclick="openModal(event, this.src)">
                         </div>
                     </div>
                 </a>
@@ -418,7 +427,9 @@
     <script src="scripts/settings.js"></script>
     <script type="module" src="scripts/auth-status.js"></script>
     <script>
-        function openModal(src) {
+        function openModal(event, src) {
+            event.preventDefault();
+            event.stopPropagation();
             var modal = document.getElementById("myModal");
             var modalImg = document.getElementById("modalImg");
             modal.style.display = "block";
@@ -427,10 +438,53 @@
 
         function closeModal() {
             var modal = document.getElementById("myModal");
+            var modalImg = document.getElementById("modalImg");
             modal.style.display = "none";
+            // Reset zoom state when closing
+            modalImg.classList.remove('zoomed');
+            modalImg.style.transformOrigin = 'center center';
         }
 
         document.addEventListener('DOMContentLoaded', function () {
+            var modal = document.getElementById('myModal');
+            var modalImg = document.getElementById('modalImg');
+            var isMouseDown = false;
+
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal();
+                }
+            });
+
+            modalImg.addEventListener('mousedown', function(e) {
+                if (e.button === 0) { // only for left click
+                    isMouseDown = true;
+                    this.classList.add('zoomed');
+                }
+            });
+
+            modalImg.addEventListener('mouseup', function(e) {
+                if (e.button === 0) {
+                    isMouseDown = false;
+                    this.classList.remove('zoomed');
+                    this.style.transformOrigin = 'center center';
+                }
+            });
+
+            modalImg.addEventListener('mousemove', function(e) {
+                if (isMouseDown) {
+                    var rect = this.getBoundingClientRect();
+                    var x = e.clientX - rect.left;
+                    var y = e.clientY - rect.top;
+                    this.style.transformOrigin = `${x}px ${y}px`;
+                }
+            });
+
+            modalImg.addEventListener('mouseleave', function() {
+                isMouseDown = false;
+                this.classList.remove('zoomed');
+                this.style.transformOrigin = 'center center';
+            });
             var containers = document.querySelectorAll('.project-media-container');
             containers.forEach(function(container) {
                 var images = container.querySelectorAll('.project-media');
