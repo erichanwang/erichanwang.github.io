@@ -1,8 +1,15 @@
 import os
 
-def create_article(title, content):
+def create_article(title, content, in_files=True):
     file_name = f"{title.replace(' ', '_').lower()}.html"
-    with open(file_name, 'w') as f:
+    if in_files:
+        if not os.path.exists('python/files'):
+            os.makedirs('python/files')
+        file_path = os.path.join('python/files', file_name)
+    else:
+        file_path = file_name
+
+    with open(file_path, 'w') as f:
         f.write(f"""
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +30,8 @@ def create_article(title, content):
 """)
 
 if __name__ == "__main__":
-    article_title = input("Enter article title: ")
-    article_content = input("Enter article content: ")
-    create_article(article_title, article_content)
+    article_title = input("Enter file name: ")
+    article_content = input("Enter file content: ")
+    save_in_files = input("Save in python/files? (y/n): ").lower() == ('y' or '')
+    create_article(article_title, article_content, save_in_files)
     print(f"Article '{article_title}' created successfully!")
