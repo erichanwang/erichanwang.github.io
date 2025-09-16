@@ -23,23 +23,7 @@ async function initializeGapiClient() {
 }
 
 function gisLoaded() {
-  if (!CLIENT_ID) {
-    console.error('CLIENT_ID is not set.');
-    return;
-  }
-  tokenClient = google.accounts.oauth2.initTokenClient({
-    client_id: CLIENT_ID,
-    scope: 'https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/calendar.events',
-    callback: '', // defined later
-  });
   gisInited = true;
-  maybeEnableButtons();
-}
-
-function maybeEnableButtons() {
-  if (gapiInited && gisInited) {
-    document.getElementById('authorize-button').style.display = 'block';
-  }
 }
 
 function setClientCredentials(clientId, apiKey) {
@@ -48,33 +32,18 @@ function setClientCredentials(clientId, apiKey) {
   if (gapiInited) {
     gapi.client.setApiKey(API_KEY);
   }
-  if (gisInited) {
-    tokenClient = google.accounts.oauth2.initTokenClient({
-      client_id: CLIENT_ID,
-      scope: 'https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/calendar.events',
-      callback: '', // defined later
-    });
-  }
 }
 
 // Authenticate user
 function handleAuthClick() {
-  tokenClient.callback = async (resp) => {
-    if (resp.error !== undefined) {
-      console.error('Login error:', resp.error);
-      alert('Login failed: ' + resp.error);
-      return;
-    }
-    document.getElementById('signout-button').style.display = 'block';
-    document.getElementById('authorize-button').style.display = 'none';
-    await listUpcomingEvents();
-  };
-
-  if (gapi.client.getToken() === null) {
-    tokenClient.requestAccessToken({prompt: 'consent'});
-  } else {
-    tokenClient.requestAccessToken({prompt: ''});
+  if (!CLIENT_ID) {
+    alert('Client ID is not set. Please call setClientCredentials(clientId, apiKey) first.');
+    return;
   }
+  const redirectUri = window.location.origin + window.location.pathname;
+  const scope = 'https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/calendar.events';
+  const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scope)}&response_type=token&access_type=offline&prompt=consent`;
+  window.location.href = authUrl;
 }
 
 function handleSignoutClick() {
@@ -202,6 +171,32 @@ async function addEvent(title, date) {
 document.getElementById('authorize-button').onclick = handleAuthClick;
 document.getElementById('signout-button').onclick = handleSignoutClick;
 document.getElementById('login-button').onclick = handleAuthClick;
+
+// Check for access token in URL hash on page load
+function checkForToken() {
+  const hash = window.location.hash;
+  if (hash.includes('access_token=')) {
+    const params = new URLSearchParams(hash.substring(1));
+    const accessToken = params.get('access_token');
+    const expiresIn = params.get('expires_in');
+    if (accessToken) {
+      gapi.client.setToken({
+        access_token: accessToken,
+        expires_in: expiresIn,
+        token_type: 'Bearer'
+      });
+      // Clear the hash
+      window.history.replaceState(null, null, window.location.pathname);
+      // Show sign out button and load events
+      document.getElementById('signout-button').style.display = 'block';
+      document.getElementById('authorize-button').style.display = 'none';
+      listUpcomingEvents();
+    }
+  }
+}
+
+// Call checkForToken on page load
+window.addEventListener('load', checkForToken);
 
 // Expose setClientCredentials to global scope for dynamic setting
 window.setClientCredentials = setClientCredentials;
