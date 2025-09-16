@@ -126,6 +126,9 @@
                         <strong>Rubik's Cube Simulation</strong> - 3d simulation of a Rubik's cube in Python.
                         <div class="project-media-container">
                             <img src="images/project images/rubiks_cube_simulation_img1.png" alt="Rubik's Cube Simulation Image 1" class="project-media" onclick="openModal(event, this.src)">
+                            <img src="images/project images/rubiks_cube_simulation_img2.png" alt="Rubik's Cube Simulation Image 2" class="project-media" onclick="openModal(event, this.src)">
+                            <img src="images/project images/rubiks_cube_simulation_img3.png" alt="Rubik's Cube Simulation Image 3" class="project-media" onclick="openModal(event, this.src)">
+                            <video src="images/project images/rubiks_cube_simulation_video1.mp4" alt="Rubik's Cube Simulation Video 1" class="project-media" controls onclick="openModal(event, this.src, 'video')"></video>
                         </div>
                     </div>
                 </a>
@@ -420,6 +423,7 @@
     <div id="myModal" class="modal">
         <span class="close" onclick="closeModal()">&times;</span>
         <img class="modal-content" id="modalImg">
+        <video class="modal-content" id="modalVideo" controls style="display: none;"></video>
     </div>
 
     <script src="scripts/nav.js"></script>
@@ -427,22 +431,34 @@
     <script src="scripts/settings.js"></script>
     <script type="module" src="scripts/auth-status.js"></script>
     <script>
-        function openModal(event, src) {
+        function openModal(event, src, type) {
             event.preventDefault();
             event.stopPropagation();
             var modal = document.getElementById("myModal");
             var modalImg = document.getElementById("modalImg");
+            var modalVideo = document.getElementById("modalVideo");
             modal.style.display = "block";
-            modalImg.src = src;
+            if (type === 'video') {
+                modalImg.style.display = 'none';
+                modalVideo.style.display = 'block';
+                modalVideo.src = src;
+            } else {
+                modalImg.style.display = 'block';
+                modalVideo.style.display = 'none';
+                modalImg.src = src;
+            }
         }
 
         function closeModal() {
             var modal = document.getElementById("myModal");
             var modalImg = document.getElementById("modalImg");
+            var modalVideo = document.getElementById("modalVideo");
             modal.style.display = "none";
             // Reset zoom state when closing
             modalImg.classList.remove('zoomed');
             modalImg.style.transformOrigin = 'center center';
+            // Pause video if playing
+            modalVideo.pause();
         }
 
         document.addEventListener('DOMContentLoaded', function () {

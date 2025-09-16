@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eric Wang - Calendar</title>
+  <link rel="icon" type="image/png" href="images/icon.png" />
+  <link id="theme-style" rel="stylesheet" href="styles/style.css" />
+  <link rel="stylesheet" href="styles/settings.css" />
+  <!-- FullCalendar CSS -->
+  <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css' rel='stylesheet' />
+</head>
+<body>
+<header>
+  <h1>Eric Wang</h1>
+  <p id="version-display">Version 2.0.0</p>
+  <p id="last-updated">Last updated 2025-07-31</p>
+  <nav>
+    <ul>
+      <li><a href="calendar.html" class="nav-button">Calendar</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section id="calendar-section">
+  <h2>Calendar</h2>
+  <p>Track your dates and sync with Google Calendar.</p>
+  <div id="calendar"></div>
+  <div id="event-details-container" style="margin-top: 20px;"></div>
+  <button id="login-button">Login with Google</button>
+  <button id="authorize-button" style="display: none;">Authorize Google Calendar</button>
+  <button id="signout-button" style="display: none;">Sign Out</button>
+</section>
+
+<footer>
+  <p>© 2025 Eric Wang. All rights reserved.</p>
+</footer>
+
+<script src="scripts/nav.js"></script>
+<script src="scripts/settings.js"></script>
+<!-- Google API -->
+<script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
+<script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
+<!-- FullCalendar JS -->
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+<script src="scripts/calendar.js"></script>
+</body>
+</html>
