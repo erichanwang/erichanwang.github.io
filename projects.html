@@ -70,6 +70,22 @@
             text-decoration: none;
             color: inherit;
         }
+        .project-links {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+            padding: 8px;
+            background-color: #cccccc;
+            border-radius: 3px;
+        }
+        .project-links a {
+            text-decoration: none;
+            color: #0056b3;
+            font-weight: bold;
+        }
+        .project-links a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -236,6 +252,13 @@
                         </div>
                     </div>
                 </a>
+                <a href="https://github.com/erichanwang/video-compressor" target="_blank" class="project-link">
+                    <div class="project-item project-item-large">
+                        <strong>Video Compressor</strong> - Python script to compress MP4 video files using ffmpeg.
+                        <div class="project-media-container">
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
         <div class="award-category">
@@ -288,7 +311,7 @@
             </div>
             <h4>2024</h4>
             <div class="award-list">
-                <a href="https://github.com/EricWang03/CalculatorProject" target="_blank" class="project-link">
+                <a href="https://github.com/EricWang03/Calculator-Project" target="_blank" class="project-link">
                     <div class="project-item project-item-large">
                         <strong>Calculator</strong> - Java GUI Calculator.
                         <div class="project-media-container">
@@ -372,22 +395,6 @@
                         </div>
                     </div>
                 </a>
-                <a href="https://github.com/erichanwang/React-Stuff" target="_blank" class="project-link">
-                    <div class="project-item project-item-large">
-                        <strong>Tic Tac Toe (React Website)</strong> - Tic Tac Toe game made with React. The website is hosted <a href="https://react-stuff.pages.dev" target="_blank">here</a>.
-                        <div class="project-media-container">
-                            <img src="images/project images/tic_tac_toe_react_img1.png" alt="Tic Tac Toe React Image 1" class="project-media" onclick="openModal(event, this.src)">
-                        </div>
-                    </div>
-                </a>
-                <a href="https://github.com/erichanwang/Pixel-Art-Maker" target="_blank" class="project-link">
-                    <div class="project-item project-item-large">
-                        <strong>Pixel Art Maker (React Website)</strong> - A pixel art maker made with React. The website is hosted <a href="https://ericwang-pixelart.pages.dev" target="_blank">here</a>.
-                        <div class="project-media-container">
-                            <img src="images/project images/pixel_art_maker_react_img1.png" alt="Pixel Art Maker React Image 1" class="project-media" onclick="openModal(event, this.src)">
-                        </div>
-                    </div>
-                </a>
                 <a href="https://github.com/erichanwang/multi-lang" target="_blank" class="project-link">
                     <div class="project-item project-item-large">
                         <strong>multi-lang</strong> - a collection of "Hello, World!" programs in different programming languages.
@@ -396,14 +403,69 @@
                         </div>
                     </div>
                 </a>
-                <a href="https://github.com/erichanwang/sql-testing" target="_blank" class="project-link">
-                    <div class="project-item project-item-large">
-                        <strong>SQL Testing</strong> - A collection of SQL queries and database management hosted on a website: <a href="https://sql-testing.pages.dev" target="_blank">sql-testing.pages.dev</a>.
-                        <div class="project-media-container">
-                            <img src="images/project images/sql_testing_img1.png" alt="SQL Testing Image 1" class="project-media" onclick="openModal(event, this.src)">
-                        </div>
+            </div>
+        </div>
+        <div class="award-category">
+            <h3>Websites</h3>
+            <h4>2025</h4>
+            <div class="award-list">
+                <div class="project-item project-item-large">
+                    <strong>Kmax</strong> - potassium database with fast Trie-based searching and dynamic webpage.
+                    <div class="project-media-container">
                     </div>
-                </a>
+                    <div class="project-links">
+                        <a href="https://github.com/erichanwang/k-maxxing" target="_blank">Github repo</a>
+                        <a href="https://kmax.pages.dev" target="_blank">Website</a>
+                    </div>
+                </div>
+                <div class="project-item project-item-large">
+                    <strong>ODE solver</strong> - ODE solver using python flask.
+                    <div class="project-media-container">
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/erichanwang/diff-eq-solver" target="_blank">Github repo</a>
+                        <a href="https://ericwang-odesolver.onrender.com" target="_blank">Website</a>
+                    </div>
+                </div>
+                <div class="project-item project-item-large">
+                    <strong>Infinite wordle</strong> - wordle game but infinite, with statistics and hints.
+                    <div class="project-media-container">
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/erichanwang/infinite-wordle" target="_blank">Github repo</a>
+                        <a href="https://infwordle.pages.dev" target="_blank">Website</a>
+                    </div>
+                </div>
+                <div class="project-item project-item-large">
+                    <strong>Tic Tac Toe (React Website)</strong> - Tic Tac Toe game made with React.
+                    <div class="project-media-container">
+                        <img src="images/project images/tic_tac_toe_react_img1.png" alt="Tic Tac Toe React Image 1" class="project-media" onclick="openModal(event, this.src)">
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/erichanwang/React-Stuff" target="_blank">Github repo</a>
+                        <a href="https://react-stuff.pages.dev" target="_blank">Website</a>
+                    </div>
+                </div>
+                <div class="project-item project-item-large">
+                    <strong>Pixel Art Maker (React Website)</strong> - A pixel art maker made with React.
+                    <div class="project-media-container">
+                        <img src="images/project images/pixel_art_maker_react_img1.png" alt="Pixel Art Maker React Image 1" class="project-media" onclick="openModal(event, this.src)">
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/erichanwang/Pixel-Art-Maker" target="_blank">Github repo</a>
+                        <a href="https://ericwang-pixelart.pages.dev" target="_blank">Website</a>
+                    </div>
+                </div>
+                <div class="project-item project-item-large">
+                    <strong>SQL Testing</strong> - A collection of SQL queries and database management.
+                    <div class="project-media-container">
+                        <img src="images/project images/sql_testing_img1.png" alt="SQL Testing Image 1" class="project-media" onclick="openModal(event, this.src)">
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/erichanwang/sql-testing" target="_blank">Github repo</a>
+                        <a href="https://sql-testing.pages.dev" target="_blank">Website</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
