@@ -1,7 +1,223 @@
 {
   "version": "2.3.3",
   "lastUpdated": "2025-09-28",
-  "title": "Eric Han Wang's Portfolio",
   "icon": "images/icon.png",
-  "backgroundImage": "images/space_bkg.png"
+  "pages": {
+    "index.html": {
+      "title": "Eric Han Wang's Portfolio - Home",
+      "og": {
+        "title": "Eric Han Wang's Portfolio",
+        "image": "images/space_bkg.png",
+        "description": "Welcome to Eric Han Wang's portfolio website, showcasing projects, skills, and achievements."
+      }
+    },
+    "projects.html": {
+      "title": "Eric Han Wang's Portfolio - Projects",
+      "og": {
+        "title": "Projects - Eric Han Wang's Portfolio",
+        "image": "images/space_bkg.png",
+        "description": "Explore the innovative projects developed by Eric Han Wang."
+      }
+    },
+    "awards.html": {
+      "title": "Eric Han Wang's Portfolio - Awards & Experience",
+      "og": {
+        "title": "Awards & Experience - Eric Han Wang's Portfolio",
+        "image": "images/space_bkg.png",
+        "description": "Discover the awards, competitions, and experiences of Eric Han Wang."
+      }
+    },
+    "skills.html": {
+      "title": "Eric Han Wang's Portfolio - Skills",
+      "og": {
+        "title": "Skills - Eric Han Wang's Portfolio",
+        "image": "images/space_bkg.png",
+        "description": "View the technical skills and certifications of Eric Han Wang."
+      }
+    },
+    "certifications.html": {
+      "title": "Eric Han Wang's Portfolio - Certifications",
+      "og": {
+        "title": "Certifications - Eric Han Wang's Portfolio",
+        "image": "images/space_bkg.png",
+        "description": "Check out the certifications earned by Eric Han Wang."
+      }
+    },
+    "education.html": {
+      "title": "Eric Han Wang's Portfolio - Education",
+      "og": {
+        "title": "Education - Eric Han Wang's Portfolio",
+        "image": "images/space_bkg.png",
+        "description": "Learn about the educational background of Eric Han Wang."
+      }
+    },
+    "404.html": {
+      "title": "Eric Han Wang's Portfolio - Page Not Found",
+      "og": {
+        "title": "Page Not Found - Eric Han Wang's Portfolio",
+        "image": "images/space_bkg.png",
+        "description": "The page you're looking for does not exist on Eric Han Wang's portfolio."
+      }
+    },
+    "admin.html": {
+      "title": "Eric Han Wang's Portfolio - Admin",
+      "og": {
+        "title": "Admin - Eric Han Wang's Portfolio",
+        "image": "images/space_bkg.png",
+        "description": "Admin dashboard for Eric Han Wang's portfolio."
+      }
+    },
+    "calendar.html": {
+      "title": "Eric Han Wang's Portfolio - Calendar",
+      "og": {
+        "title": "Calendar - Eric Han Wang's Portfolio",
+        "image": "images/space_bkg.png",
+        "description": "Calendar feature on Eric Han Wang's portfolio."
+      }
+    },
+    "chat.html": {
+      "title": "Eric Han Wang's Portfolio - Chat",
+      "og": {
+        "title": "Chat - Eric Han Wang's Portfolio",
+        "image": "images/space_bkg.png",
+        "description": "Chat functionality on Eric Han Wang's portfolio."
+      }
+    },
+    "database.html": {
+      "title": "Eric Han Wang's Portfolio - Database",
+      "og": {
+        "title": "Database - Eric Han Wang's Portfolio",
+        "image": "images/space_bkg.png",
+        "description": "Database page on Eric Han Wang's portfolio."
+      }
+    },
+    "games.html": {
+      "title": "Eric Han Wang's Portfolio - Games",
+      "og": {
+        "title": "Games - Eric Han Wang's Portfolio",
+        "image": "images/space_bkg.png",
+        "description": "Games section on Eric Han Wang's portfolio."
+      }
+    },
+    "global-chat.html": {
+      "title": "Eric Han Wang's Portfolio - Global Chat",
+      "og": {
+        "title": "Global Chat - Eric Han Wang's Portfolio",
+        "image": "images/space_bkg.png",
+        "description": "Global chat on Eric Han Wang's portfolio."
+      }
+    },
+    "guess.html": {
+      "title": "Eric Han Wang's Portfolio - Guess Game",
+      "og": {
+        "title": "Guess Game - Eric Han Wang's Portfolio",
+        "image": "images/space_bkg.png",
+        "description": "Play the guess game on Eric Han Wang's portfolio."
+      }
+    },
+    "login.html": {
+      "title": "Eric Han Wang's Portfolio - Login",
+      "og": {
+        "title": "Login - Eric Han Wang's Portfolio",
+        "image": "images/space_bkg.png",
+        "description": "Login to Eric Han Wang's portfolio."
+      }
+    },
+    "music.html": {
+      "title": "Eric Han Wang's Portfolio - Music",
+      "og": {
+        "title": "Music - Eric Han Wang's Portfolio",
+        "image": "images/space_bkg.png",
+        "description": "Music section on Eric Han Wang's portfolio."
+      }
+    },
+    "notes.html": {
+      "title": "Eric Han Wang's Portfolio - Notes",
+      "og": {
+        "title": "Notes - Eric Han Wang's Portfolio",
+        "image": "images/space_bkg.png",
+        "description": "Notes feature on Eric Han Wang's portfolio."
+      }
+    },
+    "orderinggame.html": {
+      "title": "Eric Han Wang's Portfolio - Ordering Game",
+      "og": {
+        "title": "Ordering Game - Eric Han Wang's Portfolio",
+        "image": "images/space_bkg.png",
+        "description": "Play the ordering game on Eric Han Wang's portfolio."
+      }
+    },
+    "page0.html": {
+      "title": "Eric Han Wang's Portfolio - Page 0",
+      "og": {
+        "title": "Page 0 - Eric Han Wang's Portfolio",
+        "image": "images/space_bkg.png",
+        "description": "Page 0 on Eric Han Wang's portfolio."
+      }
+    },
+    "plinko.html": {
+      "title": "Eric Han Wang's Portfolio - Plinko",
+      "og": {
+        "title": "Plinko - Eric Han Wang's Portfolio",
+        "image": "images/space_bkg.png",
+        "description": "Play Plinko on Eric Han Wang's portfolio."
+      }
+    },
+    "profile.html": {
+      "title": "Eric Han Wang's Portfolio - Profile",
+      "og": {
+        "title": "Profile - Eric Han Wang's Portfolio",
+        "image": "images/space_bkg.png",
+        "description": "User profile on Eric Han Wang's portfolio."
+      }
+    },
+    "reaction-speed-test.html": {
+      "title": "Eric Han Wang's Portfolio - Reaction Speed Test",
+      "og": {
+        "title": "Reaction Speed Test - Eric Han Wang's Portfolio",
+        "image": "images/space_bkg.png",
+        "description": "Test your reaction speed on Eric Han Wang's portfolio."
+      }
+    },
+    "signup.html": {
+      "title": "Eric Han Wang's Portfolio - Signup",
+      "og": {
+        "title": "Signup - Eric Han Wang's Portfolio",
+        "image": "images/space_bkg.png",
+        "description": "Sign up for Eric Han Wang's portfolio."
+      }
+    },
+    "snake.html": {
+      "title": "Eric Han Wang's Portfolio - Snake",
+      "og": {
+        "title": "Snake - Eric Han Wang's Portfolio",
+        "image": "images/space_bkg.png",
+        "description": "Play Snake on Eric Han Wang's portfolio."
+      }
+    },
+    "testfile.html": {
+      "title": "Eric Han Wang's Portfolio - Test File",
+      "og": {
+        "title": "Test File - Eric Han Wang's Portfolio",
+        "image": "images/space_bkg.png",
+        "description": "Test file on Eric Han Wang's portfolio."
+      }
+    },
+    "tetris.html": {
+      "title": "Eric Han Wang's Portfolio - Tetris",
+      "og": {
+        "title": "Tetris - Eric Han Wang's Portfolio",
+        "image": "images/space_bkg.png",
+        "description": "Play Tetris on Eric Han Wang's portfolio."
+      }
+    },
+    "time.html": {
+      "title": "Eric Han Wang's Portfolio - Time",
+      "og": {
+        "title": "Time - Eric Han Wang's Portfolio",
+        "image": "images/space_bkg.png",
+        "description": "Time feature on Eric Han Wang's portfolio."
+      }
+    }
+  }
 }
