@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getDatabase, ref, push, onValue, serverTimestamp, get } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+import { getDatabase, ref, push, onValue, serverTimestamp, get, query, orderByChild } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 import { firebaseConfig } from './firebase-config.js';
 
 // Initialize Firebase
@@ -11,6 +11,11 @@ const db = getDatabase(app);
 const messagesDiv = document.getElementById('messages');
 const messageInput = document.getElementById('message-input');
 const sendButton = document.getElementById('send-button');
+
+// Create a single timestamp tooltip
+const timestampTooltip = document.createElement('div');
+timestampTooltip.className = 'timestamp-tooltip';
+document.body.appendChild(timestampTooltip);
 
 let currentUser = null;
 const messagesRef = ref(db, 'global-chat');
@@ -25,7 +30,8 @@ onAuthStateChanged(auth, user => {
 });
 
 function loadMessages() {
-    onValue(messagesRef, (snapshot) => {
+    const messagesQuery = query(messagesRef, orderByChild('timestamp'));
+    onValue(messagesQuery, (snapshot) => {
         messagesDiv.innerHTML = '';
         snapshot.forEach((childSnapshot) => {
             const message = childSnapshot.val();
@@ -59,6 +65,7 @@ function sendMessage() {
 
 async function displayMessage(message) {
     const messageElement = document.createElement('div');
+    messageElement.className = 'message';
     const senderUid = message.sender;
     let senderName = 'Unknown User';
     let userInfo = null;
@@ -78,9 +85,32 @@ async function displayMessage(message) {
     const senderSpan = document.createElement('span');
     senderSpan.className = 'sender-name';
     senderSpan.textContent = senderName;
+
     if (userInfo) {
-        const creationDate = userInfo.creationTime ? new Date(parseInt(userInfo.creationTime)).toLocaleDateString() : 'Unknown';
-        senderSpan.title = `Email: ${userInfo.email}\nAccount Created: ${creationDate}`;
+        const userInfoBox = document.createElement('div');
+        userInfoBox.className = 'user-info-box';
+        const creationDate = userInfo.creationTime ? new Date(parseInt(userInfo.creationTime)) : null;
+        
+        if (!creationDate || creationDate.toString() === 'Invalid Date') {
+            userInfoBox.innerHTML = `Email: ${userInfo.email}<br>Account Created: Beta Tester`;
+        } else {
+            userInfoBox.innerHTML = `Email: ${userInfo.email}<br>Account Created: ${creationDate.toLocaleDateString()}`;
+        }
+        
+        userInfoBox.style.display = 'none';
+        senderSpan.appendChild(userInfoBox);
+
+        senderSpan.addEventListener('mouseover', (e) => {
+            e.stopPropagation();
+            userInfoBox.style.display = 'block';
+        });
+        senderSpan.addEventListener('mouseout', () => {
+            userInfoBox.style.display = 'none';
+        });
+        senderSpan.addEventListener('mousemove', (e) => {
+            userInfoBox.style.left = `${e.pageX + 10}px`;
+            userInfoBox.style.top = `${e.pageY + 10}px`;
+        });
     }
 
     const textSpan = document.createElement('span');
@@ -90,8 +120,17 @@ async function displayMessage(message) {
     messageElement.appendChild(textSpan);
 
     if (message.timestamp) {
-        const timestamp = new Date(message.timestamp).toLocaleString();
-        messageElement.title = timestamp; // Tooltip on hover for timestamp
+        messageElement.addEventListener('mouseover', () => {
+            timestampTooltip.textContent = new Date(message.timestamp).toLocaleString();
+            timestampTooltip.style.display = 'block';
+        });
+        messageElement.addEventListener('mouseout', () => {
+            timestampTooltip.style.display = 'none';
+        });
+        messageElement.addEventListener('mousemove', (e) => {
+            timestampTooltip.style.left = `${e.pageX + 10}px`;
+            timestampTooltip.style.top = `${e.pageY + 10}px`;
+        });
     }
 
     messagesDiv.appendChild(messageElement);

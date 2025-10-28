@@ -61,6 +61,7 @@
 }
 
 .sender-name {
+    position: relative;
     display: inline-block;
     background-color: #2563eb;
     color: #fff;
@@ -73,4 +74,55 @@
 
 .sender-name:hover {
     background-color: #1e40af;
+}
+
+.message {
+    position: relative;
+    padding-right: 150px; /* Space for the timestamp */
+}
+
+.timestamp {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #999;
+    font-size: 0.6em;
+}
+
+.message:hover .timestamp {
+    display: inline;
+}
+
+.user-info-box {
+    display: none;
+    position: fixed;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1;
+    width: 250px;
+    color: #000;
+    pointer-events: none;
+}
+
+.sent {
+    text-align: right;
+}
+
+.received {
+    text-align: left;
+}
+
+.timestamp-tooltip {
+    display: none;
+    position: fixed;
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 3px;
+    z-index: 2;
+    pointer-events: none;
+    font-size: 0.8em;
 }

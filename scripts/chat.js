@@ -16,6 +16,11 @@ const messageInput = document.getElementById('message-input');
 const sendButton = document.getElementById('send-button');
 const chatWith = document.getElementById('chat-with');
 
+// Create a single timestamp tooltip
+const timestampTooltip = document.createElement('div');
+timestampTooltip.className = 'timestamp-tooltip';
+document.body.appendChild(timestampTooltip);
+
 let currentUser = null;
 let selectedUser = null;
 let messagesRef = null;
@@ -102,8 +107,9 @@ function selectUser(user) {
 
     const conversationId = getConversationId(currentUser.uid, selectedUser.uid);
     messagesRef = ref(db, `dms/${conversationId}`);
+    const messagesQuery = query(messagesRef, orderByChild('timestamp'));
 
-    onValue(messagesRef, (snapshot) => {
+    onValue(messagesQuery, (snapshot) => {
         messagesDiv.innerHTML = '';
         snapshot.forEach((childSnapshot) => {
             displayMessage(childSnapshot.val());
@@ -129,14 +135,17 @@ function sendMessage() {
 
 async function displayMessage(message) {
     const messageElement = document.createElement('div');
+    messageElement.className = 'message';
     const senderUid = message.sender;
     let senderName = 'Unknown User';
     let userInfo = null;
 
     if (senderUid === currentUser.uid) {
+        messageElement.classList.add('sent');
         senderName = 'You';
         userInfo = { email: currentUser.email, creationTime: currentUser.metadata.creationTime };
     } else {
+        messageElement.classList.add('received');
         const userSnapshot = await get(ref(db, `users/${senderUid}`));
         if (userSnapshot.exists()) {
             const userData = userSnapshot.val();
@@ -148,9 +157,31 @@ async function displayMessage(message) {
     const senderSpan = document.createElement('span');
     senderSpan.className = 'sender-name';
     senderSpan.textContent = senderName;
+
     if (userInfo) {
-        const creationDate = userInfo.creationTime ? new Date(parseInt(userInfo.creationTime)).toLocaleDateString() : 'Unknown';
-        senderSpan.title = `Email: ${userInfo.email}\nAccount Created: ${creationDate}`;
+        const userInfoBox = document.createElement('div');
+        userInfoBox.className = 'user-info-box';
+        const creationDate = userInfo.creationTime ? new Date(parseInt(userInfo.creationTime)) : null;
+        
+        if (!creationDate || creationDate.toString() === 'Invalid Date') {
+            userInfoBox.innerHTML = `Email: ${userInfo.email}<br>Account Created: Beta Tester`;
+        } else {
+            userInfoBox.innerHTML = `Email: ${userInfo.email}<br>Account Created: ${creationDate.toLocaleDateString()}`;
+        }
+        
+        userInfoBox.style.display = 'none';
+        senderSpan.appendChild(userInfoBox);
+
+        senderSpan.addEventListener('mouseover', (e) => {
+            userInfoBox.style.display = 'block';
+        });
+        senderSpan.addEventListener('mouseout', () => {
+            userInfoBox.style.display = 'none';
+        });
+        senderSpan.addEventListener('mousemove', (e) => {
+            userInfoBox.style.left = `${e.pageX + 10}px`;
+            userInfoBox.style.top = `${e.pageY + 10}px`;
+        });
     }
 
     const textSpan = document.createElement('span');
@@ -160,8 +191,17 @@ async function displayMessage(message) {
     messageElement.appendChild(textSpan);
 
     if (message.timestamp) {
-        const timestamp = new Date(message.timestamp).toLocaleString();
-        messageElement.title = timestamp; // Tooltip on hover for timestamp
+        messageElement.addEventListener('mouseover', () => {
+            timestampTooltip.textContent = new Date(message.timestamp).toLocaleString();
+            timestampTooltip.style.display = 'block';
+        });
+        messageElement.addEventListener('mouseout', () => {
+            timestampTooltip.style.display = 'none';
+        });
+        messageElement.addEventListener('mousemove', (e) => {
+            timestampTooltip.style.left = `${e.pageX + 10}px`;
+            timestampTooltip.style.top = `${e.pageY + 10}px`;
+        });
     }
 
     messagesDiv.appendChild(messageElement);
