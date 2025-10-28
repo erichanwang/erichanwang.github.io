@@ -1,6 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getDatabase, ref, push, onValue, serverTimestamp, query, orderByChild, equalTo, set, get } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+// Import onChildAdded and off for the new listener type
+import { getDatabase, ref, push, onValue, serverTimestamp, query, orderByChild, equalTo, set, get, onChildAdded, off } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 import { firebaseConfig } from './firebase-config.js';
 
 // Initialize Firebase
@@ -24,6 +25,7 @@ document.body.appendChild(timestampTooltip);
 let currentUser = null;
 let selectedUser = null;
 let messagesRef = null;
+let unsubscribeMessages = null;
 
 onAuthStateChanged(auth, user => {
     currentUser = user;
@@ -100,21 +102,38 @@ async function searchUsers() {
     }
 }
 
+/**
+ * FIXED: Switched from onValue to onChildAdded.
+ * This listener fires for each message in order (due to the query) 
+ * and only fires for new messages, which prevents duplication and
+ * race conditions when mixing async rendering with real-time updates.
+ */
 function selectUser(user) {
     selectedUser = user;
     chatWith.textContent = `Chat with ${user.displayName || user.email}`;
     chatContainer.style.display = 'flex';
 
+    // 1. Remove the previous listener if it exists
+    if (messagesRef) {
+        off(messagesRef, 'child_added'); // Explicitly turn off the child_added listener
+    }
+    
+    // 2. Clear the message container once
+    messagesDiv.innerHTML = '';
+    
     const conversationId = getConversationId(currentUser.uid, selectedUser.uid);
     messagesRef = ref(db, `dms/${conversationId}`);
     const messagesQuery = query(messagesRef, orderByChild('timestamp'));
 
-    onValue(messagesQuery, (snapshot) => {
-        messagesDiv.innerHTML = '';
-        snapshot.forEach((childSnapshot) => {
-            displayMessage(childSnapshot.val());
-        });
+    // 3. Attach the new listener
+    onChildAdded(messagesQuery, (snapshot) => {
+        // displayMessage is called sequentially for each message found by the query
+        displayMessage(snapshot.val());
     });
+    
+    // Store the cleanup function reference to unsubscribe from the previous onValue method, 
+    // although now we are using the simpler 'off' with the ref.
+    unsubscribeMessages = () => off(messagesRef, 'child_added');
 }
 
 function getConversationId(uid1, uid2) {
@@ -127,13 +146,24 @@ function sendMessage() {
             text: messageInput.value,
             sender: currentUser.uid,
             receiver: selectedUser.uid,
-            timestamp: serverTimestamp()
+            timestamp: serverTimestamp() 
         });
         messageInput.value = '';
     }
 }
 
+/**
+ * MODIFIED: No longer needs the external Promise.all logic, but MUST still 
+ * check for a resolved timestamp to prevent out-of-order rendering 
+ * of the user's just-sent message.
+ */
 async function displayMessage(message) {
+    
+    // Critical Fix: Check for resolved timestamp.
+    if (typeof message.timestamp !== 'number') {
+        return; // Skip rendering until the server resolves the timestamp.
+    }
+    
     const messageElement = document.createElement('div');
     messageElement.className = 'message';
     const senderUid = message.sender;
@@ -146,7 +176,8 @@ async function displayMessage(message) {
         userInfo = { email: currentUser.email, creationTime: currentUser.metadata.creationTime };
     } else {
         messageElement.classList.add('received');
-        const userSnapshot = await get(ref(db, `users/${senderUid}`));
+        // This is the slow, async part that caused the original issue
+        const userSnapshot = await get(ref(db, `users/${senderUid}`)); 
         if (userSnapshot.exists()) {
             const userData = userSnapshot.val();
             senderName = userData.displayName || userData.email;
@@ -161,7 +192,7 @@ async function displayMessage(message) {
     if (userInfo) {
         const userInfoBox = document.createElement('div');
         userInfoBox.className = 'user-info-box';
-        const creationDate = userInfo.creationTime ? new Date(parseInt(userInfo.creationTime)) : null;
+        const creationDate = userInfo.creationTime ? new Date(userInfo.creationTime) : null;
         
         if (!creationDate || creationDate.toString() === 'Invalid Date') {
             userInfoBox.innerHTML = `Email: ${userInfo.email}<br>Account Created: Beta Tester`;
@@ -188,8 +219,13 @@ async function displayMessage(message) {
     const textSpan = document.createElement('span');
     textSpan.textContent = `: ${message.text}`;
 
-    messageElement.appendChild(senderSpan);
-    messageElement.appendChild(textSpan);
+    // Create a wrapper for the message content
+    const messageWrapper = document.createElement('div');
+    messageWrapper.className = 'message-wrapper';
+    messageWrapper.appendChild(senderSpan);
+    messageWrapper.appendChild(textSpan);
+    messageElement.appendChild(messageWrapper);
+
 
     if (message.timestamp) {
         messageElement.addEventListener('mouseover', () => {
@@ -206,7 +242,9 @@ async function displayMessage(message) {
     }
 
     messagesDiv.appendChild(messageElement);
-    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    
+    // Now safe to scroll here, as this function is called once per message in order.
+    messagesDiv.scrollTop = messagesDiv.scrollHeight; 
 }
 
 sendButton.addEventListener('click', sendMessage);

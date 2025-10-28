@@ -45,6 +45,8 @@
     border-bottom: 1px solid #ccc;
     margin-bottom: 10px;
     padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 #input-container {
@@ -61,37 +63,40 @@
 }
 
 .sender-name {
-    position: relative;
-    display: inline-block;
-    background-color: #2563eb;
-    color: #fff;
-    padding: 2px 6px;
-    border-radius: 4px;
     font-weight: bold;
     cursor: pointer;
     margin-right: 5px;
 }
 
-.sender-name:hover {
-    background-color: #1e40af;
-}
-
 .message {
-    position: relative;
-    padding-right: 150px; /* Space for the timestamp */
+    display: flex;
+    margin: 5px 0;
 }
 
-.timestamp {
-    display: none;
-    position: absolute;
-    right: 0;
-    top: 0;
-    color: #999;
-    font-size: 0.6em;
+.message-wrapper {
+    padding: 8px 12px;
+    border-radius: 18px;
+    max-width: 70%;
 }
 
-.message:hover .timestamp {
-    display: inline;
+.sent {
+    justify-content: flex-end;
+}
+
+.sent .message-wrapper {
+    background-color: #dcf8c6;
+}
+
+.received {
+    justify-content: flex-start;
+}
+
+.received .message-wrapper {
+    background-color: #fff;
+}
+
+.received .sender-name {
+    color: #60a5fa; /* Light blue */
 }
 
 .user-info-box {
@@ -105,14 +110,6 @@
     width: 250px;
     color: #000;
     pointer-events: none;
-}
-
-.sent {
-    text-align: right;
-}
-
-.received {
-    text-align: left;
 }
 
 .timestamp-tooltip {

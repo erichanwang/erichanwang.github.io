@@ -71,9 +71,11 @@ async function displayMessage(message) {
     let userInfo = null;
 
     if (senderUid === currentUser.uid) {
+        messageElement.classList.add('sent');
         senderName = 'You';
         userInfo = { email: currentUser.email, creationTime: currentUser.metadata.creationTime };
     } else {
+        messageElement.classList.add('received');
         const userSnapshot = await get(ref(db, `users/${senderUid}`));
         if (userSnapshot.exists()) {
             const userData = userSnapshot.val();
@@ -116,8 +118,13 @@ async function displayMessage(message) {
     const textSpan = document.createElement('span');
     textSpan.textContent = `: ${message.text}`;
 
-    messageElement.appendChild(senderSpan);
-    messageElement.appendChild(textSpan);
+    // Create a wrapper for the message content
+    const messageWrapper = document.createElement('div');
+    messageWrapper.className = 'message-wrapper';
+    messageWrapper.appendChild(senderSpan);
+    messageWrapper.appendChild(textSpan);
+    messageElement.appendChild(messageWrapper);
+
 
     if (message.timestamp) {
         messageElement.addEventListener('mouseover', () => {
