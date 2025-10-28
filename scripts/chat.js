@@ -173,6 +173,7 @@ async function displayMessage(message) {
         senderSpan.appendChild(userInfoBox);
 
         senderSpan.addEventListener('mouseover', (e) => {
+            e.stopPropagation();
             userInfoBox.style.display = 'block';
         });
         senderSpan.addEventListener('mouseout', () => {
