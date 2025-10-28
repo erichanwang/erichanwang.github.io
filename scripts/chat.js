@@ -1,7 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-// Import onChildAdded and off for the new listener type
-import { getDatabase, ref, push, onValue, serverTimestamp, query, orderByChild, equalTo, set, get, onChildAdded, off } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+import { getDatabase, ref, push, onValue, serverTimestamp, query, orderByChild, set, get, onChildAdded, off } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 import { firebaseConfig } from './firebase-config.js';
 
 // Initialize Firebase
@@ -25,7 +24,7 @@ document.body.appendChild(timestampTooltip);
 let currentUser = null;
 let selectedUser = null;
 let messagesRef = null;
-let unsubscribeMessages = null;
+let userCache = new Map(); // FIX: Cache to store user data
 
 onAuthStateChanged(auth, user => {
     currentUser = user;
@@ -44,17 +43,29 @@ onAuthStateChanged(auth, user => {
                 });
             }
         });
-        loadAllUsers();
+        // Load all users to populate the cache *before* any chat is selected
+        loadAllUsers(); 
     }
 });
 
+// FIX: This function now also populates the userCache
 async function loadAllUsers() {
     const usersRef = ref(db, 'users');
     const snapshot = await get(usersRef);
     usersList.innerHTML = '';
+    userCache.clear(); // Clear cache on reload
+
     if (snapshot.exists()) {
         snapshot.forEach((childSnapshot) => {
             const user = childSnapshot.val();
+            // Populate the cache
+            userCache.set(user.uid, {
+                displayName: user.displayName || user.email,
+                email: user.email,
+                creationTime: user.creationTime
+            });
+
+            // Populate the user list
             if (user.uid !== currentUser.uid) {
                 const userElement = document.createElement('div');
                 userElement.textContent = user.displayName || user.email;
@@ -71,10 +82,12 @@ userSearchInput.addEventListener('input', searchUsers);
 
 async function searchUsers() {
     const searchText = userSearchInput.value.trim().toLowerCase();
-    const usersRef = ref(db, 'users');
+    // This function can also benefit from the cache, but we'll keep it simple
+    // and re-query the database for now.
+    const usersRef = ref(db, 'users'); 
 
     if (searchText === '') {
-        loadAllUsers();
+        loadAllUsers(); // Reloads all users and refills cache
         return;
     }
 
@@ -102,38 +115,28 @@ async function searchUsers() {
     }
 }
 
-/**
- * FIXED: Switched from onValue to onChildAdded.
- * This listener fires for each message in order (due to the query) 
- * and only fires for new messages, which prevents duplication and
- * race conditions when mixing async rendering with real-time updates.
- */
 function selectUser(user) {
     selectedUser = user;
     chatWith.textContent = `Chat with ${user.displayName || user.email}`;
     chatContainer.style.display = 'flex';
 
-    // 1. Remove the previous listener if it exists
     if (messagesRef) {
-        off(messagesRef, 'child_added'); // Explicitly turn off the child_added listener
+        off(messagesRef); 
     }
     
-    // 2. Clear the message container once
-    messagesDiv.innerHTML = '';
+    // Use synchronous DOM removal
+    while (messagesDiv.firstChild) {
+        messagesDiv.removeChild(messagesDiv.firstChild);
+    }
     
     const conversationId = getConversationId(currentUser.uid, selectedUser.uid);
     messagesRef = ref(db, `dms/${conversationId}`);
     const messagesQuery = query(messagesRef, orderByChild('timestamp'));
 
-    // 3. Attach the new listener
     onChildAdded(messagesQuery, (snapshot) => {
-        // displayMessage is called sequentially for each message found by the query
+        // This will now call the synchronous displayMessage
         displayMessage(snapshot.val());
     });
-    
-    // Store the cleanup function reference to unsubscribe from the previous onValue method, 
-    // although now we are using the simpler 'off' with the ref.
-    unsubscribeMessages = () => off(messagesRef, 'child_added');
 }
 
 function getConversationId(uid1, uid2) {
@@ -152,16 +155,11 @@ function sendMessage() {
     }
 }
 
-/**
- * MODIFIED: No longer needs the external Promise.all logic, but MUST still 
- * check for a resolved timestamp to prevent out-of-order rendering 
- * of the user's just-sent message.
- */
-async function displayMessage(message) {
+// FIX: This function is no longer async and uses the userCache
+function displayMessage(message) {
     
-    // Critical Fix: Check for resolved timestamp.
-    if (typeof message.timestamp !== 'number') {
-        return; // Skip rendering until the server resolves the timestamp.
+    if (!currentUser || typeof message.timestamp !== 'number') {
+        return; 
     }
     
     const messageElement = document.createElement('div');
@@ -171,17 +169,22 @@ async function displayMessage(message) {
     let userInfo = null;
 
     if (senderUid === currentUser.uid) {
+        // This branch is synchronous (fast)
         messageElement.classList.add('sent');
         senderName = 'You';
         userInfo = { email: currentUser.email, creationTime: currentUser.metadata.creationTime };
     } else {
+        // FIX: This branch is now also synchronous (fast)
         messageElement.classList.add('received');
-        // This is the slow, async part that caused the original issue
-        const userSnapshot = await get(ref(db, `users/${senderUid}`)); 
-        if (userSnapshot.exists()) {
-            const userData = userSnapshot.val();
+        
+        if (userCache.has(senderUid)) {
+            const userData = userCache.get(senderUid);
             senderName = userData.displayName || userData.email;
             userInfo = { email: userData.email, creationTime: userData.creationTime };
+        } else {
+            // Fallback for a user not in the cache (e.g., deleted user)
+            senderName = 'Unknown User';
+            userInfo = { email: 'Not found', creationTime: null };
         }
     }
 
@@ -219,7 +222,6 @@ async function displayMessage(message) {
     const textSpan = document.createElement('span');
     textSpan.textContent = `: ${message.text}`;
 
-    // Create a wrapper for the message content
     const messageWrapper = document.createElement('div');
     messageWrapper.className = 'message-wrapper';
     messageWrapper.appendChild(senderSpan);
@@ -241,9 +243,9 @@ async function displayMessage(message) {
         });
     }
 
+    // Both 'sent' and 'received' messages are now appended in the exact
+    // order they arrive from onChildAdded, fixing the race condition.
     messagesDiv.appendChild(messageElement);
-    
-    // Now safe to scroll here, as this function is called once per message in order.
     messagesDiv.scrollTop = messagesDiv.scrollHeight; 
 }
 

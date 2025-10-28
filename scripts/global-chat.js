@@ -1,6 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getDatabase, ref, push, onValue, serverTimestamp, get, query, orderByChild } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+// Import 'off' for listener cleanup
+import { getDatabase, ref, push, onValue, serverTimestamp, get, query, orderByChild, off } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 import { firebaseConfig } from './firebase-config.js';
 
 // Initialize Firebase
@@ -19,19 +20,58 @@ document.body.appendChild(timestampTooltip);
 
 let currentUser = null;
 const messagesRef = ref(db, 'global-chat');
+let messagesListener = null; // To hold the listener function
+let userCache = new Map(); // FIX: Cache for synchronous user data lookups
 
-onAuthStateChanged(auth, user => {
+// FIX: Made the auth listener async to await the user cache
+onAuthStateChanged(auth, async (user) => {
     currentUser = user;
     if (!user) {
         window.location.href = 'login.html';
+        // If user signs out, turn off the database listener
+        if (messagesListener) {
+            off(messagesRef, 'value', messagesListener);
+        }
     } else {
+        // FIX: Wait for the user cache to be populated *before* loading messages
+        await loadUserCache();
         loadMessages();
     }
 });
 
+/**
+ * FIX: New function to fetch all user data and store it in the cache
+ * before any messages are rendered.
+ */
+async function loadUserCache() {
+    const usersRef = ref(db, 'users');
+    const snapshot = await get(usersRef);
+    userCache.clear();
+    if (snapshot.exists()) {
+        snapshot.forEach((childSnapshot) => {
+            const user = childSnapshot.val();
+            userCache.set(user.uid, {
+                displayName: user.displayName || user.email,
+                email: user.email,
+                creationTime: user.creationTime
+            });
+        });
+    }
+    // Also add the current user to the cache
+    if (currentUser && !userCache.has(currentUser.uid)) {
+        userCache.set(currentUser.uid, {
+            displayName: currentUser.displayName || currentUser.email,
+            email: currentUser.email,
+            creationTime: currentUser.metadata.creationTime
+        });
+    }
+}
+
 function loadMessages() {
     const messagesQuery = query(messagesRef, orderByChild('timestamp'));
-    onValue(messagesQuery, (snapshot) => {
+    
+    // Store the listener function so we can detach it on sign-out
+    messagesListener = onValue(messagesQuery, (snapshot) => {
         messagesDiv.innerHTML = '';
         snapshot.forEach((childSnapshot) => {
             const message = childSnapshot.val();
@@ -42,9 +82,10 @@ function loadMessages() {
                 const diffTime = now - messageDate;
                 const diffDays = diffTime / (1000 * 60 * 60 * 24);
                 if (diffDays <= 7) {
-                    displayMessage(message);
+                    displayMessage(message); // Now calls the synchronous function
                 }
             } else {
+                // Display messages that might not have a timestamp (e.g., still saving)
                 displayMessage(message);
             }
         });
@@ -56,14 +97,25 @@ function sendMessage() {
         push(messagesRef, {
             text: messageInput.value,
             sender: currentUser.uid,
-            displayName: currentUser.displayName || currentUser.email,
+            // FIX: Save the displayName with the message
+            displayName: currentUser.displayName || currentUser.email, 
             timestamp: serverTimestamp()
         });
         messageInput.value = '';
     }
 }
 
-async function displayMessage(message) {
+/**
+ * FIX: This function is no longer async.
+ * It now pulls user data from the local 'userCache' synchronously,
+ * which solves the race condition and chronological order.
+ */
+function displayMessage(message) {
+    // FIX: Add a check for unresolved timestamps
+    if (typeof message.timestamp !== 'number') {
+        return; // Don't render messages that are still saving
+    }
+
     const messageElement = document.createElement('div');
     messageElement.className = 'message';
     const senderUid = message.sender;
@@ -76,11 +128,16 @@ async function displayMessage(message) {
         userInfo = { email: currentUser.email, creationTime: currentUser.metadata.creationTime };
     } else {
         messageElement.classList.add('received');
-        const userSnapshot = await get(ref(db, `users/${senderUid}`));
-        if (userSnapshot.exists()) {
-            const userData = userSnapshot.val();
-            senderName = userData.displayName || userData.email;
+        
+        // FIX: Get user data from the cache instead of 'await get()'
+        if (userCache.has(senderUid)) {
+            const userData = userCache.get(senderUid);
+            senderName = userData.displayName;
             userInfo = { email: userData.email, creationTime: userData.creationTime };
+        } else {
+            // Fallback: Use the displayName saved with the message
+            senderName = message.displayName || 'Unknown User';
+            userInfo = { email: '?', creationTime: null };
         }
     }
 
@@ -91,6 +148,8 @@ async function displayMessage(message) {
     if (userInfo) {
         const userInfoBox = document.createElement('div');
         userInfoBox.className = 'user-info-box';
+        // Note: creationTime from Auth (currentUser) is a string, 
+        // but from the DB (cache) it might be a number. parseInt is safer.
         const creationDate = userInfo.creationTime ? new Date(parseInt(userInfo.creationTime)) : null;
         
         if (!creationDate || creationDate.toString() === 'Invalid Date') {
@@ -118,7 +177,6 @@ async function displayMessage(message) {
     const textSpan = document.createElement('span');
     textSpan.textContent = `: ${message.text}`;
 
-    // Create a wrapper for the message content
     const messageWrapper = document.createElement('div');
     messageWrapper.className = 'message-wrapper';
     messageWrapper.appendChild(senderSpan);
@@ -141,7 +199,10 @@ async function displayMessage(message) {
     }
 
     messagesDiv.appendChild(messageElement);
-    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    // Only scroll if the user isn't scrolled up looking at old messages
+    if (messagesDiv.scrollTop + messagesDiv.clientHeight + 100 >= messagesDiv.scrollHeight) {
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
 }
 
 sendButton.addEventListener('click', sendMessage);
