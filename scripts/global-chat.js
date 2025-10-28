@@ -28,7 +28,19 @@ function loadMessages() {
     onValue(messagesRef, (snapshot) => {
         messagesDiv.innerHTML = '';
         snapshot.forEach((childSnapshot) => {
-            displayMessage(childSnapshot.val());
+            const message = childSnapshot.val();
+            const messageTimestamp = message.timestamp;
+            if (messageTimestamp) {
+                const messageDate = new Date(messageTimestamp);
+                const now = new Date();
+                const diffTime = now - messageDate;
+                const diffDays = diffTime / (1000 * 60 * 60 * 24);
+                if (diffDays <= 7) {
+                    displayMessage(message);
+                }
+            } else {
+                displayMessage(message);
+            }
         });
     });
 }
@@ -47,20 +59,41 @@ function sendMessage() {
 
 async function displayMessage(message) {
     const messageElement = document.createElement('div');
+    const senderUid = message.sender;
     let senderName = 'Unknown User';
+    let userInfo = null;
 
-    if (message.sender === currentUser.uid) {
+    if (senderUid === currentUser.uid) {
         senderName = 'You';
-    } else if (message.displayName) {
-        senderName = message.displayName;
+        userInfo = { email: currentUser.email, creationTime: currentUser.metadata.creationTime };
     } else {
-        const userSnapshot = await get(ref(db, `users/${message.sender}`));
+        const userSnapshot = await get(ref(db, `users/${senderUid}`));
         if (userSnapshot.exists()) {
-            senderName = userSnapshot.val().displayName || userSnapshot.val().email;
+            const userData = userSnapshot.val();
+            senderName = userData.displayName || userData.email;
+            userInfo = { email: userData.email, creationTime: userData.creationTime };
         }
     }
 
-    messageElement.textContent = `${senderName}: ${message.text}`;
+    const senderSpan = document.createElement('span');
+    senderSpan.className = 'sender-name';
+    senderSpan.textContent = senderName;
+    if (userInfo) {
+        const creationDate = userInfo.creationTime ? new Date(parseInt(userInfo.creationTime)).toLocaleDateString() : 'Unknown';
+        senderSpan.title = `Email: ${userInfo.email}\nAccount Created: ${creationDate}`;
+    }
+
+    const textSpan = document.createElement('span');
+    textSpan.textContent = `: ${message.text}`;
+
+    messageElement.appendChild(senderSpan);
+    messageElement.appendChild(textSpan);
+
+    if (message.timestamp) {
+        const timestamp = new Date(message.timestamp).toLocaleString();
+        messageElement.title = timestamp; // Tooltip on hover for timestamp
+    }
+
     messagesDiv.appendChild(messageElement);
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }

@@ -32,7 +32,8 @@ onAuthStateChanged(auth, user => {
                 set(userRef, {
                     uid: user.uid,
                     email: user.email,
-                    displayName: user.displayName
+                    displayName: user.displayName,
+                    creationTime: user.metadata.creationTime
                 });
             }
         });
@@ -126,10 +127,43 @@ function sendMessage() {
     }
 }
 
-function displayMessage(message) {
+async function displayMessage(message) {
     const messageElement = document.createElement('div');
-    const senderName = message.sender === currentUser.uid ? 'You' : selectedUser.displayName || selectedUser.email;
-    messageElement.textContent = `${senderName}: ${message.text}`;
+    const senderUid = message.sender;
+    let senderName = 'Unknown User';
+    let userInfo = null;
+
+    if (senderUid === currentUser.uid) {
+        senderName = 'You';
+        userInfo = { email: currentUser.email, creationTime: currentUser.metadata.creationTime };
+    } else {
+        const userSnapshot = await get(ref(db, `users/${senderUid}`));
+        if (userSnapshot.exists()) {
+            const userData = userSnapshot.val();
+            senderName = userData.displayName || userData.email;
+            userInfo = { email: userData.email, creationTime: userData.creationTime };
+        }
+    }
+
+    const senderSpan = document.createElement('span');
+    senderSpan.className = 'sender-name';
+    senderSpan.textContent = senderName;
+    if (userInfo) {
+        const creationDate = userInfo.creationTime ? new Date(parseInt(userInfo.creationTime)).toLocaleDateString() : 'Unknown';
+        senderSpan.title = `Email: ${userInfo.email}\nAccount Created: ${creationDate}`;
+    }
+
+    const textSpan = document.createElement('span');
+    textSpan.textContent = `: ${message.text}`;
+
+    messageElement.appendChild(senderSpan);
+    messageElement.appendChild(textSpan);
+
+    if (message.timestamp) {
+        const timestamp = new Date(message.timestamp).toLocaleString();
+        messageElement.title = timestamp; // Tooltip on hover for timestamp
+    }
+
     messagesDiv.appendChild(messageElement);
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }

@@ -59,3 +59,18 @@
 #send-button {
     padding: 5px 10px;
 }
+
+.sender-name {
+    display: inline-block;
+    background-color: #2563eb;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.sender-name:hover {
+    background-color: #1e40af;
+}

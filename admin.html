@@ -27,8 +27,77 @@
 
 <section id="admin-section">
     <h2>Admin Dashboard</h2>
-    <p>You must be an admin to view this page.</p>
+    <div id="login-container">
+        <form id="login-form">
+            <div class="input-group">
+                <label for="username">Email</label>
+                <input type="email" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
     <div id="admin-container" style="display: none;">
+        <h3>Welcome, Admin!</h3>
+        <button id="logout-btn">Logout</button>
+        <div id="tabs">
+            <button class="tab-button active" onclick="showTab('content')">Content Management</button>
+            <button class="tab-button" onclick="showTab('html')">HTML Editor</button>
+            <button class="tab-button" onclick="showTab('metadata')">Metadata Editor</button>
+        </div>
+        <div id="content-tab" class="tab-content">
+            <h3>Content Management</h3>
+            <div id="content-editor">
+                <label for="home-description">Home Page Description:</label>
+                <textarea id="home-description" rows="5" cols="50"></textarea>
+                <button id="save-home-description">Save</button>
+                <br><br>
+                <label for="projects-description">Projects Page Description:</label>
+                <textarea id="projects-description" rows="5" cols="50"></textarea>
+                <button id="save-projects-description">Save</button>
+                <br><br>
+                <label for="awards-description">Awards Page Description:</label>
+                <textarea id="awards-description" rows="5" cols="50"></textarea>
+                <button id="save-awards-description">Save</button>
+                <br><br>
+                <label for="skills-description">Skills Page Description:</label>
+                <textarea id="skills-description" rows="5" cols="50"></textarea>
+                <button id="save-skills-description">Save</button>
+                <br><br>
+                <label for="certifications-description">Certifications Page Description:</label>
+                <textarea id="certifications-description" rows="5" cols="50"></textarea>
+                <button id="save-certifications-description">Save</button>
+                <br><br>
+                <label for="education-description">Education Page Description:</label>
+                <textarea id="education-description" rows="5" cols="50"></textarea>
+                <button id="save-education-description">Save</button>
+                <br><br>
+                <label for="version">Version:</label>
+                <input type="text" id="version" />
+                <button id="save-version">Save</button>
+                <br><br>
+                <label for="last-updated">Last Updated:</label>
+                <input type="date" id="last-updated" />
+                <button id="save-last-updated">Save</button>
+            </div>
+        </div>
+        <div id="html-tab" class="tab-content" style="display: none;">
+            <h3>HTML Editor</h3>
+            <select id="page-selector">
+                <option value="">Select a page...</option>
+            </select>
+            <input type="text" id="search-input" placeholder="Search pages...">
+            <textarea id="html-editor" rows="20" cols="80"></textarea>
+            <button id="save-html">Save HTML</button>
+        </div>
+        <div id="metadata-tab" class="tab-content" style="display: none;">
+            <h3>Metadata Editor</h3>
+            <textarea id="metadata-editor" rows="20" cols="80"></textarea>
+            <button id="save-metadata">Save Metadata</button>
+        </div>
         <h3>User Management</h3>
         <div id="user-list"></div>
     </div>

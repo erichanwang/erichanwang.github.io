@@ -107,6 +107,7 @@
     
     <section id="projects">
         <h2>Projects</h2>
+        <p id="projects-description">Here are some of the projects I've worked on over the years. Click on the images to view them in full size.</p>
         <div class="award-category">
             <h3>Python Projects</h3>
             <h4>2021</h4>
@@ -593,5 +594,44 @@
         });
     </script>
     <script src="scripts/set-metadata.js"></script>
-<script src="scripts/set-metadata.js"></script></body>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyB67q01HUssXeYo0A2MdpsVU9AOG_KLB3E",
+            authDomain: "new-database-bc98a.firebaseapp.com",
+            projectId: "new-database-bc98a",
+            storageBucket: "new-database-bc98a.firebasestorage.app",
+            messagingSenderId: "436686586315",
+            appId: "1:436686586315:web:53350b51bcbcd52794764e",
+            measurementId: "G-W8BR4WNQR6"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        async function loadContent() {
+            const projectsDescRef = ref(db, 'content/projects-description');
+            const versionRef = ref(db, 'content/version');
+            const lastUpdatedRef = ref(db, 'content/last-updated');
+
+            const projectsDescSnap = await get(projectsDescRef);
+            const versionSnap = await get(versionRef);
+            const lastUpdatedSnap = await get(lastUpdatedRef);
+
+            if (projectsDescSnap.exists()) {
+                document.getElementById('projects-description').textContent = projectsDescSnap.val();
+            }
+            if (versionSnap.exists()) {
+                document.getElementById('version-display').textContent = `Version ${versionSnap.val()}`;
+            }
+            if (lastUpdatedSnap.exists()) {
+                document.getElementById('last-updated').textContent = `Last updated ${lastUpdatedSnap.val()}`;
+            }
+        }
+
+        loadContent();
+    </script>
+</body>
 </html>

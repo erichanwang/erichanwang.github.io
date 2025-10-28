@@ -3,7 +3,7 @@ import { auth } from './firebase-config.js';
 
 const authStatusContainer = document.createElement('div');
 authStatusContainer.id = 'auth-status-container';
-const allowedPages = ['notes.html', 'chat.html', 'global-chat.html', 'profile.html'];
+const allowedPages = ['notes.html', 'chat.html', 'global-chat.html', 'profile.html', 'time.html'];
 const currentPage = window.location.pathname.split('/').pop();
 
 if (allowedPages.includes(currentPage)) {
@@ -28,7 +28,7 @@ if (allowedPages.includes(currentPage)) {
         const loginButton = document.createElement('button');
         loginButton.textContent = 'Login';
         loginButton.addEventListener('click', () => {
-            sessionStorage.setItem('redirectTo', 'global-chat.html');
+            sessionStorage.setItem('redirectTo', window.location.pathname);
             window.location.href = 'login.html';
         });
         authStatusContainer.appendChild(loginButton);

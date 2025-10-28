@@ -27,7 +27,7 @@
 
   <section id="about-me">
     <h2>About Me</h2>
-    <p>Hi, I'm Eric (王翰)!</p>
+    <p id="home-description">Hi, I'm Eric (王翰)!</p>
     <p>I'm a high-school senior with a passion for computer science, math, and tennis.</p>
     <p>Fluent in English and Mandarin Chinese.</p>
     <p>My current time is: <strong><span id="local-time"></span></strong> (GMT-5 / CDT) </p>
@@ -64,5 +64,44 @@
   </script>
   <script type="module" src="scripts/auth-status.js"></script>
   <script src="scripts/set-metadata.js"></script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyB67q01HUssXeYo0A2MdpsVU9AOG_KLB3E",
+        authDomain: "new-database-bc98a.firebaseapp.com",
+        projectId: "new-database-bc98a",
+        storageBucket: "new-database-bc98a.firebasestorage.app",
+        messagingSenderId: "436686586315",
+        appId: "1:436686586315:web:53350b51bcbcd52794764e",
+        measurementId: "G-W8BR4WNQR6"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    async function loadContent() {
+        const homeDescRef = ref(db, 'content/home-description');
+        const versionRef = ref(db, 'content/version');
+        const lastUpdatedRef = ref(db, 'content/last-updated');
+
+        const homeDescSnap = await get(homeDescRef);
+        const versionSnap = await get(versionRef);
+        const lastUpdatedSnap = await get(lastUpdatedRef);
+
+        if (homeDescSnap.exists()) {
+            document.getElementById('home-description').textContent = homeDescSnap.val();
+        }
+        if (versionSnap.exists()) {
+            document.getElementById('version-display').textContent = `Version ${versionSnap.val()}`;
+        }
+        if (lastUpdatedSnap.exists()) {
+            document.getElementById('last-updated').textContent = `Last updated ${lastUpdatedSnap.val()}`;
+        }
+    }
+
+    loadContent();
+  </script>
 <script src="scripts/set-metadata.js"></script></body>
 </html>
